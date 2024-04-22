@@ -1,5 +1,5 @@
 # Cuterbot 2004 
-For Cuterbot to run on python3.8 and ubuntu 20.04, the NV jetbot original codes are modified as following:
+For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original codes are modified as following:
 1. The ubuntu is upgrade from 18.04 to 20.04 with reference to https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html.
 2. The jetpack for python3.8 was built and installed.
 3. The cuterbot docker images was built base on nvidia l4t-base image. 
