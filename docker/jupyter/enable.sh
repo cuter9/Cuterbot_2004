@@ -1,0 +1,55 @@
+WORKSPACE=$1
+JETBOT_CAMERA=${2:-opencv_gst_camera}
+
+# set default swap limit as unlimited
+if [[ -z "$JETBOT_JUPYTER_MEMORY_SWAP" ]]
+then
+	export JETBOT_JUPYTER_MEMORY_SWAP=-1
+fi
+
+if [[ -z "$JETBOT_JUPYTER_MEMORY" ]]
+then
+
+	sudo docker run -it -d \
+	    --restart always \
+	    --runtime nvidia \
+	    --network host \
+	    --privileged \
+	    --device /dev/video* \
+	    --volume /dev/bus/usb:/dev/bus/usb \
+	    --volume /tmp/argus_socket:/tmp/argus_socket \
+	    -p 8888:8888 \
+	    -v $WORKSPACE:/workspace \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v $HOME/.Xauthority:/root/.Xauthority \
+	    --workdir /workspace \
+	    --name=jetbot_jupyter \
+	    --memory-swap=$JETBOT_JUPYTER_MEMORY_SWAP \
+	    --env JETBOT_DEFAULT_CAMERA=$JETBOT_CAMERA \
+      --env DISPLAY=$DISPLAY \
+      --env LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libGLdispatch.so.0 \
+	    $CUTERBOT_DOCKER_REMOTE/cuterbot:jupyter-$CUTERBOT_IMAGES_TAG
+
+else
+
+	sudo docker run -it -d \
+	    --restart always \
+	    --runtime nvidia \
+	    --network host \
+	    --privileged \
+	    --device /dev/video* \
+	    --volume /dev/bus/usb:/dev/bus/usb \
+	    --volume /tmp/argus_socket:/tmp/argus_socket \
+	    -p 8888:8888 \
+	    -v $WORKSPACE:/workspace \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v $HOME/.Xauthority:/root/.Xauthority \
+	    --workdir /workspace \
+	    --name=jetbot_jupyter \
+	    --memory=$JETBOT_JUPYTER_MEMORY \
+	    --memory-swap=$JETBOT_JUPYTER_MEMORY_SWAP \
+	    --env JETBOT_DEFAULT_CAMERA=$JETBOT_CAMERA \
+      --env DISPLAY=$DISPLAY \
+	    $CUTERBOT_DOCKER_REMOTE/cuterbot:jupyter-$CUTERBOT_IMAGES_TAG
+
+fi
