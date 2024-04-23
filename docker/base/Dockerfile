@@ -77,10 +77,7 @@ RUN python3 -m pip install matplotlib
 RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m"
 # ENV HOME=${HOME}
 # RUN mkdir -p /repo
-COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/
-COPY ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/
-COPY ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
-COPY ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
 COPY ./repo/opencv-python_dep.sh ./repo/
 
 RUN cd /repo && bash opencv-python_dep.sh && pip3 install *.whl && cd .. && rm -rf /repo
