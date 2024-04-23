@@ -80,7 +80,6 @@ RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m
 COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/
 COPY ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/
 COPY ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
-COPY ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
 COPY ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
 COPY ./repo/opencv-python_dep.sh ./repo/
 
@@ -112,7 +111,6 @@ RUN apt-get update && \
 # =======================
 # INSTALL JUPYTER RELATED
 # =======================
-
 # Install traitlets (master, to support the unlink() method)
 RUN echo -e "\e[48;5;172m Install traitlets \e[0m" 
 RUN pip3 install traitlets
