@@ -70,10 +70,21 @@ RUN python3 -m pip install matplotlib
  #   pip3 install ${TENSORFLOW_WHL} && \
  #   rm ${TENSORFLOW_WHL}
 
+
+# ================================================
+# INSTALL TENSORFLOW, PYTORCH, TOCHVISION, OPENCV
+# ================================================
+RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m"
 # ENV HOME=${HOME}
 # RUN mkdir -p /repo
-COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
-RUN cd /repo && pip3 install *.whl && cd .. && rm -rf /repo
+COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/opencv-python_dep.sh ./repo/
+
+RUN cd /repo && bash opencv-python_dep.sh && pip3 install *.whl && cd .. && rm -rf /repo
 
 
 # ==============
@@ -81,10 +92,10 @@ RUN cd /repo && pip3 install *.whl && cd .. && rm -rf /repo
 # ==============
 # COPY jetson-ota-public.asc /etc/apt/trusted.gpg.d/jetson-ota-public.asc
 # RUN echo "deb https://repo.download.nvidia.com/jetson/common r32.7 main" > /etc/apt/sources.list.d/nvidia-l4t-apt-source.list && \
-RUN apt-get update && \
-    	apt-get install -y --no-install-recommends libgstreamer1.0-dev libopencv-python \
-        && rm -rf /var/lib/apt/lists/*
-
+# RUN apt-get update && \
+#    	apt-get install -y --no-install-recommends libgstreamer1.0-dev libopencv-python \
+#        && rm -rf /var/lib/apt/lists/*
+#
 
 # =================
 # INSTALL GSTREAMER
