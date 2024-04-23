@@ -37,7 +37,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-
+js = jetbot_states()
 # Scan for devices on I2C bus
 addresses = qwiic.scan()
 
@@ -160,7 +160,7 @@ while True:
 
 	# Power Status
 	# channel : 1 (default) : board level; 2: GPU level; 3: CPU level
-	js = jetbot_states()
+	# js = jetbot_states()
 	POM_5V_IN = js.pwr_states(channel=1)
 	IN_VOLT = POM_5V_IN['in_volt']
 	IN_CURR = POM_5V_IN['in_current']
