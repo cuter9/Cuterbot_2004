@@ -37,14 +37,6 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-# for jetson nano status
-# from jtop import jtop
-
-
-# start jtop instance
-# jp= jtop(interval=5.0)
-# jp.start()
-
 # Scan for devices on I2C bus
 addresses = qwiic.scan()
 

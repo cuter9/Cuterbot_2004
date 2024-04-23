@@ -26,7 +26,7 @@ INA3221_READ    =                         (0x01)
 INA3221_REG_CONFIG            =          (0x00)
 #    /*---------------------------------------------------------------------*/
 INA3221_CONFIG_RESET          =          (0x8000)  # Reset Bit
-	
+
 INA3221_CONFIG_ENABLE_CHAN1   =          (0x4000)  # Enable Channel 1
 INA3221_CONFIG_ENABLE_CHAN2   =          (0x2000)  # Enable Channel 2
 INA3221_CONFIG_ENABLE_CHAN3   =          (0x1000)  # Enable Channel 3
@@ -65,9 +65,7 @@ SHUNT_RESISTOR_VALUE         = (0.005)   # default shunt resistor value of 0.005
 
 SLAVE_FORCE = True          # face read the i2c bus device even it is used bt other kernel
 
-class INA3221():
-
-
+class INA3221:
 
     ###########################
     # INA3221 Code
@@ -105,7 +103,7 @@ class INA3221():
 
 
     def _read_register_little_endian(self, register): 
-	
+
         result = self._bus.read_word_data(self._addr, register) & 0xFFFF
         lowbyte = (result & 0xFF00)>>8 
         highbyte = (result & 0x00FF) << 8
@@ -127,7 +125,7 @@ class INA3221():
 
 
     def _getBusVoltage_raw(self, channel):
-	#Gets the raw bus voltage (16-bit signed integer, so +-32767)
+    #Gets the raw bus voltage (16-bit signed integer, so +-32767)
 
         value = self._read_register_little_endian(INA3221_REG_BUSVOLTAGE_1+(channel -1) *2) 
         if value > 32767:
@@ -135,8 +133,8 @@ class INA3221():
         return value
 
     def _getShuntVoltage_raw(self, channel):
-	#Gets the raw shunt voltage (16-bit signed integer, so +-32767)
-	
+    #Gets the raw shunt voltage (16-bit signed integer, so +-32767)
+
         value = self._read_register_little_endian(INA3221_REG_SHUNTVOLTAGE_1+(channel -1) *2)
         if value > 32767:
             value -= 65536
@@ -145,21 +143,21 @@ class INA3221():
     # public functions
 
     def getBusVoltage_V(self, channel):
-	# Gets the Bus voltage in volts
+    # Gets the Bus voltage in volts
 
         value = self._getBusVoltage_raw(channel)
         return value * 0.001
 
 
     def getShuntVoltage_mV(self, channel):
-	# Gets the shunt voltage in mV (so +-168.3mV)
+    # Gets the shunt voltage in mV (so +-168.3mV)
 
         value = self._getShuntVoltage_raw(channel)
         return value * 0.005
 
     def getCurrent_mA(self, channel):
     #Gets the current value in mA, taking into account the config settings and current LSB
-    	
+
         valueDec = self.getShuntVoltage_mV(channel)/ SHUNT_RESISTOR_VALUE               
         return valueDec;
 

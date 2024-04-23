@@ -31,19 +31,14 @@ ina3221 = INA3221(twi=I2C_BUS, addr=I2C_ADDRESS)
 
 def jetbot_pwr_states(channel=BOARD):
 
-    shuntvoltage = 0
-    busvoltage   = 0
-    current_mA   = 0
-    loadvoltage  = 0
-
-    busvoltage = ina3221.getBusVoltage_V(channel)
-    shuntvoltage = ina3221.getShuntVoltage_mV(channel)
-  	# minus is to get the "sense" right.   - means the battery is charging, + that it is discharging
+    bus_voltage = ina3221.getBusVoltage_V(channel)
+    shunt_voltage = ina3221.getShuntVoltage_mV(channel)
+    # minus is to get the "sense" right.   - means the battery is charging, + that it is discharging
     current_mA = ina3221.getCurrent_mA(channel)
 
-    loadvoltage = busvoltage + (shuntvoltage / 1000)
+    load_voltage = bus_voltage + (shunt_voltage / 1000)
     
-    return {"in_volt": loadvoltage, "in_current": current_mA, "shunt_volt": shuntvoltage, "end_volt": busvoltage}
+    return {"in_volt": load_voltage, "in_current": current_mA, "shunt_volt": shunt_voltage, "end_volt": bus_voltage}
 
 '''
 if __name__ == '__main__':
