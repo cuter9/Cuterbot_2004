@@ -24,7 +24,7 @@ import time
 from jetbot.utils.utils import get_ip_address
 
 # use ian3221 power monitor i2c device to get the jetson nano power status, the modules are ian3221.py and ian3221_jetbot.py in /jetbot/apps, 
-from jetbot.apps import jetbot_pwr_states
+from jetbot.apps import jetbot_pwr_states as jps
 
 import subprocess
 
@@ -159,12 +159,12 @@ while True:
 
 	# Power Status
 	# channel : 1 (default) : board level; 2: GPU level; 3: CPU level
-	POM_5V_IN = jetbot_pwr_states(channel=1)
+	POM_5V_IN = jps(channel=1)
 	IN_VOLT = POM_5V_IN['in_volt']
 	IN_CURR = POM_5V_IN['in_current']
 	IN_PWR = IN_VOLT * IN_CURR * 0.001
-	POM_5V_CPU = jetbot_pwr_states(channel=3)
-	POM_5V_GPU = jetbot_pwr_states(channel=2)
+	POM_5V_CPU = jps(channel=3)
+	POM_5V_GPU = jps(channel=2)
 	# print("Load Voltage:  %3.2f V" % IN_VOLT)
 	# print("Current:  %3.2f mA" % IN_CURR)
 

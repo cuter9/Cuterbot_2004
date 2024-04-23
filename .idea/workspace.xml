@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="typo coding">
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/apps/ina3221_jetbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/ina3221_jetbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/apps/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/stats.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +74,7 @@
       <workItem from="1713776230874" duration="63000" />
       <workItem from="1713776297255" duration="1290000" />
       <workItem from="1713847025061" duration="274000" />
-      <workItem from="1713850054680" duration="2299000" />
+      <workItem from="1713850054680" duration="2454000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -117,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713852181325</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="typo coding">
+      <option name="closed" value="true" />
+      <created>1713852370817</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713852370817</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
