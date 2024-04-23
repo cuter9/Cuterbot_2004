@@ -70,7 +70,7 @@ def parse_boxes_yolo(trt_outputs, conf_th=0.3, nms_threshold=0.5):
     detections = np.concatenate(detections, axis=0)
 
     if len(detections) == 0:
-        boxes = np.zeros((0, 4), dtype=np.int)
+        boxes = np.zeros((0, 4), dtype=int)
         scores = np.zeros((0,), dtype=np.float32)
         classes = np.zeros((0,), dtype=np.float32)
     else:
