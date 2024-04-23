@@ -1,2 +1,2 @@
 from .ina3221 import *
-from .ina3221_jetbot import *
+from .jetbot_states import *

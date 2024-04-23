@@ -63,7 +63,7 @@ INA3221_REG_BUSVOLTAGE_1     =             (0x02)
 
 SHUNT_RESISTOR_VALUE         = (0.005)   # default shunt resistor value of 0.005 (org is 0.1) Ohm for jetson nano
 
-SLAVE_FORCE = True          # face read the i2c bus device even it is used bt other kernel
+SLAVE_FORCE = False          # face read the i2c bus device even it is used bt other kernel
 
 class INA3221:
 
