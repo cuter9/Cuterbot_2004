@@ -22,7 +22,7 @@ starttime = datetime.datetime.utcnow()
 BOARD = 1
 GPU = 2
 CPU = 3
-I2C_BUS = 6
+I2C_BUS = 6     # jetbot i2c bus no and address of ina3221
 I2C_ADDRESS = 0x40
 
 ina3221 = INA3221(twi=I2C_BUS, addr=I2C_ADDRESS)

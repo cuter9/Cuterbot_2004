@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="add to modify the nv container run time to mount py 3.8 tensorrt">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/apps/ina3221.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/ina3221.py" afterDir="false" />
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="typo coding">
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/apps/ina3221_jetbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/ina3221_jetbot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/apps/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/stats.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +75,7 @@
       <workItem from="1713776230874" duration="63000" />
       <workItem from="1713776297255" duration="1290000" />
       <workItem from="1713847025061" duration="274000" />
-      <workItem from="1713850054680" duration="2049000" />
+      <workItem from="1713850054680" duration="2299000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -113,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713847270977</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="typo coding">
+      <option name="closed" value="true" />
+      <created>1713852181325</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713852181325</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +131,8 @@
     <MESSAGE value="delete model files" />
     <MESSAGE value="modify np.int to int in according to the release of numpy version &gt; 20" />
     <MESSAGE value="add to modify the nv container run time to mount py 3.8 tensorrt" />
-    <option name="LAST_COMMIT_MESSAGE" value="add to modify the nv container run time to mount py 3.8 tensorrt" />
+    <MESSAGE value="typo coding" />
+    <option name="LAST_COMMIT_MESSAGE" value="typo coding" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Cuterbot_2004$stats.coverage" NAME="stats Coverage Results" MODIFIED="1713851089294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/apps" />
