@@ -34,8 +34,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
 		  gfortran \
 		  build-essential \
-		  liblapack-dev \ 
-		  libblas-dev \
+		  liblapack-dev \
+    	  libblas-dev \
 		  libhdf5-serial-dev \
 		  hdf5-tools \
 		  libhdf5-dev \
