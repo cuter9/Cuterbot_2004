@@ -1,5 +1,7 @@
 # Docker version issue
-The latest docker version seems will fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder. Installing the deault version by using apt-get docker.io will work. It can be check with apt list --installed | grep docker.io, and then will get docker verion "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64".
+The latest docker version seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder. 
+1. Installing the deault version by using apt-get docker.io will work. It can be check with apt list --installed | grep docker.io, and then will get docker verion "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64", or
+2. install the docker v20.10 from docker https://docs.docker.com/engine/install/ubuntu/#installation-methods.
 
 
 # CuterBot Docker
