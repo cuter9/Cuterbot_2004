@@ -1,7 +1,10 @@
 #!/bin/bash
 
 export JETBOT_VERSION=1.0.0
-export L4T_BASE_IMAGE_TAG=r34.1
+# export L4T_BASE_IMAGE_TAG=r34.1
+export L4T_BASE_IMAGE_TAG=r35.1.0
+# export L4T_BASE_IMAGE_TAG=r36.2.0
+
 export CUTERBOT_IMAGES_TAG="$JETBOT_VERSION-$L4T_BASE_IMAGE_TAG"
 
 L4T_VERSION_STRING=$(head -n 1 /etc/nv_tegra_release)

@@ -53,7 +53,7 @@ RUN apt-get update && \
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 RUN pip3 install setuptools wheel packaging
 # RUN pip3 install setuptools 'Cython<3.0' wheel
-# RUN pip3 install 'numpy<1.19.0'
+RUN pip3 install 'numpy<1.24.0' -U
 RUN python3 -m pip install matplotlib
 
 # RUN pip3 install h5py==2.10.0

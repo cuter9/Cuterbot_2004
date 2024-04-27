@@ -27,7 +27,7 @@ then
 	    --memory-swap=$JETBOT_JUPYTER_MEMORY_SWAP \
 	    --env JETBOT_DEFAULT_CAMERA=$JETBOT_CAMERA \
       --env DISPLAY=$DISPLAY \
-      --env LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libGLdispatch.so.0 \
+      --env LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libGLdispatch.so.0:/usr/lib/aarch64-linux-gnu/libgomp.so.1\
 	    $CUTERBOT_DOCKER_REMOTE/cuterbot:jupyter-$CUTERBOT_IMAGES_TAG
 
 else

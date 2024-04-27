@@ -7,7 +7,7 @@ import os
 
 
 def plot_exec_time(execution_time, model_name, model_str):
-    os.environ['DISPLAY'] = ':10.0'
+    # os.environ['DISPLAY'] = ':10.0'
     execute_time = np.array(execution_time)
     mean_execute_time = np.mean(execute_time)
     max_execute_time = np.amax(execute_time)
