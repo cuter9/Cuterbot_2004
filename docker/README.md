@@ -2,7 +2,12 @@
 The latest docker version seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder.
 1. Install the default version by using apt-get docker.io will work, an then can check the installed docker version with apt list --installed | grep docker.io, and then will get docker version "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64", or
 2. install the docker v20.10.X as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
-
+3. The following packages will make the docker works as it is:
+   1) libnvidia-container-tools v1.7.0 and the following 2 associated packages 
+   2) libnvidia-container0 
+   3) libnvidia-container1
+   4) nvidia-docker2 v2.8.0
+   5) docker v1.5.2
 
 # CuterBot Docker
 
