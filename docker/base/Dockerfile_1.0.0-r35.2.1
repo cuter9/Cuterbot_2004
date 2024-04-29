@@ -145,7 +145,7 @@ RUN cd && apt-get update && \
 # INSTALL MISC DEPENDENCIES
 # ============================
 RUN apt-get update && apt-get install -y supervisor unzip
-RUN apt install -y python3-smbus && pip3 install pyzmq
+RUN apt-get install -y python3-smbus && pip3 install pyzmq
 
 # =================
 # INSTALL TORCH2TRT
