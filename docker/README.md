@@ -8,7 +8,7 @@ The latest docker version seems fail to build the image with the build-in jetson
    3) nvidia container tools
    4) nvidia container toolkit
    5) docker.io
-4. BuildKit seems not workable with nvidia container toolkit 
+4. BuildKit seems not workable with nvidia container toolkit, thus is not recommended to install.
 
 # CuterBot Docker
 
