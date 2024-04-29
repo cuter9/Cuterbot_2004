@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="NV container setting">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +85,8 @@
       <workItem from="1714227719502" duration="642000" />
       <workItem from="1714300299531" duration="443000" />
       <workItem from="1714300758297" duration="2322000" />
-      <workItem from="1714361645825" duration="853000" />
+      <workItem from="1714361645825" duration="953000" />
+      <workItem from="1714364614984" duration="664000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -302,7 +304,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714362579033</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="NV container setting">
+      <option name="closed" value="true" />
+      <created>1714362700438</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1714362700438</updated>
+    </task>
+    <task id="LOCAL-00029" summary="NV container setting">
+      <option name="closed" value="true" />
+      <created>1714362780315</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1714362780315</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

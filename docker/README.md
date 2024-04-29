@@ -1,14 +1,17 @@
 # Docker version issue
-The latest docker version seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder.
-1. Install the default version by using apt-get docker.io will work, and then can check the installed docker version with apt list --installed | grep docker.io, and then will get docker version "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64", or
-2. install the docker v20.10.X as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
-3. The following packages will make the docker works as it is: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
+1. The native nvidia container libraries, nvidia-docker2 v2.8, can be upgrade to v2.13.0, as following 
+2. Add the latest apt source list to /etc/apt/source.list.d, https://github.com/NVIDIA/libnvidia-container/blob/gh-pages/stable/ubuntu18.04/nvidia-container-toolkit.list
+3. Run sudo apt update and sudo apt update nvidia-docker2.The following packages will update and make the docker works as it is: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
    1) install nvidia-docker2 v2.13.0; and it will automatically install the following packages
    2) libnvidia-container1 (v1.13.5)
    3) nvidia container tools (v1.13.5)
    4) nvidia container toolkit
    5) docker.io
-4. BuildKit seems not workable with nvidia container toolkit, thus is not recommended to install.
+4. you can check the installed docker version with apt list --installed | grep docker.io, and then will get docker version "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64"
+5. BuildKit seems not workable with nvidia container toolkit, thus is not recommended to install.
+6. The latest docker version with BuildKit seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder.
+7. It seems fail to work to install the docker as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
+
 
 # CuterBot Docker
 
