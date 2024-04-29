@@ -15,7 +15,7 @@
 
 # CuterBot Docker
 
-This directory contains scripts to build the CuterBot docker containers.  
+This directory contains scripts to build the CuterBot docker containers.
 
 ## Quick Start
 
