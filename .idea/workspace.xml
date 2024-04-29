@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="NV container setting" />
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="change Dockerfile name of base images" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,7 +84,7 @@
       <workItem from="1714300758297" duration="2322000" />
       <workItem from="1714361645825" duration="953000" />
       <workItem from="1714364614984" duration="1190000" />
-      <workItem from="1714366437819" duration="1289000" />
+      <workItem from="1714366437819" duration="1404000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -374,7 +374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714367619577</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="change Dockerfile name of base images">
+      <option name="closed" value="true" />
+      <created>1714367838329</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1714367838329</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,7 +402,8 @@
     <MESSAGE value="Dockerfile modified" />
     <MESSAGE value="typo" />
     <MESSAGE value="NV container setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="NV container setting" />
+    <MESSAGE value="change Dockerfile name of base images" />
+    <option name="LAST_COMMIT_MESSAGE" value="change Dockerfile name of base images" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Cuterbot_2004$stats.coverage" NAME="stats Coverage Results" MODIFIED="1713851089294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/apps" />
