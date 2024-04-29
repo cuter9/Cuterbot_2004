@@ -4,8 +4,8 @@ The latest docker version seems fail to build the image with the build-in jetson
 2. install the docker v20.10.X as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
 3. The following packages will make the docker works as it is: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
    1) install nvidia-docker2 v2.13.0; and it will automatically install the following packages
-   2) libnvidia-container1 (v1.13.0)
-   3) nvidia container tools (v1.13.0)
+   2) libnvidia-container1 (v1.13.5)
+   3) nvidia container tools (v1.13.5)
    4) nvidia container toolkit
    5) docker.io
 4. BuildKit seems not workable with nvidia container toolkit, thus is not recommended to install.
