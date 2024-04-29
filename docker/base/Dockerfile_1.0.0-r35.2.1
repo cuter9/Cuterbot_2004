@@ -11,6 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH /usr/local/cuda-10.2/bin:/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/cuda-10.2/targets/aarch64-linux/lib:/usr/lib/aarch64-linux-gnu/tegra:/usr/lib/aarch64-linux-gnu/gstreamer-1.0:${LD_LIBRARY_PATH}
+# RUN cd /usr/local/lib/python3.8/dist-packages/tensorrt && python3 -c  "import tensorrt as trt; print(dir(trt))"
 
 # ====================
 # INSTALL COMMON TOOLS
