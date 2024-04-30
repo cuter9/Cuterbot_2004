@@ -164,7 +164,7 @@ while True:
 	# channel : 1 (default) : board level; 2: GPU level; 3: CPU level
 	# POM_5V_IN = js.pwr_states(channel=1)		# use INA3221
 	POM_5V_IN = js.pwr_states	# jtop app
-	# print(POM_5V_IN)
+	print(POM_5V_IN)
 	IN_VOLT = POM_5V_IN['in_volt']
 	IN_CURR = POM_5V_IN['in_current']
 	IN_PWR = POM_5V_IN['in_pwr']
@@ -391,5 +391,6 @@ while True:
 		print("OS error: {0}".format(err))
 		time.sleep(5)
 		break
+
 	except:
 		break

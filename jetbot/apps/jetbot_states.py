@@ -69,6 +69,7 @@ class jetbot_states:
 '''
 if __name__ == '__main__':
     # import time
+    import stats
     # states = nano_states()
     # states = jetbot_states()
     # while True:
@@ -80,13 +81,13 @@ if __name__ == '__main__':
     # while True:
     #    print(pwr_states)
     #    time.sleep(1)
-    import stats
+    
     # with jtop() as jetson:
     #    while jetson.ok():
     #        stats = jetson.stats
     #        print(stats['Power TOT'])
     #        time.sleep(1)
-   
+
     print("------------------------------")
     print("Bus Voltage: %3.2f V " % pwr_state["end_volt"])
     print("Shunt Voltage: %3.2f mV " % pwr_state["shunt_volt"])

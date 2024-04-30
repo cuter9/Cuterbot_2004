@@ -9,6 +9,7 @@ docker run -it --rm \
    --volume /tmp/argus_socket:/tmp/argus_socket \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    -v $HOME/.Xauthority:/root/.Xauthority \
+   -v /run/jtop.sock:/run/jtop.sock \
    -v $HOME/repo:/repo \
    --name=jetpack_container_test \
    --env DISPLAY=$DISPLAY \

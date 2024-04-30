@@ -6,8 +6,8 @@ cp -r ${HOME}/repo ../../repo
 docker build -t $CUTERBOT_DOCKER_REMOTE/cuterbot:base-$CUTERBOT_IMAGES_TAG \
 	--build-arg BASE_IMAGE=$JETBOT_BASE_IMAGE \
 	--build-arg HOME=$HOME \
-	-f Dockerfile \
-	../.. 2>&1 | tee build_cuterbot_base.log
+	-f Dockerfile_$CUTERBOT_IMAGES_TAG \
+	../.. 2>&1 | tee build_cuterbot_base_$CUTERBOT_IMAGES_TAG.log
 # jetbot repo root as context
 # docker run -t cuterbot/jetbot:base-1.0.0-32.7.4 "pip3 install /repo/setup.py install"
 
