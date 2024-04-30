@@ -1,0 +1,415 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.26GB
+Step 1/51 : ARG BASE_IMAGE=$BASE_IMAGE
+Step 2/51 : FROM $BASE_IMAGE
+ ---> 27aa17d8c835
+Step 3/51 : RUN cat /etc/lsb-release
+ ---> Using cache
+ ---> 2e2439da2c43
+Step 4/51 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 9eac63d46a88
+Step 5/51 : ENV PATH /usr/local/cuda-10.2/bin:/usr/local/cuda/bin:${PATH}
+ ---> Using cache
+ ---> 9fe278065be7
+Step 6/51 : ENV LD_LIBRARY_PATH /usr/local/cuda-10.2/targets/aarch64-linux/lib:/usr/lib/aarch64-linux-gnu/tegra:/usr/lib/aarch64-linux-gnu/gstreamer-1.0:${LD_LIBRARY_PATH}
+ ---> Using cache
+ ---> 21c6547d46f3
+Step 7/51 : RUN cd /usr/local/lib/python3.8/dist-packages/tensorrt && python3 -c  "import tensorrt as trt; print(dir(trt))"
+ ---> Using cache
+ ---> 1a3ae3e1df4e
+Step 8/51 : RUN printf "%s  " $(dir /usr/local/cuda-10.2) && printf "\n"
+ ---> Using cache
+ ---> 421c110b12d4
+Step 9/51 : RUN apt-get update && apt-get install -y software-properties-common wget
+ ---> Using cache
+ ---> 005ec1a3f1d4
+Step 10/51 : RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+ ---> Using cache
+ ---> 4311f0fa9453
+Step 11/51 : RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+ ---> Using cache
+ ---> 32e7ebb8f002
+Step 12/51 : RUN apt-get update && apt-get install -y net-tools nano cmake python3-tk
+ ---> Using cache
+ ---> 8c5812d3042d
+Step 13/51 : ARG HDF5_DIR="/usr/lib/aarch64-linux-gnu/hdf5/serial/"
+ ---> Using cache
+ ---> 7d33943d6b97
+Step 14/51 : ARG MAKEFLAGS=-j6
+ ---> Using cache
+ ---> 7962f5ea218b
+Step 15/51 : RUN apt-get update &&     apt-get install -y --no-install-recommends 		  gfortran 		  build-essential 		  liblapack-dev     	  libblas-dev 		  libhdf5-serial-dev 		  hdf5-tools 		  libhdf5-dev 		  zlib1g-dev 		  zip 		  libjpeg8-dev 		  python3-dev           wget           git     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> e10a8a833841
+Step 16/51 : RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+ ---> Using cache
+ ---> fc9a3233e4af
+Step 17/51 : RUN pip3 install setuptools wheel packaging
+ ---> Using cache
+ ---> e7633515d0ea
+Step 18/51 : RUN pip3 install 'numpy<1.24.0' -U
+ ---> Using cache
+ ---> d5cadca6cece
+Step 19/51 : RUN python3 -m pip install matplotlib
+ ---> Using cache
+ ---> 1503b6b1b31c
+Step 20/51 : RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m"
+ ---> Using cache
+ ---> 3041c2b6002b
+Step 21/51 : COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
+ ---> Using cache
+ ---> de2753b62e93
+Step 22/51 : COPY ./repo/opencv-python_dep.sh ./repo/
+ ---> Using cache
+ ---> 2929678f2aa2
+Step 23/51 : RUN cd /repo && bash opencv-python_dep.sh && pip3 install *.whl && cd .. && rm -rf /repo
+ ---> Using cache
+ ---> e54e4b557c46
+Step 24/51 : RUN apt-get update &&     apt-get install -y     libwayland-egl1     gstreamer1.0-plugins-bad     libgstreamer-plugins-bad1.0-0     gstreamer1.0-plugins-good     python3-gst-1.0
+ ---> Using cache
+ ---> a8a0160b0c97
+Step 25/51 : RUN echo -e "\e[48;5;172m Install traitlets \e[0m"
+ ---> Using cache
+ ---> b19e916f6e47
+Step 26/51 : RUN pip3 install traitlets
+ ---> Using cache
+ ---> e2b605c46da5
+Step 27/51 : RUN echo -e "\e[48;5;172m Install Jupyter Lab \e[0m"
+ ---> Using cache
+ ---> 0c2a010b8c1f
+Step 28/51 : RUN apt-get update
+ ---> Using cache
+ ---> 2c2b2b274819
+Step 29/51 : RUN apt-get install -y curl
+ ---> Using cache
+ ---> f8ec26e55e59
+Step 30/51 : RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+ ---> Using cache
+ ---> 0b9aaf732936
+Step 31/51 : RUN apt-get install -y nodejs libffi-dev
+ ---> Using cache
+ ---> 740c1fbfe72d
+Step 32/51 : RUN pip3 install jupyter jupyterlab jupyter_packaging
+ ---> Using cache
+ ---> 59c2711bb2c0
+Step 33/51 : RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+ ---> Using cache
+ ---> ea614dad2b2c
+Step 34/51 : RUN pip3 install ipywidgets -U      # update the latest ipython widgets
+ ---> Using cache
+ ---> 6d7875010d0e
+Step 35/51 : RUN echo "\e[42m Install jupyter_clickable_image_widget \e[0m"
+ ---> Using cache
+ ---> ce9ff11b1b6f
+Step 36/51 : RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security main" >> /etc/apt/sources.list
+ ---> Using cache
+ ---> 6961427107f9
+Step 37/51 : RUN cd && apt-get update &&     apt-get install -y libssl1.0-dev &&     git clone https://github.com/jaybdub/jupyter_clickable_image_widget &&     cd jupyter_clickable_image_widget &&     git checkout tags/v0.1 &&     pip3 install -e . &&     jupyter labextension install js &&     jupyter lab build
+ ---> Using cache
+ ---> 16d714e8c2a5
+Step 38/51 : RUN apt-get update && apt-get install -y supervisor unzip
+ ---> Using cache
+ ---> 932999e72224
+Step 39/51 : RUN apt-get install -y python3-smbus && pip3 install pyzmq
+ ---> Using cache
+ ---> 00f7fa83b328
+Step 40/51 : ENV TORCH2TRT_REPO_DIR=/opt/
+ ---> Using cache
+ ---> fbd22f875a56
+Step 41/51 : RUN apt-get update && apt-get install -y libomp-dev libopenblas-dev libopenmpi-dev
+ ---> Using cache
+ ---> ddb42f2c959a
+Step 42/51 : RUN cd ${TORCH2TRT_REPO_DIR} && git clone https://github.com/NVIDIA-AI-IOT/torch2trt
+ ---> Using cache
+ ---> 4543e5093098
+Step 43/51 : RUN cd ${TORCH2TRT_REPO_DIR}/torch2trt && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl && cd .. && rm -rf /torch2trt
+ ---> Using cache
+ ---> 73fd9557ad57
+Step 44/51 : ENV QWIIC_DIR=/opt/Qwiic_Py
+ ---> Using cache
+ ---> 4191b6207047
+Step 45/51 : ENV QWIIC_I2C_DIR=/opt/Qwiic_Py/qwiic_i2c
+ ---> Using cache
+ ---> 6b4a4a55a43c
+Step 46/51 : RUN cd /opt && git clone --recurse-submodules https://github.com/sparkfun/Qwiic_Py.git
+ ---> Using cache
+ ---> 9685b5d16e9e
+Step 47/51 : RUN cd ${QWIIC_DIR}/qwiic/drivers && rm -rf qwiic_as6212 qwiic_kx13x &&     cd ${QWIIC_DIR} && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl &&     cd ${QWIIC_I2C_DIR} && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl &&     cd /opt && rm -rf Qwiic_Py
+ ---> Using cache
+ ---> 0f78a37c2ce6
+Step 48/51 : RUN pip3 install pyserial jetson-stats
+ ---> Using cache
+ ---> c34f0a1fb764
+Step 49/51 : ENV JETBOT_REPO_DIR=/opt/jetbot
+ ---> Using cache
+ ---> 7c4453036414
+Step 50/51 : COPY . ${JETBOT_REPO_DIR}
+ ---> 2709c99290ec
+Step 51/51 : RUN cd ${JETBOT_REPO_DIR} && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl
+ ---> Running in d9f186cae849
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /usr/local/cuda-10.2 (found version "10.2") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /opt/jetbot
+[ 50%] Building CXX object jetbot/ssd_tensorrt/CMakeFiles/ssd_tensorrt.dir/FlattenConcat.cpp.o
+[100%] Linking CXX shared library libssd_tensorrt.so
+[100%] Built target ssd_tensorrt
+running bdist_wheel
+running build
+running build_py
+creating build
+creating build/lib
+creating build/lib/jetbot
+copying jetbot/motor.py -> build/lib/jetbot
+copying jetbot/road_cruiser.py -> build/lib/jetbot
+copying jetbot/robot.py -> build/lib/jetbot
+copying jetbot/image.py -> build/lib/jetbot
+copying jetbot/tensorrt_model_o.py -> build/lib/jetbot
+copying jetbot/tensorrt_model.py -> build/lib/jetbot
+copying jetbot/fleet_manager.py -> build/lib/jetbot
+copying jetbot/heartbeat.py -> build/lib/jetbot
+copying jetbot/__init__.py -> build/lib/jetbot
+copying jetbot/jpeg_encoder.py -> build/lib/jetbot
+copying jetbot/object_detection.py -> build/lib/jetbot
+copying jetbot/object_follower.py -> build/lib/jetbot
+copying jetbot/fleet_manager_trt.py -> build/lib/jetbot
+copying jetbot/local_controller.py -> build/lib/jetbot
+copying jetbot/road_cruiser_trt.py -> build/lib/jetbot
+creating build/lib/jetbot/utils
+copying jetbot/utils/create_jupyter_service.py -> build/lib/jetbot/utils
+copying jetbot/utils/utils.py -> build/lib/jetbot/utils
+copying jetbot/utils/plot_perf.py -> build/lib/jetbot/utils
+copying jetbot/utils/__init__.py -> build/lib/jetbot/utils
+copying jetbot/utils/create_stats_service.py -> build/lib/jetbot/utils
+copying jetbot/utils/yolo_classes.py -> build/lib/jetbot/utils
+copying jetbot/utils/ssd_classes.py -> build/lib/jetbot/utils
+creating build/lib/jetbot/yolo_tensorrt
+copying jetbot/yolo_tensorrt/__init__.py -> build/lib/jetbot/yolo_tensorrt
+copying jetbot/yolo_tensorrt/yolo_classes.py -> build/lib/jetbot/yolo_tensorrt
+copying jetbot/yolo_tensorrt/yolo_with_plugins.py -> build/lib/jetbot/yolo_tensorrt
+creating build/lib/jetbot/camera
+copying jetbot/camera/opencv_gst_camera.py -> build/lib/jetbot/camera
+copying jetbot/camera/__init__.py -> build/lib/jetbot/camera
+copying jetbot/camera/opencv_gst_camera_old.py -> build/lib/jetbot/camera
+copying jetbot/camera/zmq_camera.py -> build/lib/jetbot/camera
+copying jetbot/camera/camera_base.py -> build/lib/jetbot/camera
+copying jetbot/camera/opencv_gst_camera_o.py -> build/lib/jetbot/camera
+creating build/lib/jetbot/apps
+copying jetbot/apps/stats_1.py -> build/lib/jetbot/apps
+copying jetbot/apps/wander.py -> build/lib/jetbot/apps
+copying jetbot/apps/ina3221.py -> build/lib/jetbot/apps
+copying jetbot/apps/ina219.py -> build/lib/jetbot/apps
+copying jetbot/apps/__init__.py -> build/lib/jetbot/apps
+copying jetbot/apps/stats.py -> build/lib/jetbot/apps
+copying jetbot/apps/ina3221_jetbot.py -> build/lib/jetbot/apps
+copying jetbot/apps/stats_o.py -> build/lib/jetbot/apps
+copying jetbot/apps/jetbot_states.py -> build/lib/jetbot/apps
+creating build/lib/jetbot/ssd_tensorrt
+copying jetbot/ssd_tensorrt/ssd_tensorrt_o.py -> build/lib/jetbot/ssd_tensorrt
+copying jetbot/ssd_tensorrt/__init__.py -> build/lib/jetbot/ssd_tensorrt
+copying jetbot/ssd_tensorrt/ssd_tensorrt.py -> build/lib/jetbot/ssd_tensorrt
+copying jetbot/ssd_tensorrt/libssd_tensorrt.so -> build/lib/jetbot/ssd_tensorrt
+copying jetbot/yolo_tensorrt/libyolo_layer.so -> build/lib/jetbot/yolo_tensorrt
+installing to build/bdist.linux-aarch64/wheel
+running install
+running install_lib
+creating build/bdist.linux-aarch64
+creating build/bdist.linux-aarch64/wheel
+creating build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/motor.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/road_cruiser.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/robot.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/image.py -> build/bdist.linux-aarch64/wheel/jetbot
+creating build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/create_jupyter_service.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/utils.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/plot_perf.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/create_stats_service.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/yolo_classes.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/utils/ssd_classes.py -> build/bdist.linux-aarch64/wheel/jetbot/utils
+copying build/lib/jetbot/tensorrt_model_o.py -> build/bdist.linux-aarch64/wheel/jetbot
+creating build/bdist.linux-aarch64/wheel/jetbot/yolo_tensorrt
+copying build/lib/jetbot/yolo_tensorrt/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot/yolo_tensorrt
+copying build/lib/jetbot/yolo_tensorrt/yolo_classes.py -> build/bdist.linux-aarch64/wheel/jetbot/yolo_tensorrt
+copying build/lib/jetbot/yolo_tensorrt/yolo_with_plugins.py -> build/bdist.linux-aarch64/wheel/jetbot/yolo_tensorrt
+copying build/lib/jetbot/yolo_tensorrt/libyolo_layer.so -> build/bdist.linux-aarch64/wheel/jetbot/yolo_tensorrt
+copying build/lib/jetbot/tensorrt_model.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/fleet_manager.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/heartbeat.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot
+creating build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/opencv_gst_camera.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/opencv_gst_camera_old.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/zmq_camera.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/camera_base.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+copying build/lib/jetbot/camera/opencv_gst_camera_o.py -> build/bdist.linux-aarch64/wheel/jetbot/camera
+creating build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/stats_1.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/wander.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/ina3221.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/ina219.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/stats.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/ina3221_jetbot.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/stats_o.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/apps/jetbot_states.py -> build/bdist.linux-aarch64/wheel/jetbot/apps
+copying build/lib/jetbot/jpeg_encoder.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/object_detection.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/object_follower.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/fleet_manager_trt.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/local_controller.py -> build/bdist.linux-aarch64/wheel/jetbot
+copying build/lib/jetbot/road_cruiser_trt.py -> build/bdist.linux-aarch64/wheel/jetbot
+creating build/bdist.linux-aarch64/wheel/jetbot/ssd_tensorrt
+copying build/lib/jetbot/ssd_tensorrt/libssd_tensorrt.so -> build/bdist.linux-aarch64/wheel/jetbot/ssd_tensorrt
+copying build/lib/jetbot/ssd_tensorrt/ssd_tensorrt_o.py -> build/bdist.linux-aarch64/wheel/jetbot/ssd_tensorrt
+copying build/lib/jetbot/ssd_tensorrt/__init__.py -> build/bdist.linux-aarch64/wheel/jetbot/ssd_tensorrt
+copying build/lib/jetbot/ssd_tensorrt/ssd_tensorrt.py -> build/bdist.linux-aarch64/wheel/jetbot/ssd_tensorrt
+running install_egg_info
+running egg_info
+creating jetbot.egg-info
+writing jetbot.egg-info/PKG-INFO
+writing dependency_links to jetbot.egg-info/dependency_links.txt
+writing requirements to jetbot.egg-info/requires.txt
+writing top-level names to jetbot.egg-info/top_level.txt
+writing manifest file 'jetbot.egg-info/SOURCES.txt'
+reading manifest file 'jetbot.egg-info/SOURCES.txt'
+writing manifest file 'jetbot.egg-info/SOURCES.txt'
+Copying jetbot.egg-info to build/bdist.linux-aarch64/wheel/jetbot-0.4.3-py3.8.egg-info
+running install_scripts
+creating build/bdist.linux-aarch64/wheel/jetbot-0.4.3.dist-info/WHEEL
+creating 'dist/jetbot-0.4.3-py3-none-any.whl' and adding 'build/bdist.linux-aarch64/wheel' to it
+adding 'jetbot/__init__.py'
+adding 'jetbot/fleet_manager.py'
+adding 'jetbot/fleet_manager_trt.py'
+adding 'jetbot/heartbeat.py'
+adding 'jetbot/image.py'
+adding 'jetbot/jpeg_encoder.py'
+adding 'jetbot/local_controller.py'
+adding 'jetbot/motor.py'
+adding 'jetbot/object_detection.py'
+adding 'jetbot/object_follower.py'
+adding 'jetbot/road_cruiser.py'
+adding 'jetbot/road_cruiser_trt.py'
+adding 'jetbot/robot.py'
+adding 'jetbot/tensorrt_model.py'
+adding 'jetbot/tensorrt_model_o.py'
+adding 'jetbot/apps/__init__.py'
+adding 'jetbot/apps/ina219.py'
+adding 'jetbot/apps/ina3221.py'
+adding 'jetbot/apps/ina3221_jetbot.py'
+adding 'jetbot/apps/jetbot_states.py'
+adding 'jetbot/apps/stats.py'
+adding 'jetbot/apps/stats_1.py'
+adding 'jetbot/apps/stats_o.py'
+adding 'jetbot/apps/wander.py'
+adding 'jetbot/camera/__init__.py'
+adding 'jetbot/camera/camera_base.py'
+adding 'jetbot/camera/opencv_gst_camera.py'
+adding 'jetbot/camera/opencv_gst_camera_o.py'
+adding 'jetbot/camera/opencv_gst_camera_old.py'
+adding 'jetbot/camera/zmq_camera.py'
+adding 'jetbot/ssd_tensorrt/__init__.py'
+adding 'jetbot/ssd_tensorrt/libssd_tensorrt.so'
+adding 'jetbot/ssd_tensorrt/ssd_tensorrt.py'
+adding 'jetbot/ssd_tensorrt/ssd_tensorrt_o.py'
+adding 'jetbot/utils/__init__.py'
+adding 'jetbot/utils/create_jupyter_service.py'
+adding 'jetbot/utils/create_stats_service.py'
+adding 'jetbot/utils/plot_perf.py'
+adding 'jetbot/utils/ssd_classes.py'
+adding 'jetbot/utils/utils.py'
+adding 'jetbot/utils/yolo_classes.py'
+adding 'jetbot/yolo_tensorrt/__init__.py'
+adding 'jetbot/yolo_tensorrt/libyolo_layer.so'
+adding 'jetbot/yolo_tensorrt/yolo_classes.py'
+adding 'jetbot/yolo_tensorrt/yolo_with_plugins.py'
+adding 'jetbot-0.4.3.dist-info/METADATA'
+adding 'jetbot-0.4.3.dist-info/WHEEL'
+adding 'jetbot-0.4.3.dist-info/top_level.txt'
+adding 'jetbot-0.4.3.dist-info/RECORD'
+removing build/bdist.linux-aarch64/wheel
+[91m/usr/local/lib/python3.8/dist-packages/setuptools/_distutils/cmd.py:66: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+[0mProcessing ./jetbot-0.4.3-py3-none-any.whl
+Collecting Adafruit-MotorHat (from jetbot==0.4.3)
+  Downloading Adafruit_MotorHAT-1.4.0-py3-none-any.whl.metadata (300 bytes)
+Collecting Adafruit-SSD1306 (from jetbot==0.4.3)
+  Downloading Adafruit_SSD1306-1.6.2.tar.gz (5.2 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting Adafruit-GPIO>=0.7 (from Adafruit-MotorHat->jetbot==0.4.3)
+  Downloading Adafruit_GPIO-1.0.3.tar.gz (24 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting adafruit-pureio (from Adafruit-GPIO>=0.7->Adafruit-MotorHat->jetbot==0.4.3)
+  Downloading Adafruit_PureIO-1.1.11-py3-none-any.whl.metadata (3.0 kB)
+Collecting spidev (from Adafruit-GPIO>=0.7->Adafruit-MotorHat->jetbot==0.4.3)
+  Downloading spidev-3.6.tar.gz (11 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Downloading Adafruit_MotorHAT-1.4.0-py3-none-any.whl (6.0 kB)
+Downloading Adafruit_PureIO-1.1.11-py3-none-any.whl (10 kB)
+Building wheels for collected packages: Adafruit-SSD1306, Adafruit-GPIO, spidev
+  Building wheel for Adafruit-SSD1306 (setup.py): started
+  Building wheel for Adafruit-SSD1306 (setup.py): finished with status 'done'
+  Created wheel for Adafruit-SSD1306: filename=Adafruit_SSD1306-1.6.2-py3-none-any.whl size=5841 sha256=71718aa60a36e70a67dafd0b2a9aa9e20ed09a8c00ccaf6495982ac3fb978014
+  Stored in directory: /root/.cache/pip/wheels/2d/dd/78/873deb33dc2369b2ff2f5620ee790e9ae632768207a3bf5349
+  Building wheel for Adafruit-GPIO (setup.py): started
+  Building wheel for Adafruit-GPIO (setup.py): finished with status 'done'
+  Created wheel for Adafruit-GPIO: filename=Adafruit_GPIO-1.0.3-py3-none-any.whl size=38122 sha256=e9c41f89fe153f7ca3a7cc29898103f8ffc98056dce45db408684ec3de7ed052
+  Stored in directory: /root/.cache/pip/wheels/49/c8/36/f44642705912aff8e48aa5ceb4b3abd7a55e8f8e4cfb9c2b84
+  Building wheel for spidev (pyproject.toml): started
+  Building wheel for spidev (pyproject.toml): finished with status 'done'
+  Created wheel for spidev: filename=spidev-3.6-cp38-cp38-linux_aarch64.whl size=46547 sha256=54434605c1f5ee1a2e7aaddfa846fa5dc06a9443386954e5bb5c990cb3ef75fd
+  Stored in directory: /root/.cache/pip/wheels/ba/17/82/d36e892c58c4a4f03c7afe3c493f852dba47f2c1ee60197087
+Successfully built Adafruit-SSD1306 Adafruit-GPIO spidev
+Installing collected packages: spidev, adafruit-pureio, Adafruit-GPIO, Adafruit-SSD1306, Adafruit-MotorHat, jetbot
+Successfully installed Adafruit-GPIO-1.0.3 Adafruit-MotorHat-1.4.0 Adafruit-SSD1306-1.6.2 adafruit-pureio-1.1.11 jetbot-0.4.3 spidev-3.6
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container d9f186cae849
+ ---> 694d69ddcfbb
+[Warning] One or more build-args [HOME] were not consumed
+Successfully built 694d69ddcfbb
+Successfully tagged cuterbot/cuterbot:base-1.0.0-r35.2.1

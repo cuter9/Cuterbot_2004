@@ -1,0 +1,1 @@
+1. Upgrade the jetson nano to 20.04 with reference to 

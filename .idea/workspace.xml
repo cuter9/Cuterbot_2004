@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="Add pwr states function using jtop">
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/base/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/base/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/base/enable_base_container_x11.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/base/enable_base_container_x11.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/display/enable.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/display/enable.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/nv_docker_settings/host-files-for-container.d/cudnn.csv" beforeDir="false" afterPath="$PROJECT_DIR$/docker/nv_docker_settings/host-files-for-container.d/cudnn.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/apps/jetbot_states.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/jetbot_states.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/apps/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/stats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/live_demo_light_trt-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/live_demo_light_trt-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_build_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_build_trt.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +141,7 @@
       <workItem from="1714474922171" duration="2808000" />
       <workItem from="1714477746932" duration="836000" />
       <workItem from="1714478591643" duration="16348000" />
-      <workItem from="1714498089256" duration="3666000" />
+      <workItem from="1714498089256" duration="4196000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -538,7 +549,8 @@
     <MESSAGE value="NV container setting" />
     <MESSAGE value="change Dockerfile name of base images" />
     <MESSAGE value="Add pwr states function using jtop" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add pwr states function using jtop" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Cuterbot_2004$stats.coverage" NAME="stats Coverage Results" MODIFIED="1713851089294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/apps" />
