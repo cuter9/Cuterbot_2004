@@ -1,7 +1,7 @@
 # Docker version issue
 1. The native nvidia container libraries in jetson nano (nvidia-docker2 v2.8 and its associative packages), can be upgrade to v2.13.0, as following 
 2. Add the latest apt source list to /etc/apt/source.list.d from https://github.com/NVIDIA/libnvidia-container/blob/gh-pages/stable/ubuntu18.04/nvidia-container-toolkit.list
-3. Run nv_container_rt.sh to install the following: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
+3. Run nv_container_rt.sh to install the following packages which ensure the nvidia container workable : https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
    1) install nvidia-docker2 v2.8.0
    2) nvidia container runtime (v3.7.0)
    3) libnvidia-container1 (v1.7.0)
