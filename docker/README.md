@@ -1,18 +1,23 @@
 # Docker version issue
 1. The native nvidia container libraries in jetson nano (nvidia-docker2 v2.8 and its associative packages), can be upgrade to v2.13.0, as following 
-2. Add the latest apt source list to /etc/apt/source.list.d from https://github.com/NVIDIA/libnvidia-container/blob/gh-pages/stable/ubuntu18.04/nvidia-container-toolkit.list
-3. Run nv_container_rt.sh to install the following packages which ensure the nvidia container workable : https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
+   Run nv_container_rt.sh to install the following packages which will ensure the nvidia container workable : https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
    1) install nvidia-docker2 v2.8.0
    2) nvidia container runtime (v3.7.0)
    3) libnvidia-container1 (v1.7.0)
    4) nvidia container tools (v1.7.0)
    5) nvidia container toolkit (v1.7.0)
    6) docker.io (v24.0.5)
-4. You can check the installed docker version with apt list --installed | grep docker.io, and then will get docker version "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64"
-5. BuildKit seems not workable with nvidia container toolkit on jetson nano, thus is not recommended to install.
-6. The latest docker version with BuildKit seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder.
-7. It seems fail to work to install the docker as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
-
+2. You can check the installed docker version with apt list --installed | grep docker.io, and then will get docker version "docker.io/focal-updates,now 24.0.5-0ubuntu1~20.04.1 arm64"
+3. BuildKit seems not workable with nvidia container toolkit on native jetson nano, thus is not recommended to install.
+4. The latest docker version with BuildKit seems fail to build the image with the build-in jetson nano container tool kit and the associated csv file in /etc/nvidia-container-runtime/host-files-for-container.d/ folder.
+5. It seems fail to work to install the docker as instructed in https://docs.docker.com/engine/install/ubuntu/#installation-methods.
+6. The native nvidia container libraries and toolkit in jetson nano (nvidia-docker2 v2.8 and its associative packages), can be upgrade to v2.13.0, as following 
+   1) Add the latest apt source list to /etc/apt/source.list.d from https://github.com/NVIDIA/libnvidia-container/blob/gh-pages/stable/ubuntu18.04/nvidia-container-toolkit.list
+   2) The nvidia container toolkit only mount l4t.csv, thus, it must combine all csv files in /etc/nvidia-container-runtime/host-files-for-container.d/ into l4t.csv. please nor there would be some syntax error in some csv files, e.g. cudnn.csv.
+   3) The already combined l4t.csv can be copied to /etc/nvidia-container-runtime/host-files-for-container.d/.
+   4) configure and restart docker daemon again
+      * sudo nvidia-ctk runtime configure --runtime=docker
+      * sudo systemctl restart docker
 
 # CuterBot Docker
 
