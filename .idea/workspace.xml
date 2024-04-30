@@ -124,7 +124,7 @@
       <workItem from="1714465715616" duration="41000" />
       <workItem from="1714474922171" duration="2808000" />
       <workItem from="1714477746932" duration="836000" />
-      <workItem from="1714478591643" duration="16248000" />
+      <workItem from="1714478591643" duration="16275000" />
     </task>
     <task id="LOCAL-00001" summary="delete model files">
       <option name="closed" value="true" />
@@ -494,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714496661480</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Add pwr states function using jtop">
+      <option name="closed" value="true" />
+      <created>1714496722736</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1714496722736</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
