@@ -54,14 +54,12 @@ def parse_boxes(outputs):
     return all_detections
 
 
-'''
 def parse_boxes_fpn(outputs):
-    
     # The fpn model converted from TF v2 has different boxes coordinate array arrangement:
     #    [ymin, xmin, ymax, xmax]
-    
+
     bboxes = outputs[0]
-    # print("shape of output:",  np.shape(bboxes))
+    # print("shape of fpn model output:",  np.shape(bboxes)) # [1, 1, 100, 7]
     # iterate through each image index
     all_detections = []
     for i in range(bboxes.shape[0]):
@@ -77,7 +75,7 @@ def parse_boxes_fpn(outputs):
             if label < 0:
                 break
 
-            if float(bbox[CONFIDENCE_IDX]) < 0.3:
+            if float(bbox[CONFIDENCE_IDX]) < 0.4:
                 continue
 
             detections.append(dict(
@@ -93,43 +91,6 @@ def parse_boxes_fpn(outputs):
 
         all_detections.append(detections)
 
-    return all_detections
-'''
-
-
-def parse_boxes_fpn(out, conf_th=0.5, output_layout=7):
-    """Postprocess TRT SSD FPN output."""
-    output = out[0]
-    boxes, confs, clss = [], [], []
-    # # box CodeTypeSSD : TF_CENTER, https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-821/api/c_api/_nv_infer_plugin_utils_8h_source.html
-    # output :  [ ,class ID, confidence score, x_min_object_box, y_min_object_box, x_max_object_box, y_max_object_box,
-    #             , ....
-    #             ,class ID, confidence score, x_min_object_box, y_min_object_box, x_max_object_box, y_max_object_box,
-    #             , ....]
-    detections = []
-    for prefix in range(0, len(output), output_layout):
-        if output[1] < 0:
-            break
-        # index = int(output[prefix+0])
-        conf = float(output[prefix + CONFIDENCE_IDX])
-        if conf < conf_th:
-            continue
-        # the box coordinate arrange in TF v2 FPN model is [y1, x1, y2, x1] which is different from TF v1 model
-        x1 = float(output[prefix + X0_IDX_FPN])
-        y1 = float(output[prefix + Y0_IDX_FPN])
-        x2 = float(output[prefix + X1_IDX_FPN])
-        y2 = float(output[prefix + Y1_IDX_FPN])
-        label = int(output[prefix + LABEL_IDX])
-        det = dict(
-            label=label,
-            confidence=conf,
-            bbox=[x1, y1, x2, y2])
-
-        detections.append(det)
-        # boxes.append((x1, y1, x2, y2))
-        # confs.append(conf)
-        # clss.append(cls)
-    all_detections = [detections]
     return all_detections
 
 

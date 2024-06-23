@@ -5,15 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/test/test_fpn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/tensorrt_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/tensorrt_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,6 +55,7 @@
   &quot;keyToString&quot;: {
     &quot;Python.jetbot_states.executor&quot;: &quot;Run&quot;,
     &quot;Python.stats.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.test_fpn.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -55,7 +65,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/jetbot/apps/jetbot_states.py&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/test/test_fpn.py&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -70,7 +80,7 @@
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\docker\nv_docker_settings" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test_fpn">
     <configuration name="jetbot_states" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Cuterbot_WS" />
       <option name="ENV_FILES" value="" />
@@ -94,6 +104,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_fpn" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Cuterbot_2004" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DISPLAY" value="localhost:10.0" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test_fpn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.jetbot_states" />
+      <item itemvalue="Python.test_fpn" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -151,15 +190,9 @@
       <workItem from="1719126115513" duration="7017000" />
       <workItem from="1719135938093" duration="1818000" />
       <workItem from="1719139386941" duration="2875000" />
-      <workItem from="1719142632275" duration="1502000" />
-    </task>
-    <task id="LOCAL-00005" summary="typo coding">
-      <option name="closed" value="true" />
-      <created>1713852181325</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1713852181325</updated>
+      <workItem from="1719142632275" duration="19864000" />
+      <workItem from="1719163271876" duration="3768000" />
+      <workItem from="1719167202825" duration="4323000" />
     </task>
     <task id="LOCAL-00006" summary="typo coding">
       <option name="closed" value="true" />
@@ -545,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719140582080</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="update">
+      <option name="closed" value="true" />
+      <created>1719144144453</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1719144144453</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,6 +612,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fpn.coverage" NAME="test_fpn Coverage Results" MODIFIED="1719171372323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$stats.coverage" NAME="stats Coverage Results" MODIFIED="1713851089294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/apps" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$jetbot_states.coverage" NAME="jetbot_states Coverage Results" MODIFIED="1714499009096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>

@@ -30,9 +30,9 @@ def bgr8_to_ssd_fpn_input(camera_value, input_shape):
        because the normalization function has been already included in the model
     """
     x = camera_value
+    x = cv2.resize(x, input_shape)
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
     # x = cv2.resize(x, (300, 300))
-    x = cv2.resize(x, input_shape)
     x = x.transpose((2, 0, 1)).astype(np.float32)
     # x -= mean[:, None, None]
     # x /= stdev[:, None, None]
@@ -100,7 +100,7 @@ class ObjectDetector(object):
         # trt_outputs = self.trt_model(self.preprocess_fn(*inputs))
         # print("model input shape", self.input_shape)
         # print('Image size:', np.shape(inputs))
-
+        detections = None
         if self.type_model == 'SSD':
             trt_outputs = self.trt_model(self.preprocess_fn(*inputs, self.input_shape))
             detections = parse_boxes(trt_outputs)
