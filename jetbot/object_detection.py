@@ -36,7 +36,8 @@ def bgr8_to_ssd_fpn_input(camera_value, input_shape):
     x = x.transpose((2, 0, 1)).astype(np.float32)
     # x -= mean[:, None, None]
     # x /= stdev[:, None, None]
-    return x[None, ...]
+    # return x[None, ...]
+    return x
 
 
 def preprocess_yolo(img, input_shape, letter_box=False):

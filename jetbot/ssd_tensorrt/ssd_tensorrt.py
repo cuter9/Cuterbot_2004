@@ -76,6 +76,9 @@ def parse_boxes_fpn(outputs):
             if label < 0:
                 break
 
+            if float(bbox[CONFIDENCE_IDX]) < 0.5:
+                continue
+
             detections.append(dict(
                 label=int(label),
                 confidence=float(bbox[CONFIDENCE_IDX]),

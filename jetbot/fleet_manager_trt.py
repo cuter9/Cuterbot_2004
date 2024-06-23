@@ -39,8 +39,8 @@ from jetbot.utils import get_cls_dict_yolo, get_cls_dict_ssd
 
 import time
 
+
 class FleeterTRT(traitlets.HasTraits):
-    
     cap_image = traitlets.Any()
     label = traitlets.Integer(default_value=1).tag(config=True)
     label_text = traitlets.Unicode(default_value='').tag(config=True)
@@ -50,14 +50,16 @@ class FleeterTRT(traitlets.HasTraits):
     turn_gain = traitlets.Float(default_value=0.3).tag(config=True)
     steering_bias = traitlets.Float(default_value=0.0).tag(config=True)
     blocked = traitlets.Float(default_value=0).tag(config=True)
-    target_view= traitlets.Float(default_value=0.6).tag(config=True)
+    target_view = traitlets.Float(default_value=0.6).tag(config=True)
     mean_view = traitlets.Float(default_value=0).tag(config=True)
     e_view = traitlets.Float(default_value=0).tag(config=True)
     is_dectecting = traitlets.Bool(default_value=True).tag(config=True)
     is_dectected = traitlets.Bool(default_value=False).tag(config=True)
-    
-    def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine', type_follower_model="SSD", cruiser_model='resnet18', type_cruiser_model='resnet'):
 
+    def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine', type_follower_model="SSD",
+                 cruiser_model='resnet18', type_cruiser_model='resnet', *args: t.Any, **kwargs: t.Any):
+
+        super().__init__(*args, **kwargs)
         self.follower_model = follower_model
         self.type_follower_model = type_follower_model
 
@@ -73,14 +75,14 @@ class FleeterTRT(traitlets.HasTraits):
 
         self.cruiser_model = cruiser_model
         self.type_cruiser_model = type_cruiser_model
-        self.road_cruiser = RoadCruiserTRT(cruiser_model = self.cruiser_model, type_cruiser_model = self.type_cruiser_model)
-        
+        self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
+
         # self.robot = self.road_cruiser.robot
         self.robot = Robot.instance()
         self.detections = None
         self.matching_detections = None
         self.object_center = None
-        self.closest_objec = None
+        self.closest_object = None
         self.is_dectecting = True
         self.is_dectected = False
 
@@ -91,7 +93,7 @@ class FleeterTRT(traitlets.HasTraits):
         self.img_height = self.capturer.height
         self.cap_image = np.empty((self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
-        
+
         self.default_speed = self.speed
         self.detect_duration_max = 10
         self.no_detect = 0
@@ -110,15 +112,15 @@ class FleeterTRT(traitlets.HasTraits):
         self.detections = self.object_detector(self.current_image)
         self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
 
-        if int(self.label) >= 0 :
-            if self.type_follower_model == "SSD" :
+        if int(self.label) >= 0:
+            if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
                 self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
             elif self.type_follower_model == "YOLO":
                 self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
         else:
-             self.label_text = " Not defined !"
+            self.label_text = " Not defined !"
         # print(int(self.label), "\n", self.matching_detections)
-        
+
     def object_center_detection(self, det):
         """Computes the center x, y coordinates of the object"""
         # print(self.matching_detections)
@@ -127,7 +129,7 @@ class FleeterTRT(traitlets.HasTraits):
         center_y = (bbox[1] + bbox[3]) / 2.0 - 0.5
         object_center = (center_x, center_y)
         return object_center
-    
+
     def norm(self, vec):
         """Computes the length of the 2D vector"""
         return np.sqrt(vec[0] ** 2 + vec[1] ** 2)
@@ -139,13 +141,14 @@ class FleeterTRT(traitlets.HasTraits):
             for det in self.matching_detections:
                 if closest_detection is None:
                     closest_detection = det
-                elif self.norm(self.object_center_detection(det)) < self.norm(self.object_center_detection(closest_detection)):
+                elif self.norm(self.object_center_detection(det)) < self.norm(
+                        self.object_center_detection(closest_detection)):
                     closest_detection = det
-        
-        self.closest_object =  closest_detection
-        
+
+        self.closest_object = closest_detection
+
     def execute_fleeting(self, change):
-        
+
         # do object following
         start_time = time.process_time()
         self.execute(change)
@@ -163,7 +166,7 @@ class FleeterTRT(traitlets.HasTraits):
         self.capturer.unobserve_all()
         print("start running")
         self.capturer.observe(self.execute_fleeting, names='value')
- 
+
     def execute(self, change):
         # print("start excution !")
         self.current_image = change['new']
@@ -175,48 +178,49 @@ class FleeterTRT(traitlets.HasTraits):
         self.closest_object_detection()
         # detections = self.object_detector(image)
         # print(self.detections)
-        
+
         # draw all detections on image
-        for det in self.detections[0]:           
+        for det in self.detections[0]:
             bbox = det['bbox']
             cv2.rectangle(self.current_image, (int(width * bbox[0]), int(height * bbox[1])),
                           (int(width * bbox[2]), int(height * bbox[3])), (255, 0, 0), 2)
-            
+
         # select detections that match selected class label
         # get detection closest to center of field of view and draw it
         cls_obj = self.closest_object
         if cls_obj is not None:
             self.is_dectected = True
-            self.no_detect = self.detect_duration_max           # set max detection no to prevent temperary loss of object detection
+            self.no_detect = self.detect_duration_max  # set max detection no to prevent temperary loss of object detection
             bbox = cls_obj['bbox']
             cv2.rectangle(self.current_image, (int(width * bbox[0]), int(height * bbox[1])),
                           (int(width * bbox[2]), int(height * bbox[3])), (0, 255, 0), 5)
-            
+
             self.mean_view = 0.8 * (bbox[2] - bbox[0]) + 0.2 * self.mean_view_prev
             self.e_view = self.target_view - self.mean_view
-            if np.abs(self.e_view/self.target_view) > 0.1:
-                self.speed = self.speed + self.speed_gain * self.e_view + self.speed_dev * (self.e_view - self.e_view_prev)
+            if np.abs(self.e_view / self.target_view) > 0.1:
+                self.speed = self.speed + self.speed_gain * self.e_view + self.speed_dev * (
+                            self.e_view - self.e_view_prev)
             self.road_cruiser.speed = self.speed
 
-            self.mean_view_prev =  self.mean_view
+            self.mean_view_prev = self.mean_view
             self.e_view_prev = self.e_view
-            
+
         # otherwise go forward if no target detected
         if cls_obj is None:
-            if self.no_detect <= 0:         # if object is not detected for a duration, road cruising
+            if self.no_detect <= 0:  # if object is not detected for a duration, road cruising
                 self.mean_view = 0.0
                 self.mean_view_prev = 0.0
                 self.is_dectected = False
                 self.cap_image = bgr8_to_jpeg(self.current_image)
                 return
             else:
-                self.no_detect -= 1         # observe for a duration for the miss of object detection
+                self.no_detect -= 1  # observe for a duration for the miss of object detection
             # self.robot.forward(float(self.speed))
-            
+
         # otherwise steer towards target
         else:
             # move robot forward and steer proportional target's x-distance from center
-            center =self.object_center_detection(cls_obj)
+            center = self.object_center_detection(cls_obj)
             self.robot.set_motors(
                 float(self.speed + self.turn_gain * center[0] + self.steering_bias),
                 float(self.speed - self.turn_gain * center[0] + self.steering_bias)
@@ -226,7 +230,6 @@ class FleeterTRT(traitlets.HasTraits):
         self.cap_image = bgr8_to_jpeg(self.current_image)
         # print("ok!")
         # return self.cap_image
-        
 
     def stop_run(self, change):
         import matplotlib.pyplot as plt
@@ -248,4 +251,3 @@ class FleeterTRT(traitlets.HasTraits):
         plot_exec_time(self.execution_time[1:], follower_model_name, self.follower_model.split(".")[0])
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split(".")[0])
         plt.show()
-
