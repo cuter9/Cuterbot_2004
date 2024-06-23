@@ -14,6 +14,11 @@ Y0_IDX = 4
 X1_IDX = 5
 Y1_IDX = 6
 
+X0_IDX_FPN = 4
+Y0_IDX_FPN = 3
+X1_IDX_FPN = 6
+Y1_IDX_FPN = 5
+
 
 def parse_boxes(outputs):
     bboxes = outputs[0]
@@ -30,7 +35,7 @@ def parse_boxes(outputs):
             label = bbox[LABEL_IDX]
 
             # last detection if < 0
-            if label < 0: 
+            if label < 0:
                 break
 
             detections.append(dict(
@@ -49,10 +54,48 @@ def parse_boxes(outputs):
     return all_detections
 
 
+def parse_boxes_fpn(outputs):
+    '''
+        The fpn model converted from TF v2 has different boxes coordinate array arrangement:
+        [ymin, xmin, ymax, xmax]
+    '''
+    bboxes = outputs[0]
+    # print("shape of output:",  np.shape(bboxes))
+    # iterate through each image index
+    all_detections = []
+    for i in range(bboxes.shape[0]):
+
+        detections = []
+        # iterate through each bounding box
+        for j in range(bboxes.shape[2]):
+
+            bbox = bboxes[i][0][j]
+            label = bbox[LABEL_IDX]
+
+            # last detection if < 0
+            if label < 0:
+                break
+
+            detections.append(dict(
+                label=int(label),
+                confidence=float(bbox[CONFIDENCE_IDX]),
+                bbox=[
+                    float(bbox[X0_IDX_FPN]),
+                    float(bbox[Y0_IDX_FPN]),
+                    float(bbox[X1_IDX_FPN]),
+                    float(bbox[Y1_IDX_FPN])
+                ]
+            ))
+
+        all_detections.append(detections)
+
+    return all_detections
+
+
 # def load_plugins():
-    # library_path = os.path.join(os.path.dirname(__file__), 'libyolo_layer.so')
-    # library_path = os.path.join(os.path.dirname(__file__), 'libssd_tensorrt.so')
-    # ctypes.CDLL(library_path)
+# library_path = os.path.join(os.path.dirname(__file__), 'libyolo_layer.so')
+# library_path = os.path.join(os.path.dirname(__file__), 'libssd_tensorrt.so')
+# ctypes.CDLL(library_path)
 
 
 def _get_feature_map_shape(config):
@@ -222,11 +265,10 @@ def ssd_uff_to_engine(uff_buffer,
                       average_find_iterations=1,
                       strict_type_constraints=False,
                       log_level=trt.Logger.INFO):
-
     import uff
     # create the tensorrt engine
     with trt.Logger(log_level) as logger, trt.Builder(logger) as builder, \
-        builder.create_network() as network, trt.UffParser() as parser:
+            builder.create_network() as network, trt.UffParser() as parser:
 
         # init built in plugins
         trt.init_libnvinfer_plugins(logger, '')

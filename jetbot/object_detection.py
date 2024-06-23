@@ -1,6 +1,6 @@
 from xml.sax.xmlreader import InputSource
 import tensorrt as trt
-from jetbot.ssd_tensorrt import parse_boxes, TRT_INPUT_NAME, TRT_OUTPUT_NAME
+from jetbot.ssd_tensorrt import parse_boxes, parse_boxes_fpn, TRT_INPUT_NAME, TRT_OUTPUT_NAME
 from .tensorrt_model import TRTModel, parse_boxes_yolo
 import numpy as np
 import cv2
@@ -21,6 +21,21 @@ def bgr8_to_ssd_input(camera_value, input_shape):
     x = x.transpose((2, 0, 1)).astype(np.float32)
     x -= mean[:, None, None]
     x /= stdev[:, None, None]
+    return x[None, ...]
+
+
+def bgr8_to_ssd_fpn_input(camera_value, input_shape):
+    """Preprocess an image size to meet the size of model input before TRT SSD FPN model inferencing.
+       the input for SSD FPN mode which converted from Tensorflow V2 does nor need normalization to +/- 1
+       because the normalization function has been already included in the model
+    """
+    x = camera_value
+    x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
+    # x = cv2.resize(x, (300, 300))
+    x = cv2.resize(x, input_shape)
+    x = x.transpose((2, 0, 1)).astype(np.float32)
+    # x -= mean[:, None, None]
+    # x /= stdev[:, None, None]
     return x[None, ...]
 
 
@@ -74,7 +89,7 @@ class ObjectDetector(object):
         #                          output_names=[TRT_OUTPUT_NAME, TRT_OUTPUT_NAME + '_1'])
         self.trt_model = TRTModel(engine_path)
         self.preprocess_fn = preprocess_fn
-        # self.preprocess_fn_yolo = bgr8_to_ssd_input_yolo
+        self.preprocess_fn_fpn = bgr8_to_ssd_fpn_input
         self.preprocess_fn_yolo = preprocess_yolo
         self.input_shape = self.trt_model.input_shape
 
@@ -88,6 +103,9 @@ class ObjectDetector(object):
         if self.type_model == 'SSD':
             trt_outputs = self.trt_model(self.preprocess_fn(*inputs, self.input_shape))
             detections = parse_boxes(trt_outputs)
+        elif self.type_model == 'SSD_FPN':
+            trt_outputs = self.trt_model(self.preprocess_fn_fpn(*inputs, self.input_shape))
+            detections = parse_boxes_fpn(trt_outputs)
         elif self.type_model == 'YOLO':
             trt_outputs = self.trt_model(self.preprocess_fn_yolo(*inputs, self.input_shape))
             detections = parse_boxes_yolo(trt_outputs)
