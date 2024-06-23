@@ -57,9 +57,8 @@ class FleeterTRT(traitlets.HasTraits):
     is_dectected = traitlets.Bool(default_value=False).tag(config=True)
 
     def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine', type_follower_model="SSD",
-                 cruiser_model='resnet18', type_cruiser_model='resnet', *args: t.Any, **kwargs: t.Any):
+                 cruiser_model='resnet18', type_cruiser_model='resnet'):
 
-        super().__init__(*args, **kwargs)
         self.follower_model = follower_model
         self.type_follower_model = type_follower_model
 

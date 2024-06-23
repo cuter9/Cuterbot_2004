@@ -7,7 +7,7 @@
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,15 +150,8 @@
       <workItem from="1717061318898" duration="2603000" />
       <workItem from="1719126115513" duration="7017000" />
       <workItem from="1719135938093" duration="1818000" />
-      <workItem from="1719139386941" duration="355000" />
-    </task>
-    <task id="LOCAL-00004" summary="add to modify the nv container run time to mount py 3.8 tensorrt">
-      <option name="closed" value="true" />
-      <created>1713847270977</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1713847270977</updated>
+      <workItem from="1719139386941" duration="2875000" />
+      <workItem from="1719142632275" duration="1502000" />
     </task>
     <task id="LOCAL-00005" summary="typo coding">
       <option name="closed" value="true" />
@@ -544,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719135589677</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="update">
+      <option name="closed" value="true" />
+      <created>1719140582079</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1719140582080</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
