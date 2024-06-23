@@ -62,7 +62,9 @@ class FleeterTRT(traitlets.HasTraits):
         self.type_follower_model = type_follower_model
 
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        if self.type_follower_model == "SSD" or self.type_follower_model == "YOLO":
+        if (self.type_follower_model == "SSD" or
+                self.type_follower_model == "SSD_FPN" or
+                self.type_follower_model == "YOLO"):
             # from jetbot import ObjectDetector
             self.object_detector = ObjectDetector(self.follower_model, self.type_follower_model)
         # elif type_model == "YOLO":

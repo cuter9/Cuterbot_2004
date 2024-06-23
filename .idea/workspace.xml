@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,15 +146,7 @@
       <workItem from="1714629840092" duration="318000" />
       <workItem from="1714761513736" duration="15000" />
       <workItem from="1717061318898" duration="2603000" />
-      <workItem from="1719126115513" duration="1322000" />
-    </task>
-    <task id="LOCAL-00002" summary="delete model files">
-      <option name="closed" value="true" />
-      <created>1713776370518</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1713776370518</updated>
+      <workItem from="1719126115513" duration="6360000" />
     </task>
     <task id="LOCAL-00003" summary="modify np.int to int in according to the release of numpy version &gt; 20">
       <option name="closed" value="true" />
@@ -543,7 +532,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714507506117</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="update">
+      <option name="closed" value="true" />
+      <created>1719127661582</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1719127661583</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
