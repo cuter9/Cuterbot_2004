@@ -57,17 +57,19 @@ class FleeterTRT(traitlets.HasTraits):
     is_dectected = traitlets.Bool(default_value=False).tag(config=True)
 
     def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine', type_follower_model="SSD",
-                 cruiser_model='resnet18', type_cruiser_model='resnet'):
+                 cruiser_model='resnet18', type_cruiser_model='resnet', conf_th=0.5):
 
         self.follower_model = follower_model
         self.type_follower_model = type_follower_model
+        self.conf_th = conf_th
 
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
         if (self.type_follower_model == "SSD" or
                 self.type_follower_model == "SSD_FPN" or
                 self.type_follower_model == "YOLO"):
             # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model)
+            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
+                                                  conf_th=self.conf_th)
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)

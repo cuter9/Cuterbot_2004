@@ -52,14 +52,17 @@ class ObjectFollower(traitlets.HasTraits):
     is_dectecting = traitlets.Bool(default_value=True).tag(config=True)
 
     def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine',
-                 avoider_model='../collision_avoidance/best_model.pth', type_follower_model="SSD"):
+                 avoider_model='../collision_avoidance/best_model.pth', type_follower_model="SSD",
+                 conf_th=0.5):
         self.follower_model = follower_model
         self.avoider_model = avoider_model
         self.type_follower_model = type_follower_model
+        self.conf_th = conf_th
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
         if type_follower_model == "SSD" or type_follower_model == "YOLO":
             from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=type_follower_model)
+            self.object_detector = ObjectDetector(self.follower_model, type_model=type_follower_model,
+                                                  conf_th=self.conf_th)
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)

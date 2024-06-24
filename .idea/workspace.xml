@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/apps/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/apps/stats.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/ssd_tensorrt/ssd_tensorrt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/tensorrt_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/tensorrt_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_fpn.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_fpn.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,15 +192,7 @@
       <workItem from="1719142632275" duration="19864000" />
       <workItem from="1719163271876" duration="3768000" />
       <workItem from="1719167202825" duration="5899000" />
-      <workItem from="1719174000483" duration="17711000" />
-    </task>
-    <task id="LOCAL-00008" summary="typo coding">
-      <option name="closed" value="true" />
-      <created>1713853579712</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1713853579712</updated>
+      <workItem from="1719174000483" duration="19883000" />
     </task>
     <task id="LOCAL-00009" summary="typo coding">
       <option name="closed" value="true" />
@@ -590,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719171824127</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="update">
+      <option name="closed" value="true" />
+      <created>1719207138239</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1719207138239</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

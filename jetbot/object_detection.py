@@ -81,13 +81,14 @@ def load_plugins():
 
 class ObjectDetector(object):
 
-    def __init__(self, engine_path, type_model=None, preprocess_fn=bgr8_to_ssd_input):
+    def __init__(self, engine_path, type_model=None, conf_th=0.5, preprocess_fn=bgr8_to_ssd_input):
         logger = trt.Logger()
         trt.init_libnvinfer_plugins(logger, '')
         load_plugins()
 
         assert type_model is not None
         self.type_model = type_model
+        self.conf_th = conf_th
 
         # self.trt_model = TRTModel(engine_path, input_names=[TRT_INPUT_NAME],
         #                          output_names=[TRT_OUTPUT_NAME, TRT_OUTPUT_NAME + '_1'])
@@ -104,7 +105,7 @@ class ObjectDetector(object):
             self.postprocess = parse_boxes_yolo
         self.input_shape = self.trt_model.input_shape
 
-    def execute(self, *inputs, conf_th=0.5):
+    def execute(self, *inputs, conf_th=None):
 
         # trt_outputs = self.trt_model(inputs)
         # trt_outputs = self.trt_model(self.preprocess_fn(*inputs))
@@ -112,6 +113,8 @@ class ObjectDetector(object):
         # print('Image size:', np.shape(inputs))
         # detections = None
 
+        if conf_th is None:
+            conf_th = self.conf_th
         trt_outputs = self.trt_model(self.preprocess(*inputs, self.input_shape))
         detections = self.postprocess(trt_outputs, conf_th=conf_th)
 
@@ -127,5 +130,7 @@ class ObjectDetector(object):
         # print(detections)
         return detections
 
-    def __call__(self, *inputs, conf_th=0.5):
+    def __call__(self, *inputs, conf_th=None):
+        if conf_th is None:
+            conf_th = self.conf_th
         return self.execute(*inputs, conf_th=conf_th)
