@@ -204,6 +204,7 @@ class TRTModel(object):
         self.final_shapes = final_shapes
 
         # destroy at exit
+        # this is depreciated
         # atexit.register(self.destroy)
 
     def _input_binding_indices(self):
@@ -283,7 +284,7 @@ class TRTModel(object):
         return self.execute(*inputs)
 
     def destroy(self):
-        # self.runtime.destroy()
-        # self.logger.destroy()
-        # self.engine.destroy()
+        self.runtime.destroy()
+        self.logger.destroy()
+        self.engine.destroy()
         self.context.destroy()

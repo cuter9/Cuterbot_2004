@@ -34,10 +34,10 @@ def bgr8_to_ssd_fpn_input(camera_value, input_shape):
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
     # x = cv2.resize(x, (300, 300))
     x = x.transpose((2, 0, 1)).astype(np.float32)
-    # x -= mean[:, None, None]
-    # x /= stdev[:, None, None]
+    x -= mean[:, None, None]
+    x /= stdev[:, None, None]
     # return x[None, ...]
-    return x
+    return x[None, ...]
 
 
 def preprocess_yolo(img, input_shape, letter_box=False):
@@ -81,38 +81,51 @@ def load_plugins():
 
 class ObjectDetector(object):
 
-    def __init__(self, engine_path, type_model, preprocess_fn=bgr8_to_ssd_input):
+    def __init__(self, engine_path, type_model=None, preprocess_fn=bgr8_to_ssd_input):
         logger = trt.Logger()
         trt.init_libnvinfer_plugins(logger, '')
         load_plugins()
+
+        assert type_model is not None
         self.type_model = type_model
+
         # self.trt_model = TRTModel(engine_path, input_names=[TRT_INPUT_NAME],
         #                          output_names=[TRT_OUTPUT_NAME, TRT_OUTPUT_NAME + '_1'])
         self.trt_model = TRTModel(engine_path)
-        self.preprocess_fn = preprocess_fn
-        self.preprocess_fn_fpn = bgr8_to_ssd_fpn_input
-        self.preprocess_fn_yolo = preprocess_yolo
+
+        if self.type_model == 'SSD':
+            self.preprocess = bgr8_to_ssd_input
+            self.postprocess = parse_boxes
+        elif self.type_model == 'SSD_FPN':
+            self.preprocess = bgr8_to_ssd_fpn_input
+            self.postprocess = parse_boxes_fpn
+        elif self.type_model == 'YOLO':
+            self.preprocess = preprocess_yolo
+            self.postprocess = parse_boxes_yolo
         self.input_shape = self.trt_model.input_shape
 
-    def execute(self, *inputs):
+    def execute(self, *inputs, conf_th=0.5):
 
         # trt_outputs = self.trt_model(inputs)
         # trt_outputs = self.trt_model(self.preprocess_fn(*inputs))
         # print("model input shape", self.input_shape)
         # print('Image size:', np.shape(inputs))
-        detections = None
+        # detections = None
+
+        trt_outputs = self.trt_model(self.preprocess(*inputs, self.input_shape))
+        detections = self.postprocess(trt_outputs, conf_th=conf_th)
+
+        '''
         if self.type_model == 'SSD':
-            trt_outputs = self.trt_model(self.preprocess_fn(*inputs, self.input_shape))
             detections = parse_boxes(trt_outputs)
         elif self.type_model == 'SSD_FPN':
-            trt_outputs = self.trt_model(self.preprocess_fn_fpn(*inputs, self.input_shape))
             detections = parse_boxes_fpn(trt_outputs)
         elif self.type_model == 'YOLO':
-            trt_outputs = self.trt_model(self.preprocess_fn_yolo(*inputs, self.input_shape))
             detections = parse_boxes_yolo(trt_outputs)
+        '''
         # return trt_outputs
         # print(detections)
         return detections
 
-    def __call__(self, *inputs):
-        return self.execute(*inputs)
+    def __call__(self, *inputs, conf_th=0.5):
+        return self.execute(*inputs, conf_th=conf_th)

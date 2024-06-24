@@ -20,7 +20,7 @@ X1_IDX_FPN = 6
 Y1_IDX_FPN = 5
 
 
-def parse_boxes(outputs):
+def parse_boxes(outputs, conf_th=0.5):
     bboxes = outputs[0]
     # print("shape of output:",  np.shape(bboxes))
     # iterate through each image index
@@ -38,6 +38,9 @@ def parse_boxes(outputs):
             if label < 0:
                 break
 
+            if float(bbox[CONFIDENCE_IDX]) < conf_th:
+                continue
+
             detections.append(dict(
                 label=int(label),
                 confidence=float(bbox[CONFIDENCE_IDX]),
@@ -54,7 +57,7 @@ def parse_boxes(outputs):
     return all_detections
 
 
-def parse_boxes_fpn(outputs):
+def parse_boxes_fpn(outputs, conf_th=0.5):
     # The fpn model converted from TF v2 has different boxes coordinate array arrangement:
     #    [ymin, xmin, ymax, xmax]
 
@@ -75,7 +78,7 @@ def parse_boxes_fpn(outputs):
             if label < 0:
                 break
 
-            if float(bbox[CONFIDENCE_IDX]) < 0.4:
+            if float(bbox[CONFIDENCE_IDX]) < conf_th:
                 continue
 
             detections.append(dict(

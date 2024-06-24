@@ -67,7 +67,7 @@ class FleeterTRT(traitlets.HasTraits):
                 self.type_follower_model == "SSD_FPN" or
                 self.type_follower_model == "YOLO"):
             # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, self.type_follower_model)
+            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model)
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
@@ -108,7 +108,7 @@ class FleeterTRT(traitlets.HasTraits):
     def run_objects_detection(self):
         # self.image = self.capturer.value
         # print(self.image[1][1], np.shape(self.image))
-        self.detections = self.object_detector(self.current_image)
+        self.detections = self.object_detector(self.current_image, conf_th=0.5)
         self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
 
         if int(self.label) >= 0:
