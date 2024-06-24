@@ -8,8 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/object_following/.ipynb_checkpoints/live_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/.ipynb_checkpoints/live_demo-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,15 +197,8 @@
       <workItem from="1719142632275" duration="19864000" />
       <workItem from="1719163271876" duration="3768000" />
       <workItem from="1719167202825" duration="5899000" />
-      <workItem from="1719174000483" duration="19883000" />
-    </task>
-    <task id="LOCAL-00009" summary="typo coding">
-      <option name="closed" value="true" />
-      <created>1713853771670</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1713853771670</updated>
+      <workItem from="1719174000483" duration="20315000" />
+      <workItem from="1719213970203" duration="1562000" />
     </task>
     <task id="LOCAL-00010" summary="typo coding">
       <option name="closed" value="true" />
@@ -586,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719207138239</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="update">
+      <option name="closed" value="true" />
+      <created>1719209706712</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1719209706713</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

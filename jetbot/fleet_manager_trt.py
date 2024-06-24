@@ -110,7 +110,7 @@ class FleeterTRT(traitlets.HasTraits):
     def run_objects_detection(self):
         # self.image = self.capturer.value
         # print(self.image[1][1], np.shape(self.image))
-        self.detections = self.object_detector(self.current_image, conf_th=0.5)
+        self.detections = self.object_detector(self.current_image)
         self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
 
         if int(self.label) >= 0:
