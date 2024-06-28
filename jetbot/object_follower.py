@@ -59,7 +59,10 @@ class ObjectFollower(traitlets.HasTraits):
         self.type_follower_model = type_follower_model
         self.conf_th = conf_th
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        if type_follower_model == "SSD" or type_follower_model == "YOLO":
+        if (type_follower_model == "SSD" or
+                type_follower_model == "SSD_FPN" or
+                type_follower_model == "YOLO" or
+                type_follower_model == "YOLO_v7"):
             from jetbot import ObjectDetector
             self.object_detector = ObjectDetector(self.follower_model, type_model=type_follower_model,
                                                   conf_th=self.conf_th)
@@ -94,7 +97,7 @@ class ObjectFollower(traitlets.HasTraits):
         self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
         if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
             self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
-        elif self.type_follower_model == "YOLO":
+        elif self.type_follower_model == "YOLO" or self.type_follower_model == "YOLO_v7":
             self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
         # print(int(self.label), "\n", self.matching_detections)
 

@@ -63,7 +63,10 @@ class Fleeter(traitlets.HasTraits):
         self.type_follower_model = type_follower_model
         self.conf_th = conf_th
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        if self.type_follower_model == "SSD" or self.type_follower_model == "YOLO":
+        if (self.type_follower_model == "SSD" or
+                self.type_follower_model == "SSD_FPN" or
+                self.type_follower_model == "YOLO" or
+                self.type_follower_model == "YOLO_v7"):
             # from jetbot import ObjectDetector
             self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
                                                   conf_th=self.conf_th)
@@ -113,7 +116,7 @@ class Fleeter(traitlets.HasTraits):
         if int(self.label) >= 0:
             if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
                 self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
-            elif self.type_follower_model == "YOLO":
+            elif self.type_follower_model == "YOLO" or self.type_follower_model == "YOLO_v7":
                 self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
         else:
             self.label_text = " Not defined !"
