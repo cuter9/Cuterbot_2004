@@ -3,7 +3,6 @@
 Implementation of TrtYOLO class with the yolo_layer plugins.
 """
 
-
 from __future__ import print_function
 
 import ctypes
@@ -27,6 +26,7 @@ import ctypes
 def load_plugins():
     library_path = os.path.join(os.path.dirname(__file__), 'libyolo_layer.so')
     ctypes.CDLL(library_path)
+
 
 def _preprocess_yolo(img, input_shape, letter_box=False):
     """Preprocess an image before TRT YOLO inferencing.
@@ -142,7 +142,7 @@ def _postprocess_yolo(trt_outputs, img_w, img_h, conf_th, nms_threshold,
             else:
                 old_w = int(input_shape[1] * img_h / input_shape[0])
                 offset_w = (old_w - img_w) // 2
-        
+
         detections[:, 0:4] *= np.array(
             [old_w, old_h, old_w, old_h], dtype=np.float32)
 
@@ -162,7 +162,7 @@ def _postprocess_yolo(trt_outputs, img_w, img_h, conf_th, nms_threshold,
             yy = yy - offset_h
         ww = nms_detections[:, 2].reshape(-1, 1)
         hh = nms_detections[:, 3].reshape(-1, 1)
-        boxes = np.concatenate([xx, yy, xx+ww, yy+hh], axis=1) + 0.5
+        boxes = np.concatenate([xx, yy, xx + ww, yy + hh], axis=1) + 0.5
         # boxes = np.concatenate([xx,  yy,  (xx+ww), (yy+hh)], axis=1)
         boxes = boxes.astype(np.int)
         scores = nms_detections[:, 4] * nms_detections[:, 6]
@@ -172,6 +172,7 @@ def _postprocess_yolo(trt_outputs, img_w, img_h, conf_th, nms_threshold,
 
 class HostDeviceMem(object):
     """Simple helper data class that's a little nicer to use than a 2-tuple."""
+
     def __init__(self, host_mem, device_mem):
         self.host = host_mem
         self.device = device_mem
@@ -184,7 +185,7 @@ class HostDeviceMem(object):
 
     def __del__(self):
         del self.device
-        del self.host        
+        del self.host
 
 
 def get_input_shape(engine):
@@ -248,8 +249,8 @@ def do_inference(context, bindings, inputs, outputs, stream, batch_size=1):
     #[[cuda.memcpy_htod(inp.device, inp.host) for inp in inputs]
     # Run inference.
     context.execute(batch_size=batch_size,
-                          bindings=bindings,
-                          stream_handle=stream.handle)
+                    bindings=bindings,
+                    stream_handle=stream.handle)
     # context.execute_async(batch_size=batch_size,
     #                      bindings=bindings)
     # Transfer predictions back from the GPU.
@@ -262,7 +263,7 @@ def do_inference(context, bindings, inputs, outputs, stream, batch_size=1):
 
 
 def do_inference_v2(context, bindings, inputs, outputs, stream):
-# def do_inference_v2(context, bindings, inputs, outputs):
+    # def do_inference_v2(context, bindings, inputs, outputs):
     """do_inference_v2 (for TensorRT 7.0+)
 
     This function is generalized for multiple inputs/outputs for full
@@ -304,10 +305,10 @@ class TrtYOLO(object):
             self.cuda_ctx.push()
 
         self.inference_fn = do_inference if trt.__version__[0] < '7' \
-                                         else do_inference_v2
+            else do_inference_v2
         self.trt_logger = trt.Logger(trt.Logger.INFO)
         # self.engine = self._load_engine()
-        with open(self.model, 'rb') as f, trt.Runtime(self.trt_logger) as runtime: 
+        with open(self.model, 'rb') as f, trt.Runtime(self.trt_logger) as runtime:
             self.engine = runtime.deserialize_cuda_engine(f.read())
 
         self.input_shape = get_input_shape(self.engine)
@@ -327,18 +328,18 @@ class TrtYOLO(object):
         del self.outputs
         del self.inputs
         del self.stream
-    
+
     def form_detection(self, boxes, scores, classes, img_w, img_h):
         all_detections = []
         detections = []
         for b, s, c in zip(boxes.tolist(), scores.tolist(), classes.tolist()):
-            det_dict = dict(label = int(c), confidence = float(s), 
-                            bbox = [b[0]/img_w, b[1]/img_h, b[2]/img_w, b[3]/img_h])
+            det_dict = dict(label=int(c), confidence=float(s),
+                            bbox=[b[0] / img_w, b[1] / img_h, b[2] / img_w, b[3] / img_h])
             # det_dict = dict(label = c, confidence = s, bbox = b)
             detections.append(det_dict)
         all_detections.append(detections)
         print(detections)
-        return  all_detections
+        return all_detections
 
     def execute(self, img, conf_th=0.3, letter_box=None):
         """Detect objects in the input image."""
@@ -359,7 +360,7 @@ class TrtYOLO(object):
             stream=self.stream)
         if self.cuda_ctx:
             self.cuda_ctx.pop()
-        
+
         print(trt_outputs)
         boxes, scores, classes = _postprocess_yolo(
             trt_outputs, img.shape[1], img.shape[0], conf_th,
@@ -367,10 +368,8 @@ class TrtYOLO(object):
             letter_box=letter_box)
 
         # clip x1, y1, x2, y2 within original image
-        boxes[:, [0, 2]] = np.clip(boxes[:, [0, 2]], 0, img.shape[1]-1)
-        boxes[:, [1, 3]] = np.clip(boxes[:, [1, 3]], 0, img.shape[0]-1)
-         # return boxes, scores, classes
+        boxes[:, [0, 2]] = np.clip(boxes[:, [0, 2]], 0, img.shape[1] - 1)
+        boxes[:, [1, 3]] = np.clip(boxes[:, [1, 3]], 0, img.shape[0] - 1)
+        # return boxes, scores, classes
         print(classes, scores, boxes)
-        return self.form_detection(boxes, scores, classes, img.shape[1],  img.shape[0])
-
-        
+        return self.form_detection(boxes, scores, classes, img.shape[1], img.shape[0])

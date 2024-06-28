@@ -127,6 +127,28 @@ def parse_boxes_yolo(trt_outputs, conf_th=0.3, nms_threshold=0.5):
     # return boxes, scores, classes
 
 
+def parse_boxes_yolo_v7(trt_outputs, input_shape, conf_th=0.3, nms_threshold=0.5):
+    ndets = trt_outputs[0][0][0]
+    boxes = trt_outputs[1][0]
+    scores = trt_outputs[2][0]
+    classes = trt_outputs[3][0]
+
+    height = input_shape[0]
+    width = input_shape[1]
+
+    all_detections = []
+    detections = []
+    for n in range(ndets):
+        if float(scores[n]) > conf_th:
+            detections.append(dict(label=int(classes[n]), confidence=float(scores[n]),
+                                   bbox=[boxes[n][0]/width,
+                                         boxes[n][1]/height,
+                                         boxes[n][2]/width,
+                                         boxes[n][3]/height]))
+    all_detections.append(detections)
+    return all_detections
+
+
 def torch_dtype_to_trt(dtype):
     if dtype == torch.int8:
         return trt.int8

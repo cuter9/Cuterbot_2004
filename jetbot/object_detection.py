@@ -1,7 +1,7 @@
 from xml.sax.xmlreader import InputSource
 import tensorrt as trt
 from jetbot.ssd_tensorrt import parse_boxes, parse_boxes_fpn, TRT_INPUT_NAME, TRT_OUTPUT_NAME
-from .tensorrt_model import TRTModel, parse_boxes_yolo
+from .tensorrt_model import TRTModel, parse_boxes_yolo, parse_boxes_yolo_v7
 import numpy as np
 import cv2
 import ctypes
@@ -74,6 +74,40 @@ def preprocess_yolo(img, input_shape, letter_box=False):
     return img
 
 
+def preprocess_yolo_v7(img, input_shape, letter_box=False):
+    """Preprocess an image size to meet the size of model input before TRT YOLO inferencing.
+
+    # Args
+        img: int8 numpy array of shape (img_h, img_w, 3)
+        input_shape: a tuple of (H, W)
+        letter_box: boolean, specifies whether to keep aspect ratio and
+                    create a "letterboxed" image for inference
+
+    # Returns
+        preprocessed img: float32 numpy array of shape (3, H, W)
+    """
+    if letter_box:
+        img_h, img_w, _ = img.shape
+        new_h, new_w = input_shape[0], input_shape[1]
+        offset_h, offset_w = 0, 0
+        if (new_w / img_w) <= (new_h / img_h):
+            new_h = int(img_h * new_w / img_w)
+            offset_h = (input_shape[0] - new_h) // 2
+        else:
+            new_w = int(img_w * new_h / img_h)
+            offset_w = (input_shape[1] - new_w) // 2
+        resized = cv2.resize(img, (new_w, new_h))
+        img = np.full((input_shape[0], input_shape[1], 3), 127, dtype=np.uint8)
+        img[offset_h:(offset_h + new_h), offset_w:(offset_w + new_w), :] = resized
+    else:
+        img = cv2.resize(img, input_shape)
+
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = img.transpose((2, 0, 1)).astype(np.float32)
+    img /= 255.0
+    return img
+
+
 def load_plugins():
     library_path = os.path.join(os.path.dirname(__file__), 'yolo_tensorrt/libyolo_layer.so')
     ctypes.CDLL(library_path)
@@ -103,6 +137,9 @@ class ObjectDetector(object):
         elif self.type_model == 'YOLO':
             self.preprocess = preprocess_yolo
             self.postprocess = parse_boxes_yolo
+        elif self.type_model == 'YOLO_v7':
+            self.preprocess = preprocess_yolo_v7
+            self.postprocess = parse_boxes_yolo_v7
         self.input_shape = self.trt_model.input_shape
 
     def execute(self, *inputs, conf_th=None):
@@ -116,8 +153,10 @@ class ObjectDetector(object):
         if conf_th is None:
             conf_th = self.conf_th
         trt_outputs = self.trt_model(self.preprocess(*inputs, self.input_shape))
-        detections = self.postprocess(trt_outputs, conf_th=conf_th)
-
+        if self.type_model == 'YOLO_v7':
+            detections = self.postprocess(trt_outputs, self.input_shape, conf_th=conf_th)
+        else:
+            detections = self.postprocess(trt_outputs, conf_th=conf_th)
         '''
         if self.type_model == 'SSD':
             detections = parse_boxes(trt_outputs)
