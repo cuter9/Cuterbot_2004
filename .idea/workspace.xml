@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/.ipynb_checkpoints/live_demo_trt-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/object_following/.ipynb_checkpoints/live_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/.ipynb_checkpoints/live_demo-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/display/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/display/build.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,15 +225,9 @@
       <workItem from="1719541873667" duration="2407000" />
       <workItem from="1719547435177" duration="5223000" />
       <workItem from="1719556223429" duration="24000" />
-      <workItem from="1719557234172" duration="122000" />
-    </task>
-    <task id="LOCAL-00014" summary="add jetbot_stats class for monitor jetbot states">
-      <option name="closed" value="true" />
-      <created>1713866134248</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1713866134248</updated>
+      <workItem from="1719557234172" duration="159000" />
+      <workItem from="1719887615381" duration="698000" />
+      <workItem from="1720026912985" duration="49000" />
     </task>
     <task id="LOCAL-00015" summary="coding revise">
       <option name="closed" value="true" />
@@ -624,7 +613,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719556242876</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="update">
+      <option name="closed" value="true" />
+      <created>1719557371427</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1719557371428</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
