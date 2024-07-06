@@ -52,7 +52,7 @@ RUN apt-get update && \
 # RUN apt-get install -y python3-pip
 # RUN pip3 install pip -U   # upgrade pip for following installation of protobuf
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
-RUN pip3 install setuptools wheel packaging gdown
+RUN pip3 install "setuptools<70.0.0" wheel packaging gdown
 # RUN pip3 install setuptools 'Cython<3.0' wheel
 RUN pip3 install 'numpy<1.24.0' -U
 RUN python3 -m pip install matplotlib
