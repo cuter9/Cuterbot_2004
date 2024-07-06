@@ -1,6 +1,11 @@
 #!/bin/bash
 sudo apt update && sudo apt-get install curl
-curl -s -L https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/nvidia-container-toolkit.list | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+# https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.8.1/install-guide.html
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+# curl -s -L https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/nvidia-container-toolkit.list | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 sudo apt update && \
   sudo apt-get upgrade -y nvidia-container-toolkit \
   libnvidia-container1 \

@@ -48,11 +48,11 @@ RUN apt-get update && \
           git \
     && rm -rf /var/lib/apt/lists/*
 
-# RUN pip3 install setuptools Cython wheel gdown
+# RUN pip3 install setuptools Cython wheel
 # RUN apt-get install -y python3-pip
 # RUN pip3 install pip -U   # upgrade pip for following installation of protobuf
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
-RUN pip3 install setuptools wheel packaging gdown
+RUN pip3 install setuptools wheel packaging
 # RUN pip3 install setuptools 'Cython<3.0' wheel
 RUN pip3 install 'numpy<1.24.0' -U
 RUN python3 -m pip install matplotlib
@@ -77,9 +77,9 @@ RUN python3 -m pip install matplotlib
 # ================================================
 RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m"
 # ENV HOME=${HOME}
-RUN gdown --folder https://drive.google.com/drive/folders/1mRBVWVFVVIGWK1F27X_m7r6XJDjVusX5 -O /repo
-# COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
-# COPY ./repo/opencv-python_dep.sh ./repo/
+# RUN mkdir -p /repo
+COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
+COPY ./repo/opencv-python_dep.sh ./repo/
 
 RUN cd /repo && bash opencv-python_dep.sh && pip3 install *.whl && cd .. && rm -rf /repo
 
