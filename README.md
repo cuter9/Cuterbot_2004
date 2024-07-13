@@ -13,18 +13,19 @@ For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original cod
 11. The operation interfaces was modified to be more neat from operation view.
 
 # Installation
-1. cd ~/
-2. git clone https://github.com/cuter9/Cuterbot_2004.git
-3. sudo chmod -R 777 ~/Cuterbot_2004
-4. sudo chown -R $(whoami) ~/Cuterbot_2004
-5. cd ~/Cuterbot_2004/scripts
-6. ./enable_swap.sh
-7. ./requirement_4_cuterbot.sh
-8. cd ~/Cuterbot_2004/docker
-9. source ./configure.sh
-10. sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
-11. ./build.sh
-12. ./enable.sh
+1. Upgrade Jetson Nano to Ubuntu 20.04 with reference to https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html
+2. cd ~/
+3. git clone https://github.com/cuter9/Cuterbot_2004.git
+4. sudo chmod -R 777 ~/Cuterbot_2004
+5. sudo chown -R $(whoami) ~/Cuterbot_2004
+6. cd ~/Cuterbot_2004/scripts
+7. ./enable_swap.sh
+8. ./requirement_4_cuterbot.sh
+9. cd ~/Cuterbot_2004/docker
+10. source ./configure.sh
+11. sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+12. ./build.sh
+13. ./enable.sh
 
 # Issues
 1. if "RuntimeError: Coul not initilize camera.", run ./restart_docker.sh to restart docker daemon and nvargus-daemon
