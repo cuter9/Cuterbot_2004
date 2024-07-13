@@ -13,4 +13,14 @@ For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original cod
 11. The operation interfaces was modified to be more neat from operation view.
 
 # Installation
-1. git clone 
+1. cd ~/
+2. git clone https://github.com/cuter9/Cuterbot_2004.git
+3. sudo chmod -R 777 ~/Cuterbot_2004
+4. sudo chown -R $(whoami) ~/Cuterbot_2004
+5. cd ~/Cuterbot_2004/scripts
+6. ./enable_swap.sh
+7. ./requirement_4_cuterbot.sh
+8. cd ~/Cuterbot_2004/docker
+9. source ./configure.sh
+10. sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+11. ./build.sh
