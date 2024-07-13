@@ -12,3 +12,5 @@ For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original cod
 10. The fleet following function was added.
 11. The operation interfaces was modified to be more neat from operation view.
 
+# Installation
+1. git clone 
