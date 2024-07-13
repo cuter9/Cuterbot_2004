@@ -29,5 +29,7 @@ For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original cod
 14. ./enable.sh
 
 # Issues
-1. if "RuntimeError: Coul not initilize camera.", run ./restart_docker.sh to restart docker daemon and nvargus-daemon
+1. if "RuntimeError: Coul not initilize camera.",
+   a. run ./restart_docker.sh to restart docker daemon and nvargus-daemon
+   b. restart jupyter lab
 
