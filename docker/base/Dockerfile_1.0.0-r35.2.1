@@ -3,6 +3,7 @@
 # FROM nvcr.io/nvidia/l4t-jetpack:r32.7.4.1
 # FROM nvcr.io/nvidia/l4t-jetpack:r32.7.4.1
 ARG BASE_IMAGE=$BASE_IMAGE
+ARG HOME=$HOME
 FROM $BASE_IMAGE
 
 RUN cat /etc/lsb-release
@@ -75,24 +76,29 @@ RUN python3 -m pip install matplotlib
 # ================================================
 # INSTALL TENSORFLOW, PYTORCH, TOCHVISION, OPENCV
 # ================================================
-RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision, opencv \e[0m"
+RUN echo -e "\e[48;5;172m Install tensorflow, pytorch, torchvision \e[0m"
 # ENV HOME=${HOME}
-RUN gdown --folder https://drive.google.com/drive/folders/1mRBVWVFVVIGWK1F27X_m7r6XJDjVusX5 -O /repo
-# COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/
-# COPY ./repo/opencv-python_dep.sh ./repo/
+# RUN gdown --folder https://drive.google.com/drive/folders/1mRBVWVFVVIGWK1F27X_m7r6XJDjVusX5 -O /repo
 
-RUN cd /repo && bash opencv-python_dep.sh && pip3 install *.whl && cd .. && rm -rf /repo
+COPY ./repo/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./repo/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl ./repo/tensorflow-2.9.3-cp38-cp38-linux_aarch64.whl ./repo/
+RUN cd /repo && pip3 install *.whl
+RUN rm -rf /repo
 
 
 # ==============
 # INSTALL OPENCV
 # ==============
-# COPY jetson-ota-public.asc /etc/apt/trusted.gpg.d/jetson-ota-public.asc
-# RUN echo "deb https://repo.download.nvidia.com/jetson/common r32.7 main" > /etc/apt/sources.list.d/nvidia-l4t-apt-source.list && \
+RUN echo -e "\e[48;5;172m Install opencv \e[0m"
+# COPY ./Cuterbot_2004/jetson-ota-public.asc /etc/apt/trusted.gpg.d/jetson-ota-public.asc
+# RUN echo "deb https://repo.download.nvidia.com/jetson/common r32.7 main" > /etc/apt/sources.list.d/nvidia-l4t-apt-source.list
 # RUN apt-get update && \
-#    	apt-get install -y --no-install-recommends libgstreamer1.0-dev libopencv-python \
+#    	apt-get install -y --no-install-recommends libgstreamer1.0-dev libopencv-python \ 
+#        && rm /etc/apt/sources.list.d/nvidia-l4t-apt-source.list \
 #        && rm -rf /var/lib/apt/lists/*
-#
+    
+
+COPY ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/opencv-python_dep.sh ./repo/
+RUN cd /repo && bash opencv-python_dep.sh && pip3 install opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl && cd .. && rm -rf /repo
 
 # =================
 # INSTALL GSTREAMER
@@ -126,8 +132,8 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs libffi-dev
 # RUN pip3 install jupyter jupyterlab==2.2.6
 RUN pip3 install jupyter jupyterlab jupyter_packaging
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
-RUN pip3 install ipywidgets -U      # update the latest ipython widgets
+# RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+# RUN pip3 install ipywidgets -U      # update the latest ipython widgets
 
 # Install jupyter_clickable_image_widget
 RUN echo "\e[42m Install jupyter_clickable_image_widget \e[0m"
@@ -173,7 +179,7 @@ RUN cd ${QWIIC_DIR}/qwiic/drivers && rm -rf qwiic_as6212 qwiic_kx13x && \
 # ==============
 RUN pip3 install pyserial jetson-stats
 ENV JETBOT_REPO_DIR=/opt/jetbot
-COPY . ${JETBOT_REPO_DIR}
+COPY ./Cuterbot_2004 ${JETBOT_REPO_DIR}
 RUN cd ${JETBOT_REPO_DIR} && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl
 
 

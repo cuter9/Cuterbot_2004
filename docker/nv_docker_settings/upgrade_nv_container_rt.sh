@@ -7,7 +7,7 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
     sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 # curl -s -L https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/nvidia-container-toolkit.list | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 sudo apt update && \
-  sudo apt-get upgrade -y nvidia-container-toolkit \
+  sudo apt-get install -y nvidia-container-toolkit \
   libnvidia-container1 \
   libnvidia-container0 \
   libnvidia-container-tools \
