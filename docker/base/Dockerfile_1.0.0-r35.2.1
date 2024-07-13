@@ -94,8 +94,7 @@ RUN echo -e "\e[48;5;172m Install opencv \e[0m"
 # RUN apt-get update && \
 #    	apt-get install -y --no-install-recommends libgstreamer1.0-dev libopencv-python \ 
 #        && rm /etc/apt/sources.list.d/nvidia-l4t-apt-source.list \
-#        && rm -rf /var/lib/apt/lists/*
-    
+#        && rm -rf /var/lib/apt/lists/*   
 
 COPY ./repo/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./repo/opencv-python_dep.sh ./repo/
 RUN cd /repo && bash opencv-python_dep.sh && pip3 install opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl && cd .. && rm -rf /repo

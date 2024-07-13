@@ -34,6 +34,7 @@ fi
 
 export JETBOT_BASE_IMAGE
 export CUTERBOT_DOCKER_REMOTE=cuterbot
+export HOME=/home/cuterbot
 
 echo "JETBOT_VERSION=$JETBOT_VERSION"
 echo "L4T_VERSION=$L4T_VERSION"
@@ -41,6 +42,7 @@ echo "JETBOT_BASE_IMAGE=$JETBOT_BASE_IMAGE"
 echo "CUTERBOT_DOCKER_REMOTE=$JETBOT_DOCKER_REMOTE"
 echo "L4T_RELEASE=$L4T_RELEASE"
 echo "CUTERBOT_IMAGES_TAG=$JETBOT_IMAGES_TAG"
+echo "HOME=$HOME"
 
 ./set_nvidia_runtime.sh
 sudo systemctl enable docker
