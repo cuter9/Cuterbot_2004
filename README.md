@@ -24,3 +24,8 @@ For Cuterbot to run on python3.8.10 and ubuntu 20.04, the NV jetbot original cod
 9. source ./configure.sh
 10. sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
 11. ./build.sh
+12. ./enable.sh
+
+# Issues
+1. if "RuntimeError: Coul not initilize camera.", run ./restart_docker.sh to restart docker daemon and nvargus-daemon
+
