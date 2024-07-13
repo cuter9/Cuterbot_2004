@@ -12,7 +12,7 @@ export HOME=/home/cuterbot
 # INSTALL TENSORFLOW, PYTORCH, TOCHVISION, OPENCV 
 gdown --folder https://drive.google.com/drive/folders/1mRBVWVFVVIGWK1F27X_m7r6XJDjVusX5 -O ${HOME}/repo
 pushd ${HOME}/repo
-bash ./opencv-python_dep.sh
+bash ./opencv-python_requirements.sh
 sudo pip3 install *.whl
 
 # INSTALL TORCH2TRT

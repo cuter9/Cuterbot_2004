@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -280,14 +278,7 @@
       <workItem from="1720861927018" duration="34000" />
       <workItem from="1720862738308" duration="2977000" />
       <workItem from="1720873969649" duration="47000" />
-    </task>
-    <task id="LOCAL-00027" summary="NV container setting">
-      <option name="closed" value="true" />
-      <created>1714362579032</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1714362579033</updated>
+      <workItem from="1720874881285" duration="50000" />
     </task>
     <task id="LOCAL-00028" summary="NV container setting">
       <option name="closed" value="true" />
@@ -673,7 +664,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720873864683</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="update">
+      <option name="closed" value="true" />
+      <created>1720874921563</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1720874921563</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
