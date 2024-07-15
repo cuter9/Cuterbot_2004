@@ -32,7 +32,7 @@ class RoadCruiserTRT(traitlets.HasTraits):
         self.type_cruiser_model = type_cruiser_model
         self.cruiser_model = TRTModule()
         # self.cruiser_model.load_state_dict(torch.load(''.join(['best_steering_model_xy_trt_', cruiser_model, '.pth'])))
-        if os.getcwd() in cruiser_model:
+        if "workspace" in cruiser_model:
             self.cruiser_model.load_state_dict(torch.load(cruiser_model))
         else:
             self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_trt_' +  cruiser_model + '.pth'))
