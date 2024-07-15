@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/jetbot/utils/model_selection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/utils/model_selection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/utils/model_selection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -291,15 +290,7 @@
       <workItem from="1720918634258" duration="1963000" />
       <workItem from="1720921135765" duration="126000" />
       <workItem from="1720922757032" duration="274000" />
-      <workItem from="1721027852333" duration="15861000" />
-    </task>
-    <task id="LOCAL-00036" summary="NV container setting">
-      <option name="closed" value="true" />
-      <created>1714367619576</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1714367619577</updated>
+      <workItem from="1721027852333" duration="30295000" />
     </task>
     <task id="LOCAL-00037" summary="change Dockerfile name of base images">
       <option name="closed" value="true" />
@@ -685,7 +676,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720919210728</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="update">
+      <option name="closed" value="true" />
+      <created>1721044933552</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1721044933552</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -716,6 +715,6 @@
     <SUITE FILE_PATH="coverage/Cuterbot_2004$jetbot_states.coverage" NAME="jetbot_states Coverage Results" MODIFIED="1714499009096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_yolo_v7.coverage" NAME="test_yolo_v7 Coverage Results" MODIFIED="1720342343965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fm_function.coverage" NAME="test_fm_function Coverage Results" MODIFIED="1720364050161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Cuterbot_2004$model_selection.coverage" NAME="model_selection Coverage Results" MODIFIED="1721044290543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/utils" />
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$model_selection.coverage" NAME="model_selection Coverage Results" MODIFIED="1721050149320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/utils" />
   </component>
 </project>
