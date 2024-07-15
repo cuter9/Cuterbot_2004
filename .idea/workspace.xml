@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/jetbot/utils/model_selection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/requirement_4_cuterbot.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/requirement_4_cuterbot.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,39 +49,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.jetbot_states.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stats.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.test_fm_function.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_fpn.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.test_yolo_v7.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/test/test_fm_function.py&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;web.server&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.jetbot_states.executor": "Run",
+    "Python.model_selection.executor": "Run",
+    "Python.stats.executor": "Debug",
+    "Python.test_fm_function.executor": "Run",
+    "Python.test_fpn.executor": "Debug",
+    "Python.test_yolo_v7.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/test/test_fm_function.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "web.server",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\test" />
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\docker\nv_docker_settings" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_fm_function">
+  <component name="RunManager">
     <configuration name="jetbot_states" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Cuterbot_WS" />
       <option name="ENV_FILES" value="" />
@@ -284,31 +287,11 @@
       <workItem from="1720874881285" duration="50000" />
       <workItem from="1720883448514" duration="643000" />
       <workItem from="1720889552929" duration="1145000" />
-      <workItem from="1720891661708" duration="322000" />
-    </task>
-    <task id="LOCAL-00033" summary="NV container setting">
-      <option name="closed" value="true" />
-      <created>1714366449593</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1714366449593</updated>
-    </task>
-    <task id="LOCAL-00034" summary="NV container setting">
-      <option name="closed" value="true" />
-      <created>1714366765666</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1714366765666</updated>
-    </task>
-    <task id="LOCAL-00035" summary="NV container setting">
-      <option name="closed" value="true" />
-      <created>1714367417009</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1714367417009</updated>
+      <workItem from="1720891661708" duration="360000" />
+      <workItem from="1720918634258" duration="1963000" />
+      <workItem from="1720921135765" duration="126000" />
+      <workItem from="1720922757032" duration="274000" />
+      <workItem from="1721027852333" duration="15861000" />
     </task>
     <task id="LOCAL-00036" summary="NV container setting">
       <option name="closed" value="true" />
@@ -678,7 +661,31 @@
       <option name="project" value="LOCAL" />
       <updated>1720891977778</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="update">
+      <option name="closed" value="true" />
+      <created>1720891994681</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1720891994681</updated>
+    </task>
+    <task id="LOCAL-00083" summary="update">
+      <option name="closed" value="true" />
+      <created>1720892014160</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1720892014160</updated>
+    </task>
+    <task id="LOCAL-00084" summary="update">
+      <option name="closed" value="true" />
+      <created>1720919210725</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1720919210728</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -709,5 +716,6 @@
     <SUITE FILE_PATH="coverage/Cuterbot_2004$jetbot_states.coverage" NAME="jetbot_states Coverage Results" MODIFIED="1714499009096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_yolo_v7.coverage" NAME="test_yolo_v7 Coverage Results" MODIFIED="1720342343965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fm_function.coverage" NAME="test_fm_function Coverage Results" MODIFIED="1720364050161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$model_selection.coverage" NAME="model_selection Coverage Results" MODIFIED="1721044290543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/utils" />
   </component>
 </project>
