@@ -20,7 +20,7 @@ class trt_model_selection(HasTraits):
 
     def __init__(self):
         super().__init__()
-        self.df = pd.read_csv(os.path.join(MODEL_REPO_DIR, "trt_model_tbl.csv"),
+        self.df = pd.read_csv(os.path.join(MODEL_REPO_DIR_DOCKER, "trt_model_tbl.csv"),
                               header=None, names=HEAD_LIST)
 
         self.model_function_list = list(self.df["model_function"].astype("category").cat.categories)
@@ -64,7 +64,7 @@ class trt_model_selection(HasTraits):
     def selected(self, change):
         self.is_selected = change['new']
 
-
+'''
 ms = trt_model_selection()
 # ms.model_function = 'object detection'
 # ms.model_type = 'SSD_FPN'
@@ -72,3 +72,4 @@ ms = trt_model_selection()
 model_path_list = ms.update_model_list()
 print(ms.model_function_list, ms.model_type_list)
 print(model_path_list)
+'''
