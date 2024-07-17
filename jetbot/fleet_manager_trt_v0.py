@@ -42,15 +42,8 @@ import time
 
 class FleeterTRT(traitlets.HasTraits):
     cap_image = traitlets.Any()
-    # model parameters
-    follower_model = traitlets.Unicode(default_value='').tag(config=True)
-    type_follower_model = traitlets.Unicode(default_value='').tag(config=True)
-    cruiser_model = traitlets.Unicode(default_value='').tag(config=True)
-    type_cruiser_model = traitlets.Unicode(default_value='').tag(config=True)
-    conf_th = traitlets.Float(default_value=0.5).tag(config=True)
     label = traitlets.Integer(default_value=1).tag(config=True)
     label_text = traitlets.Unicode(default_value='').tag(config=True)
-    # control parameters
     speed = traitlets.Float(default_value=0.10).tag(config=True)
     speed_gain = traitlets.Float(default_value=0.01).tag(config=True)
     speed_dev = traitlets.Float(default_value=0.5).tag(config=True)
@@ -66,13 +59,10 @@ class FleeterTRT(traitlets.HasTraits):
     def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine', type_follower_model="SSD",
                  cruiser_model='resnet18', type_cruiser_model='resnet', conf_th=0.5):
 
-        super().__init__()
+        self.follower_model = follower_model
+        self.type_follower_model = type_follower_model
+        self.conf_th = conf_th
 
-        self.follower_model = 'ssd_mobilenet_v2_coco_onnx.engine'
-        self.type_follower_model = "SSD"
-        self.conf_th = 0.5
-        self.object_detector = object
-        '''
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
         if (self.type_follower_model == "SSD" or
                 self.type_follower_model == "SSD_FPN" or
@@ -81,16 +71,13 @@ class FleeterTRT(traitlets.HasTraits):
             # from jetbot import ObjectDetector
             self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
                                                   conf_th=self.conf_th)
-        '''
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
 
-        self.cruiser_model = 'resnet18'
-        self.type_cruiser_model = 'resnet'
-        self.road_cruiser = object
-
-        # self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
+        self.cruiser_model = cruiser_model
+        self.type_cruiser_model = type_cruiser_model
+        self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
 
         # self.robot = self.road_cruiser.robot
         self.robot = Robot.instance()
@@ -103,18 +90,11 @@ class FleeterTRT(traitlets.HasTraits):
 
         # Camera instance would be better to put after all models instantiation
         # self.capturer = Camera()
-        '''
         self.capturer = self.road_cruiser.camera
         self.img_width = self.capturer.width
         self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+        self.cap_image = np.empty((self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
-        '''
-        self.capturer = None
-        self.img_width = None
-        self.img_height = None
-        self.cap_image = None
-        self.current_image = None
 
         self.default_speed = self.speed
         self.detect_duration_max = 10
@@ -127,44 +107,6 @@ class FleeterTRT(traitlets.HasTraits):
 
         self.execution_time = []
         # self.fps = []
-
-    def load_object_detector(self):
-
-        """
-        self.follower_model = follower_model
-        self.type_follower_model = type_follower_model
-        self.conf_th = conf_th
-        """
-        self.object_detector = None
-        # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        print('path of object detector model: %s' % self.follower_model)
-        if (self.type_follower_model == "SSD" or
-                self.type_follower_model == "SSD_FPN" or
-                self.type_follower_model == "YOLO" or
-                self.type_follower_model == "YOLO_v7"):
-            # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
-                                                  conf_th=self.conf_th)
-
-        # elif type_model == "YOLO":
-        #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
-        #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
-
-    def load_road_follower(self):
-
-        """
-        self.cruiser_model = cruiser_model
-        self.type_cruiser_model = type_cruiser_model
-        """
-        self.road_cruiser = None
-        print('path of cruiser model: %s' % self.cruiser_model)
-        self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
-
-        self.capturer = self.road_cruiser.camera
-        self.img_width = self.capturer.width
-        self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        self.current_image = np.empty((self.img_height, self.img_width, 3))
 
     def run_objects_detection(self):
         # self.image = self.capturer.value
@@ -259,7 +201,7 @@ class FleeterTRT(traitlets.HasTraits):
             self.e_view = self.target_view - self.mean_view
             if np.abs(self.e_view / self.target_view) > 0.1:
                 self.speed = self.speed + self.speed_gain * self.e_view + self.speed_dev * (
-                        self.e_view - self.e_view_prev)
+                            self.e_view - self.e_view_prev)
             self.road_cruiser.speed = self.speed
 
             self.mean_view_prev = self.mean_view
