@@ -139,6 +139,7 @@ class ObjectFollower(traitlets.HasTraits):
         self.closest_object = closest_detection
 
     def start_run(self, change):
+        self.load_object_detector(change)
         self.capturer.unobserve_all()
         print("start running")
         self.capturer.observe(self.execute, names='value')
@@ -218,7 +219,8 @@ class ObjectFollower(traitlets.HasTraits):
 
         # plot exection time of object follower model processing
         model_name = "object follower model"
-        plot_exec_time(self.execution_time[1:], model_name, self.follower_model.split('.')[0])
+        model_name_str = self.follower_model.split('/')[-1].split('.')[0]
+        plot_exec_time(self.execution_time[1:], model_name, model_name_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split('.')[0])
         plt.show()
 
