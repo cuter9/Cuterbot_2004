@@ -1,6 +1,8 @@
 import numpy as np
 import torch
 import tensorrt as trt
+import os
+import ctypes
 import atexit
 
 
@@ -141,10 +143,10 @@ def parse_boxes_yolo_v7(trt_outputs, input_shape, conf_th=0.3, nms_threshold=0.5
     for n in range(ndets):
         if float(scores[n]) > conf_th:
             detections.append(dict(label=int(classes[n]), confidence=float(scores[n]),
-                                   bbox=[boxes[n][0]/width,
-                                         boxes[n][1]/height,
-                                         boxes[n][2]/width,
-                                         boxes[n][3]/height]))
+                                   bbox=[boxes[n][0] / width,
+                                         boxes[n][1] / height,
+                                         boxes[n][2] / width,
+                                         boxes[n][3] / height]))
     all_detections.append(detections)
     return all_detections
 
@@ -193,14 +195,23 @@ def torch_device_from_trt(device):
         return TypeError('%s is not supported by torch' % device)
 
 
+def load_plugins():
+    library_path = os.path.join(os.path.dirname(__file__), 'yolo_tensorrt/libyolo_layer.so')
+    ctypes.CDLL(library_path)
+
+
 class TRTModel(object):
 
-    def __init__(self, engine_path, input_names=None, output_names=None, final_shapes=None):
+    def __init__(self, engine_path=None, input_names=None, output_names=None, final_shapes=None):
 
         # load engine
         self.logger = trt.Logger()
+        trt.init_libnvinfer_plugins(self.logger, '')
+        load_plugins()
+        self.engine_path = engine_path
         self.runtime = trt.Runtime(self.logger)
-        with open(engine_path, 'rb') as f:
+
+        with open(self.engine_path, 'rb') as f:
             self.engine = self.runtime.deserialize_cuda_engine(f.read())
         self.context = self.engine.create_execution_context()
         # self.stream = torch.cuda.Stream()

@@ -1,5 +1,5 @@
 from xml.sax.xmlreader import InputSource
-import tensorrt as trt
+# import tensorrt as trt
 from jetbot.ssd_tensorrt import parse_boxes, parse_boxes_fpn, TRT_INPUT_NAME, TRT_OUTPUT_NAME
 from .tensorrt_model import TRTModel, parse_boxes_yolo, parse_boxes_yolo_v7
 import numpy as np
@@ -108,19 +108,21 @@ def preprocess_yolo_v7(img, input_shape, letter_box=False):
     return img
 
 
+'''
 def load_plugins():
     library_path = os.path.join(os.path.dirname(__file__), 'yolo_tensorrt/libyolo_layer.so')
     ctypes.CDLL(library_path)
+'''
 
 
 class ObjectDetector(object):
 
-    def __init__(self, engine_path, type_model=None, conf_th=0.5, preprocess_fn=bgr8_to_ssd_input):
-        logger = trt.Logger()
-        trt.init_libnvinfer_plugins(logger, '')
-        load_plugins()
+    def __init__(self, engine_path, type_model="SSD", conf_th=0.5):
+        # logger = trt.Logger()
+        # trt.init_libnvinfer_plugins(logger, '')
+        # load_plugins()
 
-        assert type_model is not None
+        # assert type_model is not None
         self.type_model = type_model
         self.conf_th = conf_th
 

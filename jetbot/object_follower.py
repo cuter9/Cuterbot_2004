@@ -95,7 +95,10 @@ class ObjectFollower(traitlets.HasTraits):
                 self.type_follower_model == "YOLO" or
                 self.type_follower_model == "YOLO_v7"):
             # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
+            # self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
+            #                                      conf_th=self.conf_th
+            self.object_detector = ObjectDetector(self.follower_model,
+                                                  type_model=self.type_follower_model,
                                                   conf_th=self.conf_th)
 
     def run_objects_detection(self):
