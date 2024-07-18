@@ -44,6 +44,9 @@ from jetbot import ObjectDetector
 
 
 class ObjectFollower(traitlets.HasTraits):
+    follower_model = traitlets.Unicode(default_value='').tag(config=True)
+    type_follower_model = traitlets.Unicode(default_value='').tag(config=True)
+    conf_th = traitlets.Float(default_value=0.5).tag(config=True)
     cap_image = traitlets.Any()
     label = traitlets.Integer(default_value=1).tag(config=True)
     label_text = traitlets.Unicode(default_value='').tag(config=True)
@@ -61,21 +64,6 @@ class ObjectFollower(traitlets.HasTraits):
         self.type_follower_model = "SSD"
         self.conf_th = 0.5
         self.object_detector = object
-
-        '''
-        # avoider_model='../collision_avoidance/best_model.pth'
-        # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        if (type_follower_model == "SSD" or
-                type_follower_model == "SSD_FPN" or
-                type_follower_model == "YOLO" or
-                type_follower_model == "YOLO_v7"):
-            from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=type_follower_model,
-                                                  conf_th=self.conf_th)
-        # elif type_model == "YOLO":
-        #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
-        #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
-        '''
 
         self.robot = Robot.instance()
         self.detections = None
@@ -98,11 +86,6 @@ class ObjectFollower(traitlets.HasTraits):
 
     def load_object_detector(self, change):
 
-        """
-        self.follower_model = follower_model
-        self.type_follower_model = type_follower_model
-        self.conf_th = conf_th
-        """
         self.object_detector = None
         # avoider_model='../collision_avoidance/best_model.pth'
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
