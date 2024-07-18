@@ -100,16 +100,18 @@ class FleeterTRT(traitlets.HasTraits):
         self.closest_object = None
         self.is_dectecting = True
         self.is_dectected = False
+        self.is_loaded = False
 
-        # Camera instance would be better to put after all models instantiation
-        # self.capturer = Camera()
         '''
-        self.capturer = self.road_cruiser.camera
+        # Camera instance would be better to put after all models instantiation
+        self.capturer = Camera()
+        # self.capturer = self.road_cruiser.camera
         self.img_width = self.capturer.width
         self.img_height = self.capturer.height
         self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
         '''
+
         self.capturer = None
         self.img_width = None
         self.img_height = None
@@ -128,7 +130,7 @@ class FleeterTRT(traitlets.HasTraits):
         self.execution_time = []
         # self.fps = []
 
-    def load_object_detector(self):
+    def load_object_detector(self, change):
 
         """
         self.follower_model = follower_model
@@ -150,7 +152,7 @@ class FleeterTRT(traitlets.HasTraits):
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
 
-    def load_road_follower(self):
+    def load_road_follower(self, change):
 
         """
         self.cruiser_model = cruiser_model
@@ -165,6 +167,7 @@ class FleeterTRT(traitlets.HasTraits):
         self.img_height = self.capturer.height
         self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
+        self.is_loaded = True
 
     def run_objects_detection(self):
         # self.image = self.capturer.value

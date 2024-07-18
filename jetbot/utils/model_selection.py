@@ -16,8 +16,7 @@ class trt_model_selection(HasTraits):
     model_path = Unicode(default_value='').tag(config=True)
     model_path_list = List(default_value=[]).tag(config=True)
     selected_model_path = Unicode(default_value='').tag(config=True)
-
-    # is_selected = Bool(default_value=False).tag(config=True)
+    is_selected = Bool(default_value=False).tag(config=True)
 
     def __init__(self):
         super().__init__()
