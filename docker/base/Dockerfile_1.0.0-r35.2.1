@@ -176,7 +176,7 @@ RUN cd ${QWIIC_DIR}/qwiic/drivers && rm -rf qwiic_as6212 qwiic_kx13x && \
 # ==============
 # INSTALL JETBOT
 # ==============
-RUN pip3 install pyserial jetson-stats
+RUN pip3 install pyserial jetson-stats pandas
 ENV JETBOT_REPO_DIR=/opt/jetbot
 COPY ./Cuterbot_2004 ${JETBOT_REPO_DIR}
 RUN cd ${JETBOT_REPO_DIR} && python3 setup.py bdist_wheel && cd dist && pip3 install *.whl
