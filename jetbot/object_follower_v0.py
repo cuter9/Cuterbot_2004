@@ -36,8 +36,6 @@ from jetbot import Robot
 from jetbot import bgr8_to_jpeg
 from jetbot.utils import get_cls_dict_yolo, get_cls_dict_ssd
 import time
-from jetbot import ObjectDetector
-
 
 # model = ObjectDetector('ssd_mobilenet_v2_coco_onnx.engine')
 # model = ObjectDetector_YOLO('yolov4-288.engine')
@@ -53,17 +51,13 @@ class ObjectFollower(traitlets.HasTraits):
     blocked = traitlets.Float(default_value=0).tag(config=True)
     is_dectecting = traitlets.Bool(default_value=True).tag(config=True)
 
-    def __init__(self):
-
+    def __init__(self, follower_model='ssd_mobilenet_v2_coco_onnx.engine',
+                 avoider_model='../collision_avoidance/best_model.pth', type_follower_model="SSD", conf_th=0.5):
         super().__init__()
-
-        self.follower_model = 'ssd_mobilenet_v2_coco_onnx.engine'
-        self.type_follower_model = "SSD"
-        self.conf_th = 0.5
-        self.object_detector = object
-
-        '''
-        # avoider_model='../collision_avoidance/best_model.pth'
+        self.follower_model = follower_model
+        self.avoider_model = avoider_model
+        self.type_follower_model = type_follower_model
+        self.conf_th = conf_th
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
         if (type_follower_model == "SSD" or
                 type_follower_model == "SSD_FPN" or
@@ -75,7 +69,6 @@ class ObjectFollower(traitlets.HasTraits):
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
         #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
-        '''
 
         self.robot = Robot.instance()
         self.detections = None
@@ -90,30 +83,12 @@ class ObjectFollower(traitlets.HasTraits):
         # self.img_height = self.capturer.capture_height
         self.img_width = self.capturer.width
         self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+        self.cap_image = np.empty((self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
 
         self.execution_time = []
         # self.fps = []
 
-    def load_object_detector(self, change):
-
-        """
-        self.follower_model = follower_model
-        self.type_follower_model = type_follower_model
-        self.conf_th = conf_th
-        """
-        self.object_detector = None
-        # avoider_model='../collision_avoidance/best_model.pth'
-        # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        print('path of object detector model: %s' % self.follower_model)
-        if (self.type_follower_model == "SSD" or
-                self.type_follower_model == "SSD_FPN" or
-                self.type_follower_model == "YOLO" or
-                self.type_follower_model == "YOLO_v7"):
-            # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
-                                                  conf_th=self.conf_th)
 
     def run_objects_detection(self):
         # self.image = self.capturer.value
@@ -209,7 +184,7 @@ class ObjectFollower(traitlets.HasTraits):
                 float(self.speed + self.turn_gain * center[0] + self.steering_bias),
                 float(self.speed - self.turn_gain * center[0] + self.steering_bias)
             )
-
+        
         end_time = time.process_time()
         # self.execution_time.append(end_time - start_time + self.capturer.cap_time)
         self.execution_time.append(end_time - start_time)
@@ -235,7 +210,6 @@ class ObjectFollower(traitlets.HasTraits):
         plot_exec_time(self.execution_time[1:], model_name, self.follower_model.split('.')[0])
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split('.')[0])
         plt.show()
-
 
 class Avoider(object):
 
