@@ -160,7 +160,9 @@ class FleeterTRT(traitlets.HasTraits):
         """
         self.road_cruiser = None
         print('path of cruiser model: %s' % self.cruiser_model)
-        self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
+        # self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
+        self.road_cruiser = RoadCruiserTRT()
+        self.road_cruiser.load_road_cruiser(change)
 
         self.capturer = self.road_cruiser.camera
         self.img_width = self.capturer.width

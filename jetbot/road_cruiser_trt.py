@@ -16,6 +16,8 @@ from jetbot import Robot
 
 
 class RoadCruiserTRT(traitlets.HasTraits):
+    cruiser_model = traitlets.Unicode(default_value='').tag(config=True)
+    type_cruiser_model = traitlets.Unicode(default_value='').tag(config=True)
     speed_gain = traitlets.Float(default_value=0.15).tag(config=True)
     steering_gain = traitlets.Float(default_value=0.08).tag(config=True)
     steering_dgain = traitlets.Float(default_value=1.5).tag(config=True)
@@ -27,15 +29,20 @@ class RoadCruiserTRT(traitlets.HasTraits):
 
     def __init__(self, cruiser_model='resnet18', type_cruiser_model='resnet'):
         super().__init__()
-        self.cruiser_model_str = cruiser_model
+
+        self.cruiser_model = 'resnet18'
         # self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
-        self.type_cruiser_model = type_cruiser_model
-        self.cruiser_model = TRTModule()
+        self.type_cruiser_model = 'resnet'
+        self.trt_model = TRTModule()
+
+        '''
         # self.cruiser_model.load_state_dict(torch.load(''.join(['best_steering_model_xy_trt_', cruiser_model, '.pth'])))
         if "workspace" in cruiser_model:
             self.cruiser_model.load_state_dict(torch.load(cruiser_model))
         else:
-            self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_trt_' +  cruiser_model + '.pth'))
+            self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_trt_' + cruiser_model + '.pth'))
+        '''
+
         self.camera = Camera()
         self.robot = Robot.instance()
         self.angle = 0.0
@@ -69,6 +76,26 @@ class RoadCruiserTRT(traitlets.HasTraits):
     # 2. Normalize using same parameters as we did during training (our camera provides values in [0, 255] range and training loaded images in [0, 1] range so we need to scale by 255.0
     # 3. Transfer the data from CPU memory to GPU memory
     # 4. Add a batch dimension
+    def load_road_cruiser(self, change):
+
+        """
+        self.cruiser_model = cruiser_model
+        self.type_cruiser_model = type_cruiser_model
+        """
+        # self.road_cruiser = None
+        print('path of cruiser model: %s' % self.cruiser_model)
+
+        if "workspace" in self.cruiser_model:
+            self.trt_model.load_state_dict(torch.load(self.cruiser_model))
+        else:
+            self.trt_model.load_state_dict(torch.load('best_steering_model_xy_trt_' + self.cruiser_model + '.pth'))
+
+        # self.capturer = self.road_cruiser.camera
+        # self.img_width = self.capturer.width
+        # self.img_height = self.capturer.height
+        # self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+        # self.current_image = np.empty((self.img_height, self.img_width, 3))
+        # self.is_loaded = True
 
     def preprocess(self, image):
         mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
@@ -77,9 +104,9 @@ class RoadCruiserTRT(traitlets.HasTraits):
         # std = torch.Tensor([0.229, 0.224, 0.225]).cuda()
         image = PIL.Image.fromarray(image)
         # resize the cam captured image to (224, 224) for optimal resnet model inference
-        if self.type_cruiser_model == 'inception':
+        if self.type_cruiser_model == 'InceptionNet':
             image = image.resize((299, 299))
-        else:
+        elif self.type_cruiser_model == 'ResNet':
             image = image.resize((224, 224))
         image = transforms.functional.to_tensor(image).to(self.device).half()
         # image = transforms.functional.to_tensor(image).to(self.device)
@@ -90,7 +117,7 @@ class RoadCruiserTRT(traitlets.HasTraits):
         start_time = time.process_time()
         # global angle, angle_last
         image = change['new']
-        xy = self.cruiser_model(self.preprocess(image)).detach().float().cpu().numpy().flatten()
+        xy = self.trt_model(self.preprocess(image)).detach().float().cpu().numpy().flatten()
         x = xy[0]
         # y = (0.5 - xy[1]) / 2.0
         y = (1 + xy[1])
@@ -117,11 +144,12 @@ class RoadCruiserTRT(traitlets.HasTraits):
         # self.fps.append(1/(end_time - start_time))
 
     # We accomplish that with the observe function.
-    def start_cruising(self):
+    def start_cruising(self, change):
         # self.execute({'new': self.camera.value})
+        self.load_road_cruiser(change)
         self.camera.observe(self.execute, names='value')
 
-    def stop_cruising(self, b):
+    def stop_cruising(self, change):
         import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         # self.camera.unobserve(self.execute, names='value')
@@ -132,6 +160,7 @@ class RoadCruiserTRT(traitlets.HasTraits):
 
         # plot exection time of road cruiser model processing
         model_name = 'road cruiser model'
-        plot_exec_time(self.execution_time[1:], model_name, self.cruiser_model_str)
+        cruiser_model_name = self.cruiser_model.split("/")[-1]
+        plot_exec_time(self.execution_time[1:], model_name, cruiser_model_name)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.cruiser_model_str)
         plt.show()
