@@ -107,13 +107,6 @@ def preprocess_yolo_v7(img, input_shape, letter_box=False):
     return img
 
 
-'''
-def load_plugins():
-    library_path = os.path.join(os.path.dirname(__file__), 'yolo_tensorrt/libyolo_layer.so')
-    ctypes.CDLL(library_path)
-'''
-
-
 class ObjectDetector(object):
 
     def __init__(self, engine_path, type_model="SSD", conf_th=0.5):
