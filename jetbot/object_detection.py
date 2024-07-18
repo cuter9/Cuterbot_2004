@@ -4,8 +4,7 @@ from jetbot.ssd_tensorrt import parse_boxes, parse_boxes_fpn, TRT_INPUT_NAME, TR
 from .tensorrt_model import TRTModel, parse_boxes_yolo, parse_boxes_yolo_v7
 import numpy as np
 import cv2
-import ctypes
-import os
+
 
 mean = 255.0 * np.array([0.5, 0.5, 0.5])
 stdev = 255.0 * np.array([0.5, 0.5, 0.5])
