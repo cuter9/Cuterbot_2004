@@ -145,10 +145,9 @@ class FleeterTRT(traitlets.HasTraits):
                 self.type_follower_model == "YOLO" or
                 self.type_follower_model == "YOLO_v7"):
             # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model)
-            self.object_detector.type_model = self.type_follower_model
-            self.object_detector.conf_th = self.conf_th
-
+            self.object_detector = ObjectDetector(self.follower_model,
+                                                  type_model=self.type_follower_model,
+                                                  conf_th=self.conf_th)
 
         # elif type_model == "YOLO":
         #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
