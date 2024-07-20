@@ -89,8 +89,6 @@ class ObjectFollower(ObjectDetector):
             self.robot = Robot.instance()
             # Camera instance would be better to put after all models instantiation
             self.capturer = Camera()
-            # self.img_width = self.capturer.capture_width
-            # self.img_height = self.capturer.capture_height
             self.img_width = self.capturer.width
             self.img_height = self.capturer.height
             self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
