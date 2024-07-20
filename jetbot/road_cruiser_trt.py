@@ -146,12 +146,12 @@ class RoadCruiserTRT(HasTraits):
         # self.fps.append(1/(end_time - start_time))
 
     # We accomplish that with the observe function.
-    def start_cruising(self, change):
+    def start_rc(self, change):
         # self.execute({'new': self.camera.value})
         self.load_road_cruiser(change)
         self.capturer.observe(self.execute_rc, names='value')
 
-    def stop_cruising(self, change):
+    def stop_rc(self, change):
         import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         # self.camera.unobserve(self.execute, names='value')

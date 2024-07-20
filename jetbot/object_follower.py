@@ -148,7 +148,7 @@ class ObjectFollower(ObjectDetector):
 
         self.closest_object = closest_detection
 
-    def start_run(self, change):
+    def start_of(self, change):
         self.load_object_detector(change)
         self.capturer.unobserve_all()
         print("start running")
@@ -218,7 +218,7 @@ class ObjectFollower(ObjectDetector):
         # print("ok!")
         # return self.cap_image
 
-    def stop_run(self, change):
+    def stop_of(self, change):
         import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         print("stop running!")

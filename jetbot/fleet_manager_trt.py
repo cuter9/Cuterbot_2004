@@ -131,10 +131,10 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             # RoadCruiserTRT.camera = self.capturer
 
             # self.capturer = self.road_cruiser.camera
-        self.img_width = self.capturer.width
-        self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        self.current_image = np.empty((self.img_height, self.img_width, 3))
+            self.img_width = self.capturer.width
+            self.img_height = self.capturer.height
+            self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+            self.current_image = np.empty((self.img_height, self.img_width, 3))
 
         '''
         self.capturer = None
@@ -223,6 +223,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # print(int(self.label), "\n", self.matching_detections)
     '''
 
+    '''
     def closest_object_detection(self):
         """Finds the detection closest to the image center"""
         closest_detection = None
@@ -235,6 +236,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
                     closest_detection = det
 
         self.closest_object = closest_detection
+    '''
 
     def execute_fm(self, change):
 
@@ -251,7 +253,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             self.execute_rc(change)
             self.speed_fm = self.speed  # set fleet mge speed to road cruising speed (self.speed)
 
-    def start_run(self, change):
+    def start_fm(self, change):
         self.load_object_detector(change)  # load object detector function in object follower module
         self.load_road_cruiser(change)  # load_road_cruiser function in road_cruiser_trt module
         self.capturer.unobserve_all()
@@ -322,7 +324,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # print("ok!")
         # return self.cap_image
 
-    def stop_run(self, change):
+    def stop_fm(self, change):
         import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         print("start stopping!")

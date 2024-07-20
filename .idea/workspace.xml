@@ -9,6 +9,8 @@
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,15 +301,7 @@
       <workItem from="1721214240754" duration="33455000" />
       <workItem from="1721288238715" duration="17977000" />
       <workItem from="1721340925139" duration="2437000" />
-      <workItem from="1721343409037" duration="36049000" />
-    </task>
-    <task id="LOCAL-00066" summary="update">
-      <option name="closed" value="true" />
-      <created>1720291680297</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1720291680298</updated>
+      <workItem from="1721343409037" duration="40004000" />
     </task>
     <task id="LOCAL-00067" summary="update">
       <option name="closed" value="true" />
@@ -693,7 +687,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721448319913</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="update">
+      <option name="closed" value="true" />
+      <created>1721449652158</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1721449652161</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
