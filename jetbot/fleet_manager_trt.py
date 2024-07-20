@@ -153,7 +153,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.capturer.observe(self.execute_fm, names='value')
 
     def execute(self, change):
-        # print("start excution !")
+        # print("start execution !")
         self.current_image = change['new']
 
         # compute all detected objects
