@@ -31,9 +31,6 @@ class RoadCruiserTRT(HasTraits):
     def __init__(self, init_sensor_rc=True):
         super().__init__()
 
-        # self.cruiser_model = 'resnet18'
-        # self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
-        # self.type_cruiser_model = 'resnet'
         self.execution_time_rc = []
         self.trt_model_rc = TRTModule()
 
@@ -47,24 +44,7 @@ class RoadCruiserTRT(HasTraits):
         self.x_slider = 0
         self.y_slider = 0
 
-        # model = torchvision.models.mobilenet_v3_large(pretrained=False)
-        # model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 2)
-
-        # model = torchvision.models.resnet18(pretrained=False)
-        # model = torchvision.models.resnet34(pretrained=False)
-        # model = torchvision.models.resnet50(pretrained=False)
-        # model.fc = torch.nn.Linear(model.fc.in_features, 2)
-        # model.load_state_dict(torch.load('best_steering_model_xy_mobilenet_v3_large.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet18.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
-
         self.device = torch.device('cuda')
-        # self.cruiser_model = self.cruiser_model.to(self.device)
-        # self.cruiser_model = self.cruiser_model.eval().half()
-        # self.cruiser_model = self.cruiser_model.float()
-        # self.cruiser_model = self.cruiser_model.to(self.device, dtype=torch.float)
-        # self.cruiser_model = self.cruiser_model.eval()
 
     # ---- Creating the Pre-Processing Function
     # 1. Convert from HWC layout to CHW layout
@@ -84,13 +64,6 @@ class RoadCruiserTRT(HasTraits):
             self.trt_model_rc.load_state_dict(torch.load(self.cruiser_model))
         else:
             self.trt_model_rc.load_state_dict(torch.load('best_steering_model_xy_trt_' + self.cruiser_model + '.pth'))
-
-        # self.capturer = self.road_cruiser.camera
-        # self.img_width = self.capturer.width
-        # self.img_height = self.capturer.height
-        # self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        # self.current_image = np.empty((self.img_height, self.img_width, 3))
-        # self.is_loaded = True
 
     def preprocess_rc(self, image):
         mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
