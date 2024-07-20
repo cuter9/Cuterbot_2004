@@ -37,13 +37,6 @@ class RoadCruiserTRT(HasTraits):
         self.execution_time_rc = []
         self.trt_model_rc = TRTModule()
 
-        '''
-        # self.cruiser_model.load_state_dict(torch.load(''.join(['best_steering_model_xy_trt_', cruiser_model, '.pth'])))
-        if "workspace" in cruiser_model:
-            self.cruiser_model.load_state_dict(torch.load(cruiser_model))
-        else:
-            self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_trt_' + cruiser_model + '.pth'))
-        '''
         if init_sensor_rc:
             self.capturer = Camera()
             self.robot = Robot.instance()
