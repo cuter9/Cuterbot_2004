@@ -131,10 +131,10 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             # RoadCruiserTRT.camera = self.capturer
 
             # self.capturer = self.road_cruiser.camera
-            self.img_width = self.capturer.width
-            self.img_height = self.capturer.height
-            self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-            self.current_image = np.empty((self.img_height, self.img_width, 3))
+        self.img_width = self.capturer.width
+        self.img_height = self.capturer.height
+        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+        self.current_image = np.empty((self.img_height, self.img_width, 3))
 
         '''
         self.capturer = None
