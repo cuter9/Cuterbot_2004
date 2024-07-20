@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt_v1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/robot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_fm_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_fm_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_fpn.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_fpn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_yolo_v7.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_yolo_v7.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,25 +75,25 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/notebooks/object_following",
+    "last_opened_file_path": "F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/jetbot",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "web.server",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\notebooks\object_following" />
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\jetbot" />
+      <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\notebooks\object_following" />
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\test" />
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\docker\nv_docker_settings" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.jetbot_states">
     <configuration name="jetbot_states" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Cuterbot_WS" />
       <option name="ENV_FILES" value="" />
@@ -295,95 +305,10 @@
       <workItem from="1721027852333" duration="36501000" />
       <workItem from="1721067100460" duration="14205000" />
       <workItem from="1721105014291" duration="4443000" />
-      <workItem from="1721214240754" duration="30342000" />
-    </task>
-    <task id="LOCAL-00051" summary="update">
-      <option name="closed" value="true" />
-      <created>1719127661582</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1719127661583</updated>
-    </task>
-    <task id="LOCAL-00052" summary="update">
-      <option name="closed" value="true" />
-      <created>1719135589676</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1719135589677</updated>
-    </task>
-    <task id="LOCAL-00053" summary="update">
-      <option name="closed" value="true" />
-      <created>1719140582079</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1719140582080</updated>
-    </task>
-    <task id="LOCAL-00054" summary="update">
-      <option name="closed" value="true" />
-      <created>1719144144453</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1719144144453</updated>
-    </task>
-    <task id="LOCAL-00055" summary="update">
-      <option name="closed" value="true" />
-      <created>1719171808183</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1719171808183</updated>
-    </task>
-    <task id="LOCAL-00056" summary="update">
-      <option name="closed" value="true" />
-      <created>1719171824127</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1719171824127</updated>
-    </task>
-    <task id="LOCAL-00057" summary="update">
-      <option name="closed" value="true" />
-      <created>1719207138239</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1719207138239</updated>
-    </task>
-    <task id="LOCAL-00058" summary="update">
-      <option name="closed" value="true" />
-      <created>1719209706712</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1719209706713</updated>
-    </task>
-    <task id="LOCAL-00059" summary="update">
-      <option name="closed" value="true" />
-      <created>1719216056955</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1719216056955</updated>
-    </task>
-    <task id="LOCAL-00060" summary="update">
-      <option name="closed" value="true" />
-      <created>1719542038270</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1719542038270</updated>
-    </task>
-    <task id="LOCAL-00061" summary="update">
-      <option name="closed" value="true" />
-      <created>1719547986050</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1719547986051</updated>
+      <workItem from="1721214240754" duration="33455000" />
+      <workItem from="1721288238715" duration="17977000" />
+      <workItem from="1721340925139" duration="2437000" />
+      <workItem from="1721343409037" duration="34955000" />
     </task>
     <task id="LOCAL-00062" summary="update">
       <option name="closed" value="true" />
@@ -689,7 +614,95 @@
       <option name="project" value="LOCAL" />
       <updated>1721275324274</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="update">
+      <option name="closed" value="true" />
+      <created>1721276280082</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1721276280083</updated>
+    </task>
+    <task id="LOCAL-00101" summary="update">
+      <option name="closed" value="true" />
+      <created>1721277351276</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1721277351276</updated>
+    </task>
+    <task id="LOCAL-00102" summary="update">
+      <option name="closed" value="true" />
+      <created>1721293897156</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1721293897157</updated>
+    </task>
+    <task id="LOCAL-00103" summary="update">
+      <option name="closed" value="true" />
+      <created>1721294246390</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1721294246391</updated>
+    </task>
+    <task id="LOCAL-00104" summary="update">
+      <option name="closed" value="true" />
+      <created>1721300882862</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1721300882862</updated>
+    </task>
+    <task id="LOCAL-00105" summary="update">
+      <option name="closed" value="true" />
+      <created>1721302896680</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302896680</updated>
+    </task>
+    <task id="LOCAL-00106" summary="update">
+      <option name="closed" value="true" />
+      <created>1721302926857</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302926857</updated>
+    </task>
+    <task id="LOCAL-00107" summary="update">
+      <option name="closed" value="true" />
+      <created>1721303814769</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1721303814769</updated>
+    </task>
+    <task id="LOCAL-00108" summary="update">
+      <option name="closed" value="true" />
+      <created>1721304898705</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1721304898705</updated>
+    </task>
+    <task id="LOCAL-00109" summary="update">
+      <option name="closed" value="true" />
+      <created>1721304970857</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1721304970857</updated>
+    </task>
+    <task id="LOCAL-00110" summary="update">
+      <option name="closed" value="true" />
+      <created>1721305383327</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1721305383327</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

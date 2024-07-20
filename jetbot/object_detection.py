@@ -1,10 +1,11 @@
 from xml.sax.xmlreader import InputSource
+
 # import tensorrt as trt
 from jetbot.ssd_tensorrt import parse_boxes, parse_boxes_fpn, TRT_INPUT_NAME, TRT_OUTPUT_NAME
 from .tensorrt_model import TRTModel, parse_boxes_yolo, parse_boxes_yolo_v7
 import numpy as np
 import cv2
-
+from traitlets import HasTraits, Unicode, Float
 
 mean = 255.0 * np.array([0.5, 0.5, 0.5])
 stdev = 255.0 * np.array([0.5, 0.5, 0.5])
@@ -107,36 +108,38 @@ def preprocess_yolo_v7(img, input_shape, letter_box=False):
     return img
 
 
-class ObjectDetector(object):
+class ObjectDetector(HasTraits):
+    engine_path = Unicode(default_value='').tag(config=True)
+    conf_th = Float(default_value=0.5).tag(config=True)
 
-    def __init__(self, engine_path, type_model="SSD", conf_th=0.5):
-        # logger = trt.Logger()
-        # trt.init_libnvinfer_plugins(logger, '')
-        # load_plugins()
-
+    def __init__(self):
         # assert type_model is not None
-        self.type_model = type_model
-        self.conf_th = conf_th
+        super().__init__()
+        self.input_shape = None
+        self.postprocess_od = None
+        self.preprocess_od = None
+        self.type_model = None
+        self.trt_model_od = None
 
         # self.trt_model = TRTModel(engine_path, input_names=[TRT_INPUT_NAME],
         #                          output_names=[TRT_OUTPUT_NAME, TRT_OUTPUT_NAME + '_1'])
-        self.trt_model = TRTModel(engine_path)
-
+    def load_od_engine(self):
+        self.trt_model_od = TRTModel(self.engine_path)
         if self.type_model == 'SSD':
-            self.preprocess = bgr8_to_ssd_input
-            self.postprocess = parse_boxes
+            self.preprocess_od = bgr8_to_ssd_input
+            self.postprocess_od = parse_boxes
         elif self.type_model == 'SSD_FPN':
-            self.preprocess = bgr8_to_ssd_fpn_input
-            self.postprocess = parse_boxes_fpn
+            self.preprocess_od = bgr8_to_ssd_fpn_input
+            self.postprocess_od = parse_boxes_fpn
         elif self.type_model == 'YOLO':
-            self.preprocess = preprocess_yolo
-            self.postprocess = parse_boxes_yolo
+            self.preprocess_od = preprocess_yolo
+            self.postprocess_od = parse_boxes_yolo
         elif self.type_model == 'YOLO_v7':
-            self.preprocess = preprocess_yolo_v7
-            self.postprocess = parse_boxes_yolo_v7
-        self.input_shape = self.trt_model.input_shape
+            self.preprocess_od = preprocess_yolo_v7
+            self.postprocess_od = parse_boxes_yolo_v7
+        self.input_shape = self.trt_model_od.input_shape
 
-    def execute(self, *inputs, conf_th=None):
+    def execute_od(self, *inputs, conf_th=None):
 
         # trt_outputs = self.trt_model(inputs)
         # trt_outputs = self.trt_model(self.preprocess_fn(*inputs))
@@ -146,11 +149,12 @@ class ObjectDetector(object):
 
         if conf_th is None:
             conf_th = self.conf_th
-        trt_outputs = self.trt_model(self.preprocess(*inputs, self.input_shape))
+        trt_outputs = self.trt_model_od(self.preprocess_od(*inputs, self.input_shape))
         if self.type_model == 'YOLO_v7':
-            detections = self.postprocess(trt_outputs, self.input_shape, conf_th=conf_th)
+            detections = self.postprocess_od(trt_outputs, self.input_shape, conf_th=conf_th)
         else:
-            detections = self.postprocess(trt_outputs, conf_th=conf_th)
+            detections = self.postprocess_od(trt_outputs, conf_th=conf_th)
+
         '''
         if self.type_model == 'SSD':
             detections = parse_boxes(trt_outputs)
@@ -166,4 +170,4 @@ class ObjectDetector(object):
     def __call__(self, *inputs, conf_th=None):
         if conf_th is None:
             conf_th = self.conf_th
-        return self.execute(*inputs, conf_th=conf_th)
+        return self.execute_od(*inputs, conf_th=conf_th)

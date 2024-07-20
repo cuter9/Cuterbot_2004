@@ -43,7 +43,23 @@ from jetbot import ObjectDetector
 # model = ObjectDetector_YOLO('yolov4-288.engine')
 
 
-class ObjectFollower(traitlets.HasTraits):
+# class ObjectFollower(traitlets.HasTraits):
+def norm(vec):
+    """Computes the length of the 2D vector"""
+    return np.sqrt(vec[0] ** 2 + vec[1] ** 2)
+
+
+def object_center_detection(det):
+    """Computes the center x, y coordinates of the object"""
+    # print(self.matching_detections)
+    bbox = det['bbox']
+    center_x = (bbox[0] + bbox[2]) / 2.0 - 0.5
+    center_y = (bbox[1] + bbox[3]) / 2.0 - 0.5
+    object_center = (center_x, center_y)
+    return object_center
+
+
+class ObjectFollower(ObjectDetector):
     follower_model = traitlets.Unicode(default_value='').tag(config=True)
     type_follower_model = traitlets.Unicode(default_value='').tag(config=True)
     conf_th = traitlets.Float(default_value=0.5).tag(config=True)
@@ -56,74 +72,68 @@ class ObjectFollower(traitlets.HasTraits):
     blocked = traitlets.Float(default_value=0).tag(config=True)
     is_dectecting = traitlets.Bool(default_value=True).tag(config=True)
 
-    def __init__(self):
+    def __init__(self, init_sensor_of=True):
 
         super().__init__()
+        # self.follower_model = ''
+        # self.type_follower_model = ''
+        # self.conf_th = 0.5
 
-        self.follower_model = 'ssd_mobilenet_v2_coco_onnx.engine'
-        self.type_follower_model = "SSD"
-        self.conf_th = 0.5
-        self.object_detector = object
-
-        self.robot = Robot.instance()
+        self.execution_time_of = None
         self.detections = None
         self.matching_detections = None
         self.object_center = None
         self.closest_object = None
-        self.is_dectecting = True
+        # self.is_dectecting = True
 
-        # Camera instance would be better to put after all models instantiation
-        self.capturer = Camera()
-        # self.img_width = self.capturer.capture_width
-        # self.img_height = self.capturer.capture_height
-        self.img_width = self.capturer.width
-        self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        self.current_image = np.empty((self.img_height, self.img_width, 3))
+        '''
+        self.robot = None
+        self.capturer = None
+        self.img_width = None
+        self.img_height = None
+        self.cap_image = None
+        self.current_image = None
+        '''
+
+        if init_sensor_of:
+            self.robot = Robot.instance()
+            # Camera instance would be better to put after all models instantiation
+            self.capturer = Camera()
+            # self.img_width = self.capturer.capture_width
+            # self.img_height = self.capturer.capture_height
+            self.img_width = self.capturer.width
+            self.img_height = self.capturer.height
+            self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+            self.current_image = np.empty((self.img_height, self.img_width, 3))
 
         self.execution_time = []
         # self.fps = []
 
     def load_object_detector(self, change):
 
-        self.object_detector = None
+        # self.object_detector = None
+        self.engine_path = self.follower_model  # set the engine_path in object detection module
+        self.type_model = self.type_follower_model  # set the type_model in object detection module
+
         # avoider_model='../collision_avoidance/best_model.pth'
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
         print('path of object detector model: %s' % self.follower_model)
-        if (self.type_follower_model == "SSD" or
-                self.type_follower_model == "SSD_FPN" or
-                self.type_follower_model == "YOLO" or
-                self.type_follower_model == "YOLO_v7"):
-            # from jetbot import ObjectDetector
-            # self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
-            #                                      conf_th=self.conf_th
-            self.object_detector = ObjectDetector(self.follower_model,
-                                                  type_model=self.type_follower_model,
-                                                  conf_th=self.conf_th)
+        self.load_od_engine()  # load object detection engine function in object detection module
 
     def run_objects_detection(self):
         # self.image = self.capturer.value
         # print(self.image[1][1], np.shape(self.image))
-        self.detections = self.object_detector(self.current_image)
+        self.detections = self.execute_od(self.current_image)  # function in object detection for executing trt engine
         self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
-        if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
-            self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
-        elif self.type_follower_model == "YOLO" or self.type_follower_model == "YOLO_v7":
-            self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
+        if int(self.label) >= 0:
+            if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
+                self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
+            elif self.type_follower_model == "YOLO" or self.type_follower_model == "YOLO_v7":
+                self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
+        else:
+            self.label_text = " Not defined !"
+
         # print(int(self.label), "\n", self.matching_detections)
-
-    def object_center_detection(self, det):
-        """Computes the center x, y coordinates of the object"""
-        # print(self.matching_detections)
-        bbox = det['bbox']
-        center_x = (bbox[0] + bbox[2]) / 2.0 - 0.5
-        center_y = (bbox[1] + bbox[3]) / 2.0 - 0.5
-        object_center = (center_x, center_y)
-        return object_center
-
-    def norm(self, vec):
-        """Computes the length of the 2D vector"""
-        return np.sqrt(vec[0] ** 2 + vec[1] ** 2)
 
     def closest_object_detection(self):
         """Finds the detection closest to the image center"""
@@ -132,8 +142,8 @@ class ObjectFollower(traitlets.HasTraits):
             for det in self.matching_detections:
                 if closest_detection is None:
                     closest_detection = det
-                elif self.norm(self.object_center_detection(det)) < self.norm(
-                        self.object_center_detection(closest_detection)):
+                elif norm(object_center_detection(det)) < norm(
+                        object_center_detection(closest_detection)):
                     closest_detection = det
 
         self.closest_object = closest_detection
@@ -142,9 +152,9 @@ class ObjectFollower(traitlets.HasTraits):
         self.load_object_detector(change)
         self.capturer.unobserve_all()
         print("start running")
-        self.capturer.observe(self.execute, names='value')
+        self.capturer.observe(self.execute_of, names='value')
 
-    def execute(self, change):
+    def execute_of(self, change):
         # print("start excution !")
         start_time = time.process_time()
 
@@ -191,7 +201,7 @@ class ObjectFollower(traitlets.HasTraits):
         # otherwise steer towards target
         else:
             # move robot forward and steer proportional target's x-distance from center
-            center = self.object_center_detection(cls_obj)
+            center = object_center_detection(cls_obj)
             self.robot.set_motors(
                 float(self.speed + self.turn_gain * center[0] + self.steering_bias),
                 float(self.speed - self.turn_gain * center[0] + self.steering_bias)
@@ -199,7 +209,7 @@ class ObjectFollower(traitlets.HasTraits):
 
         end_time = time.process_time()
         # self.execution_time.append(end_time - start_time + self.capturer.cap_time)
-        self.execution_time.append(end_time - start_time)
+        self.execution_time_of.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
 
         # update image widget
@@ -220,7 +230,7 @@ class ObjectFollower(traitlets.HasTraits):
         # plot exection time of object follower model processing
         model_name = "object follower model"
         model_name_str = self.follower_model.split('/')[-1].split('.')[0]
-        plot_exec_time(self.execution_time[1:], model_name, model_name_str)
+        plot_exec_time(self.execution_time_of[1:], model_name, model_name_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split('.')[0])
         plt.show()
 
