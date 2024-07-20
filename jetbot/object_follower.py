@@ -79,7 +79,6 @@ class ObjectFollower(ObjectDetector):
         # self.type_follower_model = ''
         # self.conf_th = 0.5
 
-        self.execution_time_of = []
         self.detections = None
         self.matching_detections = None
         self.object_center = None
@@ -106,7 +105,7 @@ class ObjectFollower(ObjectDetector):
             self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
             self.current_image = np.empty((self.img_height, self.img_width, 3))
 
-        self.execution_time = []
+        self.execution_time_of = []
         # self.fps = []
 
     def load_object_detector(self, change):
