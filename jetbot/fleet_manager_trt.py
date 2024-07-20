@@ -118,7 +118,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
 
-        self.default_speed = self.speed
+        self.default_speed = self.speed_fm
         self.detect_duration_max = 10
         self.no_detect = 0
         self.target_view = 0.5
@@ -143,7 +143,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # if closest object is not detected and followed, do road cruising
         if not self.is_detected:
             self.execute_rc(change)
-            self.speed_fm = self.speed  # set fleet mge speed to road cruising speed (self.speed)
+            self.speed_fm = self.speed_rc  # set fleet mge speed to road cruising speed (self.speed)
 
     def start_fm(self, change):
         self.load_object_detector(change)  # load object detector function in object follower module
@@ -183,7 +183,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             if np.abs(self.e_view / self.target_view) > 0.1:
                 self.speed_fm = self.speed_fm + self.speed_gain_fm * self.e_view + self.speed_dev_fm * (
                         self.e_view - self.e_view_prev)
-            self.speed = self.speed_fm
+            # self.speed = self.speed_fm
 
             self.mean_view_prev = self.mean_view
             self.e_view_prev = self.e_view

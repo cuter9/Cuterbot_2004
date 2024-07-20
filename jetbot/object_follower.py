@@ -66,11 +66,12 @@ class ObjectFollower(ObjectDetector):
     cap_image = traitlets.Any()
     label = traitlets.Integer(default_value=1).tag(config=True)
     label_text = traitlets.Unicode(default_value='').tag(config=True)
-    speed = traitlets.Float(default_value=0.15).tag(config=True)
-    turn_gain = traitlets.Float(default_value=0.3).tag(config=True)
-    steering_bias = traitlets.Float(default_value=0.0).tag(config=True)
+    speed_of = traitlets.Float(default_value=0).tag(config=True)
+    speed_gain_of = traitlets.Float(default_value=0.15).tag(config=True)
+    turn_gain_of = traitlets.Float(default_value=0.3).tag(config=True)
+    steering_bias_of = traitlets.Float(default_value=0.0).tag(config=True)
     blocked = traitlets.Float(default_value=0).tag(config=True)
-    is_dectecting = traitlets.Bool(default_value=True).tag(config=True)
+    is_detecting = traitlets.Bool(default_value=True).tag(config=True)
 
     def __init__(self, init_sensor_of=True):
 
@@ -79,6 +80,7 @@ class ObjectFollower(ObjectDetector):
         self.matching_detections = None
         self.object_center = None
         self.closest_object = None
+        self.speed_of = self.speed_gain_of
         # self.is_detecting = True
 
         if init_sensor_of:
@@ -163,6 +165,8 @@ class ObjectFollower(ObjectDetector):
         # detections = self.object_detector(image)
         # print(self.detections)
 
+        self.speed_of = self.speed_gain_of
+
         # draw all detections on image
         for det in self.detections[0]:
             bbox = det['bbox']
@@ -180,15 +184,15 @@ class ObjectFollower(ObjectDetector):
 
         # otherwise go forward if no target detected
         if cls_obj is None:
-            self.robot.forward(float(self.speed))
+            self.robot.forward(float(self.speed_gain_of))
 
         # otherwise steer towards target
         else:
             # move robot forward and steer proportional target's x-distance from center
             center = object_center_detection(cls_obj)
             self.robot.set_motors(
-                float(self.speed + self.turn_gain * center[0] + self.steering_bias),
-                float(self.speed - self.turn_gain * center[0] + self.steering_bias)
+                float(self.speed_gain_of + self.turn_gain_of * center[0] + self.steering_bias_of),
+                float(self.speed_gain_of - self.turn_gain_of * center[0] + self.steering_bias_of)
             )
 
         end_time = time.process_time()

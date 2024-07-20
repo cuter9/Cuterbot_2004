@@ -19,32 +19,34 @@ from jetbot import Robot
 class RoadCruiserTRT(HasTraits):
     cruiser_model = Unicode(default_value='').tag(config=True)
     type_cruiser_model = Unicode(default_value='').tag(config=True)
-    speed_gain = Float(default_value=0.15).tag(config=True)
-    steering_gain = Float(default_value=0.08).tag(config=True)
-    steering_dgain = Float(default_value=1.5).tag(config=True)
-    steering_bias = Float(default_value=0.0).tag(config=True)
-    steering = Float(default_value=0.0).tag(config=True)
+    speed_rc = Float(default_value=0).tag(config=True)
+    speed_gain_rc = Float(default_value=0.15).tag(config=True)
+    steering_gain_rc = Float(default_value=0.08).tag(config=True)
+    steering_dgain_rc = Float(default_value=1.5).tag(config=True)
+    steering_bias_rc = Float(default_value=0.0).tag(config=True)
+    steering_rc = Float(default_value=0.0).tag(config=True)
     x_slider = Float(default_value=0).tag(config=True)
     y_slider = Float(default_value=0).tag(config=True)
-    speed = Float(default_value=0).tag(config=True)
 
     def __init__(self, init_sensor_rc=True):
         super().__init__()
 
-        self.execution_time_rc = []
         self.trt_model_rc = TRTModule()
 
         if init_sensor_rc:
             self.capturer = Camera()
             self.robot = Robot.instance()
+
         self.angle = 0.0
         self.angle_last = 0.0
         self.execution_time = []
         # self.fps = []
         self.x_slider = 0
         self.y_slider = 0
+        self.speed_rc = self.speed_gain_rc
 
         self.device = torch.device('cuda')
+        self.execution_time_rc = []
 
     # ---- Creating the Pre-Processing Function
     # 1. Convert from HWC layout to CHW layout
@@ -93,18 +95,18 @@ class RoadCruiserTRT(HasTraits):
         self.x_slider = x.item()
         self.y_slider = y.item()
 
-        self.speed = self.speed_gain
+        self.speed_rc = self.speed_gain_rc
 
         # angle = np.sqrt(xy)*np.arctan2(x, y)
         angle_1 = np.arctan2(x, y)
         self.angle = 0.5 * np.pi * np.tanh(0.5 * angle_1)
-        pid = self.angle * self.steering_gain + (self.angle - self.angle_last) * self.steering_dgain
+        pid = self.angle * self.steering_gain_rc + (self.angle - self.angle_last) * self.steering_dgain_rc
         self.angle_last = self.angle
 
-        self.steering = pid + self.steering_bias
+        self.steering_rc = pid + self.steering_bias_rc
 
-        self.robot.left_motor.value = max(min(self.speed_gain + self.steering, 1.0), 0.0)
-        self.robot.right_motor.value = max(min(self.speed_gain - self.steering, 1.0), 0.0)
+        self.robot.left_motor.value = max(min(self.speed_gain_rc + self.steering_rc, 1.0), 0.0)
+        self.robot.right_motor.value = max(min(self.speed_gain_rc - self.steering_rc, 1.0), 0.0)
 
         end_time = time.process_time()
         # self.execution_time.append(end_time - start_time + self.camera.cap_time)
