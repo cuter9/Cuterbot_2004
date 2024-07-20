@@ -34,7 +34,7 @@ class RoadCruiserTRT(HasTraits):
         # self.cruiser_model = 'resnet18'
         # self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
         # self.type_cruiser_model = 'resnet'
-        self.execution_time_rc = None
+        self.execution_time_rc = []
         self.trt_model_rc = TRTModule()
 
         '''

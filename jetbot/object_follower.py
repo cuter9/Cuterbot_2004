@@ -79,7 +79,7 @@ class ObjectFollower(ObjectDetector):
         # self.type_follower_model = ''
         # self.conf_th = 0.5
 
-        self.execution_time_of = None
+        self.execution_time_of = []
         self.detections = None
         self.matching_detections = None
         self.object_center = None

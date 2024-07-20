@@ -153,7 +153,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.e_view = 0
         self.e_view_prev = 0
 
-        self.execution_time = []
+        self.execution_time_fm = []
         # self.fps = []
 
     '''
