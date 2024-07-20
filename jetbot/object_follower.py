@@ -85,15 +85,6 @@ class ObjectFollower(ObjectDetector):
         self.closest_object = None
         # self.is_detecting = True
 
-        '''
-        self.robot = None
-        self.capturer = None
-        self.img_width = None
-        self.img_height = None
-        self.cap_image = None
-        self.current_image = None
-        '''
-
         if init_sensor_of:
             self.robot = Robot.instance()
             # Camera instance would be better to put after all models instantiation
