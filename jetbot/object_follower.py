@@ -75,10 +75,6 @@ class ObjectFollower(ObjectDetector):
     def __init__(self, init_sensor_of=True):
 
         super().__init__()
-        # self.follower_model = ''
-        # self.type_follower_model = ''
-        # self.conf_th = 0.5
-
         self.detections = None
         self.matching_detections = None
         self.object_center = None
