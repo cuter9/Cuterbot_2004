@@ -118,23 +118,23 @@ class ObjectDetector(HasTraits):
         self.input_shape = None
         self.postprocess_od = None
         self.preprocess_od = None
-        self.type_model = None
+        self.type_model_od = None
         self.trt_model_od = None
 
         # self.trt_model = TRTModel(engine_path, input_names=[TRT_INPUT_NAME],
         #                          output_names=[TRT_OUTPUT_NAME, TRT_OUTPUT_NAME + '_1'])
     def load_od_engine(self):
         self.trt_model_od = TRTModel(self.engine_path)
-        if self.type_model == 'SSD':
+        if self.type_model_od == 'SSD':
             self.preprocess_od = bgr8_to_ssd_input
             self.postprocess_od = parse_boxes
-        elif self.type_model == 'SSD_FPN':
+        elif self.type_model_od == 'SSD_FPN':
             self.preprocess_od = bgr8_to_ssd_fpn_input
             self.postprocess_od = parse_boxes_fpn
-        elif self.type_model == 'YOLO':
+        elif self.type_model_od == 'YOLO':
             self.preprocess_od = preprocess_yolo
             self.postprocess_od = parse_boxes_yolo
-        elif self.type_model == 'YOLO_v7':
+        elif self.type_model_od == 'YOLO_v7':
             self.preprocess_od = preprocess_yolo_v7
             self.postprocess_od = parse_boxes_yolo_v7
         self.input_shape = self.trt_model_od.input_shape

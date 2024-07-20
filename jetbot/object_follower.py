@@ -97,7 +97,7 @@ class ObjectFollower(ObjectDetector):
 
         # self.object_detector = None
         self.engine_path = self.follower_model  # set the engine_path in object detection module
-        self.type_model = self.type_follower_model  # set the type_model in object detection module
+        self.type_model_od = self.type_follower_model  # set the type_model in object detection module
 
         # avoider_model='../collision_avoidance/best_model.pth'
         # self.obstacle_detector = Avoider(model_params=self.avoider_model)
