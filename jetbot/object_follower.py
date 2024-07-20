@@ -84,7 +84,7 @@ class ObjectFollower(ObjectDetector):
         self.matching_detections = None
         self.object_center = None
         self.closest_object = None
-        # self.is_dectecting = True
+        # self.is_detecting = True
 
         '''
         self.robot = None

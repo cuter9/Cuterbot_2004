@@ -160,7 +160,7 @@ class RoadCruiserTRT(HasTraits):
         self.robot.stop()
         self.capturer.stop()
 
-        # plot exection time of road cruiser model processing
+        # plot execution time of road cruiser model processing
         model_name = 'road cruiser model'
         cruiser_model_name = self.cruiser_model.split("/")[-1].split('.')[0]
         plot_exec_time(self.execution_time_rc[1:], model_name, cruiser_model_name)

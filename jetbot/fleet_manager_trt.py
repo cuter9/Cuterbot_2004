@@ -77,8 +77,8 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
     target_view = Float(default_value=0.6).tag(config=True)
     mean_view = Float(default_value=0).tag(config=True)
     e_view = Float(default_value=0).tag(config=True)
-    # is_dectecting = Bool(default_value=True).tag(config=True)
-    is_dectected = Bool(default_value=False).tag(config=True)
+    # is_detecting = Bool(default_value=True).tag(config=True)
+    is_detected = Bool(default_value=False).tag(config=True)
 
     def __init__(self, init_sensor_fm=True):
 
@@ -87,38 +87,20 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # self.conf_th = 0.5
         # self.object_detector = object
 
-        """
-        # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        if (self.type_follower_model == "SSD" or
-                self.type_follower_model == "SSD_FPN" or
-                self.type_follower_model == "YOLO" or
-                self.type_follower_model == "YOLO_v7"):
-            # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model, type_model=self.type_follower_model,
-                                                  conf_th=self.conf_th)
-        """
-
-        # elif type_model == "YOLO":
-        #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
-        #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
-
         # self.cruiser_model = 'resnet18'
         # self.type_cruiser_model = 'resnet'
         # self.road_cruiser = object
-
-        # self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
 
         # self.robot = self.road_cruiser.robot
         ObjectFollower.__init__(self, init_sensor_of=False)
         RoadCruiserTRT.__init__(self, init_sensor_rc=False)
 
-        self.execution_time_fm = None
         self.detections = None
         self.matching_detections = None
         self.object_center = None
         self.closest_object = None
-        self.is_dectecting = True
-        self.is_dectected = False
+        self.is_detecting = True
+        self.is_detected = False
         self.is_loaded = False
 
         if init_sensor_fm:
@@ -136,14 +118,6 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
         self.current_image = np.empty((self.img_height, self.img_width, 3))
 
-        '''
-        self.capturer = None
-        self.img_width = None
-        self.img_height = None
-        self.cap_image = None
-        self.current_image = None
-        '''
-
         self.default_speed = self.speed
         self.detect_duration_max = 10
         self.no_detect = 0
@@ -156,88 +130,6 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.execution_time_fm = []
         # self.fps = []
 
-    '''
-    def load_object_detector(self, change):
-
-        """
-        self.follower_model = follower_model
-        self.type_follower_model = type_follower_model
-        self.conf_th = conf_th
-        """
-        self.object_detector = None
-        # self.obstacle_detector = Avoider(model_params=self.avoider_model)
-        print('path of object detector model: %s' % self.follower_model)
-        if (self.type_follower_model == "SSD" or
-                self.type_follower_model == "SSD_FPN" or
-                self.type_follower_model == "YOLO" or
-                self.type_follower_model == "YOLO_v7"):
-            # from jetbot import ObjectDetector
-            self.object_detector = ObjectDetector(self.follower_model,
-                                                  type_model=self.type_follower_model,
-                                                  conf_th=self.conf_th)
-
-        # elif type_model == "YOLO":
-        #    from jetbot.object_detection_yolo import ObjectDetector_YOLO
-        #    self.object_detector = ObjectDetector_YOLO(self.follower_model)
-    '''
-
-    '''
-    def load_road_follower(self, change):
-
-        """
-        self.cruiser_model = cruiser_model
-        self.type_cruiser_model = type_cruiser_model
-        """
-        
-        self.road_cruiser = None
-        print('path of cruiser model: %s' % self.cruiser_model)
-        # self.road_cruiser = RoadCruiserTRT(cruiser_model=self.cruiser_model, type_cruiser_model=self.type_cruiser_model)
-        self.road_cruiser = RoadCruiserTRT()
-        self.road_cruiser.load_road_cruiser(change)
-        self.road_cruiser.camera = self.capturer
-        
-
-        
-        self.capturer = self.road_cruiser.camera
-        self.img_width = self.capturer.width
-        self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        self.current_image = np.empty((self.img_height, self.img_width, 3))
-        self.is_loaded = True
-        
-    '''
-    '''
-    def run_objects_detection(self):
-        # self.image = self.capturer.value
-        # print(self.image[1][1], np.shape(self.image))
-        self.detections = self.object_detector(self.current_image)
-        self.matching_detections = [d for d in self.detections[0] if d['label'] == int(self.label)]
-
-        if int(self.label) >= 0:
-            if self.type_follower_model == "SSD" or self.type_follower_model == "SSD_FPN":
-                self.label_text = get_cls_dict_ssd('coco')[int(self.label)]
-            elif self.type_follower_model == "YOLO" or self.type_follower_model == "YOLO_v7":
-                self.label_text = get_cls_dict_yolo('coco')[int(self.label)]
-        else:
-            self.label_text = " Not defined !"
-        # print(int(self.label), "\n", self.matching_detections)
-    '''
-
-    '''
-    def closest_object_detection(self):
-        """Finds the detection closest to the image center"""
-        closest_detection = None
-        if len(self.matching_detections) != 0:
-            for det in self.matching_detections:
-                if closest_detection is None:
-                    closest_detection = det
-                elif norm(object_center_detection(det)) < norm(
-                        object_center_detection(closest_detection)):
-                    closest_detection = det
-
-        self.closest_object = closest_detection
-    '''
-
     def execute_fm(self, change):
 
         # do object following
@@ -249,7 +141,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # self.fps.append(1/(end_time - start_time))
 
         # if closest object is not detected and followed, do road cruising
-        if not self.is_dectected:
+        if not self.is_detected:
             self.execute_rc(change)
             self.speed_fm = self.speed  # set fleet mge speed to road cruising speed (self.speed)
 
@@ -263,8 +155,6 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
     def execute(self, change):
         # print("start excution !")
         self.current_image = change['new']
-        width = self.img_width
-        height = self.img_height
 
         # compute all detected objects
         self.run_objects_detection()
@@ -275,18 +165,18 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # draw all detections on image
         for det in self.detections[0]:
             bbox = det['bbox']
-            cv2.rectangle(self.current_image, (int(width * bbox[0]), int(height * bbox[1])),
-                          (int(width * bbox[2]), int(height * bbox[3])), (255, 0, 0), 2)
+            cv2.rectangle(self.current_image, (int(self.img_width * bbox[0]), int(self.img_height * bbox[1])),
+                          (int(self.img_width * bbox[2]), int(self.img_height * bbox[3])), (255, 0, 0), 2)
 
         # select detections that match selected class label
         # get detection closest to center of field of view and draw it
         cls_obj = self.closest_object
         if cls_obj is not None:
-            self.is_dectected = True
+            self.is_detected = True
             self.no_detect = self.detect_duration_max  # set max detection no to prevent temporary loss of object detection
             bbox = cls_obj['bbox']
-            cv2.rectangle(self.current_image, (int(width * bbox[0]), int(height * bbox[1])),
-                          (int(width * bbox[2]), int(height * bbox[3])), (0, 255, 0), 5)
+            cv2.rectangle(self.current_image, (int(self.img_width * bbox[0]), int(self.img_height * bbox[1])),
+                          (int(self.img_width * bbox[2]), int(self.img_height * bbox[3])), (0, 255, 0), 5)
 
             self.mean_view = 0.8 * (bbox[2] - bbox[0]) + 0.2 * self.mean_view_prev
             self.e_view = self.target_view - self.mean_view
@@ -303,7 +193,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             if self.no_detect <= 0:  # if object is not detected for a duration, road cruising
                 self.mean_view = 0.0
                 self.mean_view_prev = 0.0
-                self.is_dectected = False
+                self.is_detected = False
                 self.cap_image = bgr8_to_jpeg(self.current_image)
                 return
             else:
@@ -335,12 +225,12 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.capturer.stop()
 
         # self.road_cruiser.stop_cruising(change)
-        # plot exection time of road cruiser model processing
+        # plot execution time of road cruiser model processing
         cruiser_model_name = "road cruiser model"
         cruiser_model_str = self.cruiser_model.split("/")[-1].split('.')[0]
         plot_exec_time(self.execution_time_rc[1:], cruiser_model_name, cruiser_model_str)
 
-        # plot exection time of fleet controller model processing
+        # plot execution time of fleet controller model processing
         follower_model_name = "fleet controller model"
         follower_model_str = self.follower_model.split(".")[0]
         plot_exec_time(self.execution_time_fm[1:], follower_model_name, follower_model_str)
