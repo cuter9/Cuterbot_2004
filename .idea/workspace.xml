@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt_v1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_detection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/robot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_fm_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_fm_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_fpn.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_fpn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_yolo_v7.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_yolo_v7.py" afterDir="false" />
-    </list>
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -308,15 +294,7 @@
       <workItem from="1721214240754" duration="33455000" />
       <workItem from="1721288238715" duration="17977000" />
       <workItem from="1721340925139" duration="2437000" />
-      <workItem from="1721343409037" duration="34955000" />
-    </task>
-    <task id="LOCAL-00062" summary="update">
-      <option name="closed" value="true" />
-      <created>1719556242876</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1719556242876</updated>
+      <workItem from="1721343409037" duration="35036000" />
     </task>
     <task id="LOCAL-00063" summary="update">
       <option name="closed" value="true" />
@@ -702,7 +680,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721305383327</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="update">
+      <option name="closed" value="true" />
+      <created>1721448234560</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1721448234560</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
