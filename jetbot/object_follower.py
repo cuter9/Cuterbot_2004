@@ -154,7 +154,7 @@ class ObjectFollower(ObjectDetector):
         self.capturer.observe(self.execute_of, names='value')
 
     def execute_of(self, change):
-        # print("start excution !")
+        # print("start execution !")
         start_time = time.process_time()
 
         self.current_image = change['new']
