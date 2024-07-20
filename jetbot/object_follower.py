@@ -226,7 +226,7 @@ class ObjectFollower(ObjectDetector):
         self.robot.stop()
         self.capturer.stop()
 
-        # plot exection time of object follower model processing
+        # plot execution time of object follower model processing
         model_name = "object follower model"
         model_name_str = self.follower_model.split('/')[-1].split('.')[0]
         plot_exec_time(self.execution_time_of[1:], model_name, model_name_str)
