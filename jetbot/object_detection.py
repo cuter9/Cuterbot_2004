@@ -150,7 +150,7 @@ class ObjectDetector(HasTraits):
         if conf_th is None:
             conf_th = self.conf_th
         trt_outputs = self.trt_model_od(self.preprocess_od(*inputs, self.input_shape))
-        if self.type_model == 'YOLO_v7':
+        if self.type_model_od == 'YOLO_v7':
             detections = self.postprocess_od(trt_outputs, self.input_shape, conf_th=conf_th)
         else:
             detections = self.postprocess_od(trt_outputs, conf_th=conf_th)
