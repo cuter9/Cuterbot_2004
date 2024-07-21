@@ -141,12 +141,6 @@ class ObjectDetector(HasTraits):
 
     def execute_od(self, *inputs, conf_th=None):
 
-        # trt_outputs = self.trt_model(inputs)
-        # trt_outputs = self.trt_model(self.preprocess_fn(*inputs))
-        # print("model input shape", self.input_shape)
-        # print('Image size:', np.shape(inputs))
-        # detections = None
-
         if conf_th is None:
             conf_th = self.conf_th
         trt_outputs = self.trt_model_od(self.preprocess_od(*inputs, self.input_shape))
@@ -155,15 +149,6 @@ class ObjectDetector(HasTraits):
         else:
             detections = self.postprocess_od(trt_outputs, conf_th=conf_th)
 
-        '''
-        if self.type_model == 'SSD':
-            detections = parse_boxes(trt_outputs)
-        elif self.type_model == 'SSD_FPN':
-            detections = parse_boxes_fpn(trt_outputs)
-        elif self.type_model == 'YOLO':
-            detections = parse_boxes_yolo(trt_outputs)
-        '''
-        # return trt_outputs
         # print(detections)
         return detections
 
