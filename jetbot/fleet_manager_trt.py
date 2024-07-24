@@ -100,14 +100,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.capturer = None
         if init_sensor_fm:
             self.robot = Robot.instance()
-            # ObjectFollower.robot = Robot.instance()
-            # RoadCruiserTRT.robot = ObjectFollower.robot
-            # Camera instance would be better to put after all models instantiation
             self.capturer = Camera()
-            # ObjectFollower.capturer = Camera()
-            # RoadCruiserTRT.camera = self.capturer
-
-            # self.capturer = self.road_cruiser.camera
             self.img_width = self.capturer.width
             self.img_height = self.capturer.height
             self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()

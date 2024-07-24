@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/test/test_inheritance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,23 +334,7 @@
       <workItem from="1721791046018" duration="636000" />
       <workItem from="1721791688214" duration="159000" />
       <workItem from="1721791851685" duration="196000" />
-      <workItem from="1721792556645" duration="15872000" />
-    </task>
-    <task id="LOCAL-00090" summary="update">
-      <option name="closed" value="true" />
-      <created>1721066147596</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1721066147596</updated>
-    </task>
-    <task id="LOCAL-00091" summary="update">
-      <option name="closed" value="true" />
-      <created>1721066973013</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1721066973013</updated>
+      <workItem from="1721792556645" duration="15948000" />
     </task>
     <task id="LOCAL-00092" summary="update">
       <option name="closed" value="true" />
@@ -734,7 +712,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721575823951</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="update">
+      <option name="closed" value="true" />
+      <created>1721818735059</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1721818735062</updated>
+    </task>
+    <task id="LOCAL-00140" summary="update">
+      <option name="closed" value="true" />
+      <created>1721818762627</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1721818762627</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
