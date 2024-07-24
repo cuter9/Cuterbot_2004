@@ -7,7 +7,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import traitlets
-from traitlets import HasTraits, Float, Unicode, Bool
+from traitlets import HasTraits, Float, Unicode
 # import torchvision.models as models
 
 from jetbot import Camera
@@ -25,7 +25,7 @@ class RoadCruiser(HasTraits):
     x_slider = Float(default_value=0).tag(config=True)
     y_slider = Float(default_value=0).tag(config=True)
     speed = Float(default_value=0).tag(config=True)
-    use_gpu = Bool(default_value=True).tag(config=True)
+    use_gpu = Unicode(default_value='gpu').tag(config=True)
 
     def __init__(self, init_sensor_rc=False):
         super().__init__()
@@ -64,7 +64,7 @@ class RoadCruiser(HasTraits):
         self.y_slider = 0
 
         self.execution_time_rc = []
-
+        self.observe(self.select_gpu, names=['use_gpu'])
         # model = torchvision.models.mobilenet_v3_large(pretrained=False)
         # model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 2)
 
@@ -88,44 +88,53 @@ class RoadCruiser(HasTraits):
 
     def load_road_cruiser(self, change):
         # self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
-        cruiser_model_pth = None
         # self.type_cruiser_model = self.type_cruiser_model
+        # The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+        self.cruiser_model_pth = None
         if self.type_cruiser_model == 'MobileNet':
             # ver = self.cruiser_model.split('.')[-2].split('_')[-1]
             if 'v2' in self.cruiser_model:
-                cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v2')(pretrained=False)
+                self.cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v2')(weights=False)
             elif 'v3_large' in self.cruiser_model:
-                cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v3_large')(pretrained=False)
-            cruiser_model_pth.classifier[3] = torch.nn.Linear(cruiser_model_pth.classifier[3].in_features, 2)
+                self.cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v3_large')(weights=False)
+            self.cruiser_model_pth.classifier[3] = torch.nn.Linear(self.cruiser_model_pth.classifier[3].in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
 
         elif self.type_cruiser_model == 'ResNet':
             resnet = self.cruiser_model.split('.')[-2].split('_')[-1]
-            cruiser_model_pth = getattr(torchvision.models, resnet)(pretrained=False)
-            cruiser_model_pth.fc = torch.nn.Linear(cruiser_model_pth.fc.in_features, 2)
+            self.cruiser_model_pth = getattr(torchvision.models, resnet)(weights=False)
+            self.cruiser_model_pth.fc = torch.nn.Linear(self.cruiser_model_pth.fc.in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
             # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
 
         elif self.type_cruiser_model == 'InceptionNet':
             if 'v3' in self.cruiser_model:
-                cruiser_model_pth = getattr(torchvision.models, 'inception_v3')(pretrained=False)
-            cruiser_model_pth.fc = torch.nn.Linear(cruiser_model_pth.fc.in_features, 2)
-            if cruiser_model_pth.aux_logits:
-                cruiser_model_pth.AuxLogits.fc = torch.nn.Linear(cruiser_model_pth.AuxLogits.fc.in_features, 2)
-
+                self.cruiser_model_pth = getattr(torchvision.models, 'inception_v3')(weights=False)
+            self.cruiser_model_pth.fc = torch.nn.Linear(self.cruiser_model_pth.fc.in_features, 2)
+            if self.cruiser_model_pth.aux_logits:
+                self.cruiser_model_pth.AuxLogits.fc = torch.nn.Linear(self.cruiser_model_pth.AuxLogits.fc.in_features,
+                                                                      2)
+        print('path of cruiser model: %s' % self.cruiser_model)
+        print('use %s' % self.use_gpu)
         # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-        self.cruiser_model_pth = cruiser_model_pth.load_state_dict(torch.load(self.cruiser_model))
+        self.cruiser_model_pth.load_state_dict(torch.load(self.cruiser_model))
 
-        if self.use_gpu:
+        if self.use_gpu == 'gpu':
             self.device = torch.device('cuda')
-        else:
+            self.cruiser_model_pth.to(self.device)
+            self.cruiser_model_pth.eval().half()
+        elif self.use_gpu == 'cpu':
             self.device = torch.device('cpu')
-        self.cruiser_model_pth = self.cruiser_model_pth.to(self.device)
-        self.cruiser_model_pth = self.cruiser_model_pth.eval().half()
+            self.cruiser_model_pth.to(self.device)
+            self.cruiser_model_pth.eval()
+
         # self.cruiser_model = self.cruiser_model.float()
         # self.cruiser_model = self.cruiser_model.to(self.device, dtype=torch.float)
         # self.cruiser_model = self.cruiser_model.eval()
+
+    def select_gpu(self, change):
+        self.use_gpu = change['new']
 
     # ---- Creating the Pre-Processing Function
     # 1. Convert from HWC layout to CHW layout
@@ -134,8 +143,14 @@ class RoadCruiser(HasTraits):
     # 4. Add a batch dimension
 
     def preprocess_rc(self, image):
-        mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
-        std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
+        mean = None
+        std = None
+        if self.use_gpu == 'gpu':
+            mean = torch.Tensor([0.485, 0.456, 0.406]).to(self.device).half()
+            std = torch.Tensor([0.229, 0.224, 0.225]).to(self.device).half()
+        elif self.use_gpu == 'cpu':
+            mean = torch.Tensor([0.485, 0.456, 0.406]).to(self.device)
+            std = torch.Tensor([0.229, 0.224, 0.225]).to(self.device)
         # mean = torch.Tensor([0.485, 0.456, 0.406]).cuda()
         # std = torch.Tensor([0.229, 0.224, 0.225]).cuda()
         image = PIL.Image.fromarray(image)
@@ -144,8 +159,12 @@ class RoadCruiser(HasTraits):
             image = image.resize((299, 299))
         else:
             image = image.resize((224, 224))
-        image = transforms.functional.to_tensor(image).to(self.device).half()
-        # image = transforms.functional.to_tensor(image).to(self.device)
+
+        if self.use_gpu == 'gpu':
+            image = transforms.functional.to_tensor(image).to(self.device).half()
+        elif self.use_gpu == 'cpu':
+            image = transforms.functional.to_tensor(image).to(self.device)
+
         image.sub_(mean[:, None, None]).div_(std[:, None, None])
         return image[None, ...]
 
@@ -183,7 +202,6 @@ class RoadCruiser(HasTraits):
     def start_rc(self, change):
         # self.execute({'new': self.camera.value})
         self.load_road_cruiser(change)
-        self.capturer.unobserve_all()
         self.capturer.observe(self.execute_rc, names='value')
 
     def stop_rc(self, change):
