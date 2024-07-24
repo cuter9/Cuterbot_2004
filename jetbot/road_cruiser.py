@@ -89,17 +89,17 @@ class RoadCruiser(HasTraits):
     def load_road_cruiser(self, change):
         self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
         # self.type_cruiser_model = self.type_cruiser_model
-        if self.type_cruiser_model == 'mobilenet':
+        if self.type_cruiser_model == 'MobileNet':
             self.cruiser_model.classifier[3] = torch.nn.Linear(self.cruiser_model.classifier[3].in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
 
-        elif self.type_cruiser_model == 'resnet':
+        elif self.type_cruiser_model == 'ResNet':
             self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
             # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
 
-        elif self.type_cruiser_model == 'inception':
+        elif self.type_cruiser_model == 'InceptionNet':
             self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
             if self.cruiser_model.aux_logits:
                 self.cruiser_model.AuxLogits.fc = torch.nn.Linear(self.cruiser_model.AuxLogits.fc.in_features, 2)
