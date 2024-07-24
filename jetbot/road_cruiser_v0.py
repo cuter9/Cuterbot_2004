@@ -7,7 +7,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import traitlets
-from traitlets import HasTraits, Float, Unicode, Bool
+from traitlets import HasTraits, Float, Unicode
 # import torchvision.models as models
 
 from jetbot import Camera
@@ -15,6 +15,7 @@ from jetbot import Robot
 
 
 class RoadCruiser(HasTraits):
+
     cruiser_model = Unicode(default_value='').tag(config=True)
     type_cruiser_model = Unicode(default_value='').tag(config=True)
     speed_gain = Float(default_value=0.15).tag(config=True)
@@ -25,13 +26,9 @@ class RoadCruiser(HasTraits):
     x_slider = Float(default_value=0).tag(config=True)
     y_slider = Float(default_value=0).tag(config=True)
     speed = Float(default_value=0).tag(config=True)
-    use_gpu = Bool(default_value=True).tag(config=True)
 
-    def __init__(self, init_sensor_rc=False):
+    def __init__(self, cruiser_model='resnet18', type_cruiser_model='resnet'):
         super().__init__()
-
-
-        '''
         self.cruiser_model_str = cruiser_model
         self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
         self.type_cruiser_model = type_cruiser_model
@@ -49,21 +46,18 @@ class RoadCruiser(HasTraits):
             self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
             if self.cruiser_model.aux_logits:
                 self.cruiser_model.AuxLogits.fc = torch.nn.Linear(self.cruiser_model.AuxLogits.fc.in_features, 2)
-
+        
         self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-        '''
 
-        if init_sensor_rc:
-            self.capturer = Camera()
-            self.robot = Robot.instance()
+        self.camera = Camera()
+        self.robot = Robot.instance()
         # self.robot = Robot()
         self.angle = 0.0
         self.angle_last = 0.0
+        self.execution_time = []
         # self.fps = []
         self.x_slider = 0
         self.y_slider = 0
-
-        self.execution_time_rc = []
 
         # model = torchvision.models.mobilenet_v3_large(pretrained=False)
         # model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 2)
@@ -76,41 +70,8 @@ class RoadCruiser(HasTraits):
         # model.load_state_dict(torch.load('best_steering_model_xy_resnet18.pth'))
         # model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
         # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
-        self.device = None
-        '''
+
         self.device = torch.device('cuda')
-        self.cruiser_model = self.cruiser_model.to(self.device)
-        self.cruiser_model = self.cruiser_model.eval().half()
-        '''
-        # self.cruiser_model = self.cruiser_model.float()
-        # self.cruiser_model = self.cruiser_model.to(self.device, dtype=torch.float)
-        # self.cruiser_model = self.cruiser_model.eval()
-
-    def load_road_cruiser(self, change):
-        self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
-        # self.type_cruiser_model = self.type_cruiser_model
-        if self.type_cruiser_model == 'mobilenet':
-            self.cruiser_model.classifier[3] = torch.nn.Linear(self.cruiser_model.classifier[3].in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-
-        elif self.type_cruiser_model == 'resnet':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
-            # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
-
-        elif self.type_cruiser_model == 'inception':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
-            if self.cruiser_model.aux_logits:
-                self.cruiser_model.AuxLogits.fc = torch.nn.Linear(self.cruiser_model.AuxLogits.fc.in_features, 2)
-
-        # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-        self.cruiser_model.load_state_dict(torch.load(self.cruiser_model))
-
-        if self.use_gpu:
-            self.device = torch.device('cuda')
-        else:
-            self.device = torch.device('cpu')
         self.cruiser_model = self.cruiser_model.to(self.device)
         self.cruiser_model = self.cruiser_model.eval().half()
         # self.cruiser_model = self.cruiser_model.float()
@@ -123,7 +84,7 @@ class RoadCruiser(HasTraits):
     # 3. Transfer the data from CPU memory to GPU memory
     # 4. Add a batch dimension
 
-    def preprocess_rc(self, image):
+    def preprocess(self, image):
         mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
         std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
         # mean = torch.Tensor([0.485, 0.456, 0.406]).cuda()
@@ -139,11 +100,11 @@ class RoadCruiser(HasTraits):
         image.sub_(mean[:, None, None]).div_(std[:, None, None])
         return image[None, ...]
 
-    def execute_rc(self, change):
+    def execute(self, change):
         start_time = time.process_time()
         # global angle, angle_last
         image = change['new']
-        xy = self.cruiser_model(self.preprocess_rc(image)).detach().float().cpu().numpy().flatten()
+        xy = self.cruiser_model(self.preprocess(image)).detach().float().cpu().numpy().flatten()
         x = xy[0]
         # y = (0.5 - xy[1]) / 2.0
         y = (1 + xy[1])
@@ -166,28 +127,25 @@ class RoadCruiser(HasTraits):
 
         end_time = time.process_time()
         # self.execution_time.append(end_time - start_time + self.camera.cap_time)
-        self.execution_time_rc.append(end_time - start_time)
+        self.execution_time.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
 
     # We accomplish that with the observe function.
-    def start_rc(self, change):
+    def start_cruising(self):
         # self.execute({'new': self.camera.value})
-        self.load_road_cruiser(change)
-        self.capturer.unobserve_all()
-        self.capturer.observe(self.execute_rc, names='value')
+        self.camera.observe(self.execute, names='value')
 
-    def stop_rc(self, change):
+    def stop_cruising(self, b):
         import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         # self.camera.unobserve(self.execute, names='value')
-        self.capturer.unobserve_all()
+        self.camera.unobserve_all()
         time.sleep(1.0)
         self.robot.stop()
-        self.capturer.stop()
+        self.camera.stop()
 
-        # plot execution time of road cruiser model processing
+        # plot exection time of road cruiser model processing
         model_name = "road cruiser model"
-        cruiser_model_str = self.cruiser_model.split("/")[-1].split('.')[0]
-        plot_exec_time(self.execution_time_rc[1:], model_name, cruiser_model_str)
+        plot_exec_time(self.execution_time[1:], model_name, self.cruiser_model_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.cruiser_model_str)
         plt.show()
