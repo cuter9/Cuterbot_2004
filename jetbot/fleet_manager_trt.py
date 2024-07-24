@@ -82,16 +82,6 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
 
     def __init__(self, init_sensor_fm=False):
 
-        # self.follower_model = 'ssd_mobilenet_v2_coco_onnx.engine'
-        # self.type_follower_model = "SSD"
-        # self.conf_th = 0.5
-        # self.object_detector = object
-
-        # self.cruiser_model = 'resnet18'
-        # self.type_cruiser_model = 'resnet'
-        # self.road_cruiser = object
-
-        # self.robot = self.road_cruiser.robot
         # the parent classes (ObjectFollower, RoadCruiserTRT) may revisit during initialization,
         # causing the  re-instantiation error of camera and robot motor,
         # which should be avoided when design the parent classes
