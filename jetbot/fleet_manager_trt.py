@@ -80,7 +80,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
     # is_detecting = Bool(default_value=True).tag(config=True)
     is_detected = Bool(default_value=False).tag(config=True)
 
-    def __init__(self, init_sensor_fm=True):
+    def __init__(self, init_sensor_fm=False):
 
         # self.follower_model = 'ssd_mobilenet_v2_coco_onnx.engine'
         # self.type_follower_model = "SSD"
@@ -92,6 +92,9 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # self.road_cruiser = object
 
         # self.robot = self.road_cruiser.robot
+        # the parent classes (ObjectFollower, RoadCruiserTRT) may revisit during initialization,
+        # causing the  re-instantiation error of camera and robot motor,
+        # which should be avoided when design the parent classes
         ObjectFollower.__init__(self, init_sensor_of=False)
         RoadCruiserTRT.__init__(self, init_sensor_rc=False)
 
@@ -103,6 +106,8 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.is_detected = False
         self.is_loaded = False
 
+        self.robot = None
+        self.capturer = None
         if init_sensor_fm:
             self.robot = Robot.instance()
             # ObjectFollower.robot = Robot.instance()
@@ -113,10 +118,10 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
             # RoadCruiserTRT.camera = self.capturer
 
             # self.capturer = self.road_cruiser.camera
-        self.img_width = self.capturer.width
-        self.img_height = self.capturer.height
-        self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
-        self.current_image = np.empty((self.img_height, self.img_width, 3))
+            self.img_width = self.capturer.width
+            self.img_height = self.capturer.height
+            self.cap_image = np.empty(shape=(self.img_height, self.img_width, 3), dtype=np.uint8).tobytes()
+            self.current_image = np.empty((self.img_height, self.img_width, 3))
 
         self.default_speed = self.speed_fm
         self.detect_duration_max = 10

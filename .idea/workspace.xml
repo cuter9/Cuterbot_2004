@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update" />
+    <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/test/test_inheritance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/fleet_manager_trt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/object_follower.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/object_follower.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser_trt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/fleet_management/live_demo_trt.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light_trt.ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,33 +53,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.jetbot_states.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_selection.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stats.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.test_fm_function.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_fpn.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.test_yolo_v7.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/jetbot&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests in test_inheritance.py.executor": "Run",
+    "Python.jetbot_states.executor": "Run",
+    "Python.model_selection.executor": "Run",
+    "Python.stats.executor": "Debug",
+    "Python.test_fm_function.executor": "Run",
+    "Python.test_fpn.executor": "Run",
+    "Python.test_inheritance.executor": "Debug",
+    "Python.test_yolo_v7.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/test/test_inheritance.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\jetbot" />
@@ -79,7 +90,7 @@
       <recent name="F:\Courses\Course_Demos\NTUC\AI_Lecture_Demos\Cuterbot_2004\docker\nv_docker_settings" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.jetbot_states">
+  <component name="RunManager" selected="Python.test_inheritance">
     <configuration name="jetbot_states" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Cuterbot_WS" />
       <option name="ENV_FILES" value="" />
@@ -153,6 +164,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_inheritance" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Cuterbot_2004" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DISPLAY" value="localhost:10.0" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test_inheritance.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test_yolo_v7" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Cuterbot_2004" />
       <option name="ENV_FILES" value="" />
@@ -183,6 +219,7 @@
       <item itemvalue="Python.test_fm_function" />
       <item itemvalue="Python.test_fpn" />
       <item itemvalue="Python.test_yolo_v7" />
+      <item itemvalue="Python.test_inheritance" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -298,14 +335,12 @@
       <workItem from="1721469208776" duration="301000" />
       <workItem from="1721469626385" duration="6041000" />
       <workItem from="1721572681974" duration="2824000" />
-    </task>
-    <task id="LOCAL-00089" summary="update">
-      <option name="closed" value="true" />
-      <created>1721065425483</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1721065425483</updated>
+      <workItem from="1721575640965" duration="197000" />
+      <workItem from="1721789968099" duration="1066000" />
+      <workItem from="1721791046018" duration="636000" />
+      <workItem from="1721791688214" duration="159000" />
+      <workItem from="1721791851685" duration="196000" />
+      <workItem from="1721792556645" duration="15872000" />
     </task>
     <task id="LOCAL-00090" summary="update">
       <option name="closed" value="true" />
@@ -691,7 +726,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721575553639</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="update">
+      <option name="closed" value="true" />
+      <created>1721575823951</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1721575823951</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -716,12 +759,25 @@
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test/test_inheritance.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fpn.coverage" NAME="test_fpn Coverage Results" MODIFIED="1720358691636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fpn.coverage" NAME="test_fpn Coverage Results" MODIFIED="1721803031703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$stats.coverage" NAME="stats Coverage Results" MODIFIED="1713851089294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/apps" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$jetbot_states.coverage" NAME="jetbot_states Coverage Results" MODIFIED="1714499009096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_yolo_v7.coverage" NAME="test_yolo_v7 Coverage Results" MODIFIED="1720342343965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$.coverage" NAME=" Coverage Results" MODIFIED="1721791715416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$test_fm_function.coverage" NAME="test_fm_function Coverage Results" MODIFIED="1720364050161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Cuterbot_2004$test_inheritance.coverage" NAME="test_inheritance Coverage Results" MODIFIED="1721814926708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Cuterbot_2004$model_selection.coverage" NAME="model_selection Coverage Results" MODIFIED="1721229101527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jetbot/utils" />
   </component>
 </project>

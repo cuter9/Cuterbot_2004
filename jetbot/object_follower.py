@@ -73,7 +73,7 @@ class ObjectFollower(ObjectDetector):
     blocked = traitlets.Float(default_value=0).tag(config=True)
     is_detecting = traitlets.Bool(default_value=True).tag(config=True)
 
-    def __init__(self, init_sensor_of=True):
+    def __init__(self, init_sensor_of=False):
 
         super().__init__()
         self.detections = None
@@ -83,6 +83,8 @@ class ObjectFollower(ObjectDetector):
         self.speed_of = self.speed_gain_of
         # self.is_detecting = True
 
+        self.robot = None
+        self.capturer = None
         if init_sensor_of:
             self.robot = Robot.instance()
             # Camera instance would be better to put after all models instantiation

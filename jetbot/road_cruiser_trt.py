@@ -28,11 +28,13 @@ class RoadCruiserTRT(HasTraits):
     x_slider = Float(default_value=0).tag(config=True)
     y_slider = Float(default_value=0).tag(config=True)
 
-    def __init__(self, init_sensor_rc=True):
+    def __init__(self, init_sensor_rc=False):
         super().__init__()
 
         self.trt_model_rc = TRTModule()
 
+        self.robot = None
+        self.capturer = None
         if init_sensor_rc:
             self.capturer = Camera()
             self.robot = Robot.instance()
