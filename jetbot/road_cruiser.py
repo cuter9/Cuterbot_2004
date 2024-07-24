@@ -30,7 +30,7 @@ class RoadCruiser(HasTraits):
     def __init__(self, init_sensor_rc=False):
         super().__init__()
 
-
+        self.cruiser_model_pth = None
         '''
         self.cruiser_model_str = cruiser_model
         self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
@@ -87,32 +87,42 @@ class RoadCruiser(HasTraits):
         # self.cruiser_model = self.cruiser_model.eval()
 
     def load_road_cruiser(self, change):
-        self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
+        # self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
+        cruiser_model_pth = None
         # self.type_cruiser_model = self.type_cruiser_model
         if self.type_cruiser_model == 'MobileNet':
-            self.cruiser_model.classifier[3] = torch.nn.Linear(self.cruiser_model.classifier[3].in_features, 2)
+            # ver = self.cruiser_model.split('.')[-2].split('_')[-1]
+            if 'v2' in self.cruiser_model:
+                cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v2')(pretrained=False)
+            elif 'v3_large' in self.cruiser_model:
+                cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v3_large')(pretrained=False)
+            cruiser_model_pth.classifier[3] = torch.nn.Linear(cruiser_model_pth.classifier[3].in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
 
         elif self.type_cruiser_model == 'ResNet':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
+            resnet = self.cruiser_model.split('.')[-2].split('_')[-1]
+            cruiser_model_pth = getattr(torchvision.models, resnet)(pretrained=False)
+            cruiser_model_pth.fc = torch.nn.Linear(cruiser_model_pth.fc.in_features, 2)
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
             # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
             # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
 
         elif self.type_cruiser_model == 'InceptionNet':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
-            if self.cruiser_model.aux_logits:
-                self.cruiser_model.AuxLogits.fc = torch.nn.Linear(self.cruiser_model.AuxLogits.fc.in_features, 2)
+            if 'v3' in self.cruiser_model:
+                cruiser_model_pth = getattr(torchvision.models, 'inception_v3')(pretrained=False)
+            cruiser_model_pth.fc = torch.nn.Linear(cruiser_model_pth.fc.in_features, 2)
+            if cruiser_model_pth.aux_logits:
+                cruiser_model_pth.AuxLogits.fc = torch.nn.Linear(cruiser_model_pth.AuxLogits.fc.in_features, 2)
 
         # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-        self.cruiser_model.load_state_dict(torch.load(self.cruiser_model))
+        self.cruiser_model_pth = cruiser_model_pth.load_state_dict(torch.load(self.cruiser_model))
 
         if self.use_gpu:
             self.device = torch.device('cuda')
         else:
             self.device = torch.device('cpu')
-        self.cruiser_model = self.cruiser_model.to(self.device)
-        self.cruiser_model = self.cruiser_model.eval().half()
+        self.cruiser_model_pth = self.cruiser_model_pth.to(self.device)
+        self.cruiser_model_pth = self.cruiser_model_pth.eval().half()
         # self.cruiser_model = self.cruiser_model.float()
         # self.cruiser_model = self.cruiser_model.to(self.device, dtype=torch.float)
         # self.cruiser_model = self.cruiser_model.eval()
@@ -143,7 +153,7 @@ class RoadCruiser(HasTraits):
         start_time = time.process_time()
         # global angle, angle_last
         image = change['new']
-        xy = self.cruiser_model(self.preprocess_rc(image)).detach().float().cpu().numpy().flatten()
+        xy = self.cruiser_model_pth(self.preprocess_rc(image)).detach().float().cpu().numpy().flatten()
         x = xy[0]
         # y = (0.5 - xy[1]) / 2.0
         y = (1 + xy[1])

@@ -19,7 +19,7 @@ class model_selection(HasTraits):
     selected_model_path = Unicode(default_value='').tag(config=True)
     is_selected = Bool(default_value=False).tag(config=True)
 
-    def __init__(self, core_library):
+    def __init__(self, core_library='TensorRT'):
         super().__init__()
 
         self.core_library = core_library
