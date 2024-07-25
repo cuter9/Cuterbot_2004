@@ -15,14 +15,13 @@ from jetbot import Robot
 
 
 def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
-
     if pretrained:
         model = getattr(pth_models, pth_model_name)()
     else:
         model = getattr(pth_models, pth_model_name)(weights=False)
     # ----- modify last layer for classification, and the model used in notebook should be modified too.
 
-    if pth_model_name == 'mobilenet_v3_large':  # MobileNet
+    if 'mobilenet_v3_large' in pth_model_name:  # MobileNet
         model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features,
                                               2)  # for mobilenet_v3 model. must add the block expansion factor 4
 
@@ -39,7 +38,7 @@ def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
                                    2)  # for resnet model must add the block expansion factor 4
         # model.fc = torch.nn.Linear(512, 2)
 
-    elif pth_model_name == 'inception_v3':  # Inception_v3
+    elif 'inception_v3' in pth_model_name:  # Inception_v3
         model.fc = torch.nn.Linear(model.fc.in_features, 2)
         if model.aux_logits:
             model.AuxLogits.fc = torch.nn.Linear(model.AuxLogits.fc.in_features, 2)
@@ -193,4 +192,3 @@ class RoadCruiser(HasTraits):
         plot_exec_time(self.execution_time_rc[1:], model_name, cruiser_model_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.cruiser_model_str)
         plt.show()
-
