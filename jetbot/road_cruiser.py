@@ -21,7 +21,7 @@ def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
         model = getattr(pth_models, pth_model_name)(weights=False)
     # ----- modify last layer for classification, and the model used in notebook should be modified too.
 
-    if 'mobilenet_v3_large' in pth_model_name:  # MobileNet
+    if pth_model_name == 'mobilenet_v3_large':  # MobileNet
         model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features,
                                               2)  # for mobilenet_v3 model. must add the block expansion factor 4
 
@@ -38,7 +38,7 @@ def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
                                    2)  # for resnet model must add the block expansion factor 4
         # model.fc = torch.nn.Linear(512, 2)
 
-    elif 'inception_v3' in pth_model_name:  # Inception_v3
+    elif pth_model_name == 'inception_v3':  # Inception_v3
         model.fc = torch.nn.Linear(model.fc.in_features, 2)
         if model.aux_logits:
             model.AuxLogits.fc = torch.nn.Linear(model.AuxLogits.fc.in_features, 2)
@@ -81,7 +81,7 @@ class RoadCruiser(HasTraits):
     def load_road_cruiser(self, change):
         # The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
         self.cruiser_model_pth = None
-        pth_model_name = self.cruiser_model.split('/')[-1].split('.')[0].split('_', 4)[-1]
+        pth_model_name = self.cruiser_model.split('/')[-1].split('.')[0].split('_', 4)[-1].split('-')[0]
         print('pytorch model name: %s' % pth_model_name)
         self.cruiser_model_pth = load_tune_pth_model(pth_model_name=pth_model_name, pretrained=False)
 
