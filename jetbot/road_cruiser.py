@@ -64,27 +64,6 @@ class RoadCruiser(HasTraits):
         super().__init__()
 
         self.cruiser_model_pth = None
-        '''
-        self.cruiser_model_str = cruiser_model
-        self.cruiser_model = getattr(torchvision.models, cruiser_model)(pretrained=False)
-        self.type_cruiser_model = type_cruiser_model
-        if self.type_cruiser_model == 'mobilenet':
-            self.cruiser_model.classifier[3] = torch.nn.Linear(self.cruiser_model.classifier[3].in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-
-        elif self.type_cruiser_model == 'resnet':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
-            # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
-
-        elif self.type_cruiser_model == 'inception':
-            self.cruiser_model.fc = torch.nn.Linear(self.cruiser_model.fc.in_features, 2)
-            if self.cruiser_model.aux_logits:
-                self.cruiser_model.AuxLogits.fc = torch.nn.Linear(self.cruiser_model.AuxLogits.fc.in_features, 2)
-
-        self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-        '''
 
         if init_sensor_rc:
             self.capturer = Camera()
@@ -98,62 +77,14 @@ class RoadCruiser(HasTraits):
 
         self.execution_time_rc = []
         self.observe(self.select_gpu, names=['use_gpu'])
-        # model = torchvision.models.mobilenet_v3_large(pretrained=False)
-        # model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 2)
-
-        # model = torchvision.models.resnet18(pretrained=False)
-        # model = torchvision.models.resnet34(pretrained=False)
-        # model = torchvision.models.resnet50(pretrained=False)
-        # model.fc = torch.nn.Linear(model.fc.in_features, 2)
-        # model.load_state_dict(torch.load('best_steering_model_xy_mobilenet_v3_large.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet18.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
-        # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
         self.device = None
-        '''
-        self.device = torch.device('cuda')
-        self.cruiser_model = self.cruiser_model.to(self.device)
-        self.cruiser_model = self.cruiser_model.eval().half()
-        '''
-        # self.cruiser_model = self.cruiser_model.float()
-        # self.cruiser_model = self.cruiser_model.to(self.device, dtype=torch.float)
-        # self.cruiser_model = self.cruiser_model.eval()
 
     def load_road_cruiser(self, change):
-        # self.cruiser_model = getattr(torchvision.models, self.cruiser_model)(pretrained=False)
-        # self.type_cruiser_model = self.type_cruiser_model
         # The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
         self.cruiser_model_pth = None
         pth_model_name = self.cruiser_model.split('/')[-1].split('.')[0].split('_', 4)[-1]
         print('pytorch model name: %s' % pth_model_name)
         self.cruiser_model_pth = load_tune_pth_model(pth_model_name=pth_model_name, pretrained=False)
-
-        '''
-        if self.type_cruiser_model == 'MobileNet':
-            # ver = self.cruiser_model.split('.')[-2].split('_')[-1]
-            if 'v2' in self.cruiser_model:
-                self.cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v2')(weights=False)
-            elif 'v3_large' in self.cruiser_model:
-                self.cruiser_model_pth = getattr(torchvision.models, 'mobilenet_v3_large')(weights=False)
-            self.cruiser_model_pth.classifier[3] = torch.nn.Linear(self.cruiser_model_pth.classifier[3].in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-
-        elif self.type_cruiser_model == 'ResNet':
-            resnet = self.cruiser_model.split('.')[-2].split('_')[-1]
-            self.cruiser_model_pth = getattr(torchvision.models, resnet)(weights=False)
-            self.cruiser_model_pth.fc = torch.nn.Linear(self.cruiser_model_pth.fc.in_features, 2)
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_' + cruiser_model + '.pth'))
-            # self.cruiser_model.load_state_dict(torch.load('best_steering_model_xy_resnet34.pth'))
-            # model.load_state_dict(torch.load('best_steering_model_xy_resnet50.pth'))
-
-        elif self.type_cruiser_model == 'InceptionNet':
-            if 'v3' in self.cruiser_model:
-                self.cruiser_model_pth = getattr(torchvision.models, 'inception_v3')(weights=False)
-            self.cruiser_model_pth.fc = torch.nn.Linear(self.cruiser_model_pth.fc.in_features, 2)
-            if self.cruiser_model_pth.aux_logits:
-                self.cruiser_model_pth.AuxLogits.fc = torch.nn.Linear(self.cruiser_model_pth.AuxLogits.fc.in_features,
-                                                                      2)
-        '''
 
         print('path of cruiser model: %s' % self.cruiser_model)
         print('use %s' % self.use_gpu)
