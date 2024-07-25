@@ -11,23 +11,27 @@ matplotlib.use("TkAgg")
 # dir_training_records = os.path.join(dir_depo, 'training records', TRAIN_MODEL)
 # os.makedirs(dir_training_records, exist_ok=True)
 
-fig_1, ax_1 = plt.subplots(figsize=(12, 9))
-font = {'weight': 'normal', 'size': 12}
+fig_1, ax_1 = plt.subplots(figsize=(16, 8))
+font = {'weight': 'normal', 'size': 18}
+font_title = {'fontweight': 'demibold', 'fontsize': 24}
 
 
+# plot the training convergence profile
 def plot_loss(loss_data, best_loss, no_epoch, dir_training_records, train_model, train_method):
     plt.cla()
+    plt.tick_params(axis='both', labelsize='large')
     epochs = range(len(loss_data))
     ld_train = [ld[0] for ld in loss_data]
     ld_test = [ld[1] for ld in loss_data]
-    ax_1.semilogy(epochs, ld_train, "r-", linewidth=1.0, label="Training Loss: {:.4E}".format(ld_train[-1]))
-    ax_1.semilogy(epochs, ld_test, 'bs--', linewidth=1.0, label="Test Loss: {:.4E}".format(ld_test[-1]))
-
+    ax_1.semilogy(epochs, ld_train, "r-", linewidth=2.0, label="Training Loss: {:.4E}".format(ld_train[-1]))
+    ax_1.semilogy(epochs, ld_test, 'bs--', linewidth=2.0, label="Test Loss: {:.4E}".format(ld_test[-1]))
     ax_1.set_xlim(0, int(epochs[-1] * 1.1) + 1)
     xlim = epochs[-1] + 2
     ax_1.set_xlim(0, xlim)
-    plt.legend()
-    plt.title("Training convergence plot -- {:s} \n current best test loss : {:.4f}".format(train_model, best_loss))
+
+    plt.legend(fontsize='x-large')
+    plt.title("Training convergence plot -- {:s} \n current best test loss : {:.4f}".format(train_model, best_loss),
+              fontdict=font_title)
     plt.xlabel('epoch', fontdict=font)
     plt.ylabel('loss', fontdict=font)
 
@@ -42,6 +46,7 @@ def plot_loss(loss_data, best_loss, no_epoch, dir_training_records, train_model,
     # display(fig_1)
 
 
+# plot the statistical histogram of learning time in terms of epoch and sample
 def lt_plot(lt_epoch, lt_sample, dir_training_records, train_model, train_method):
     # ----- training time statistics in terms of epoch
     learning_time_epoch = np.array(lt_epoch)
@@ -61,14 +66,18 @@ def lt_plot(lt_epoch, lt_sample, dir_training_records, train_model, train_method
         "mean learning time per sample: {:.3f} s, maximum sample learning time: {:.3f} s, minimum sample learning time: {:.3f} s".
         format(mean_lt_sample, max_lt_sample, min_lt_sample))
 
-    fig_2, axh = plt.subplots(1, 2, figsize=(10, 4))
-    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model))
-    axh[0].set_ylabel('no. of epoch')
-    axh[0].set_xlabel('time of training in an epoch , sec.')
+    fig_2, axh = plt.subplots(1, 2, figsize=(16, 8))
+    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model), fontdict=font_title)
+    axh[0].set_ylabel('no. of epoch', fontdict=font)
+    axh[0].set_xlabel('time of training in an epoch , sec.', fontdict=font)
     axh[0].hist(learning_time_epoch)
-    axh[1].set_ylabel('no. of sample')
-    axh[1].set_xlabel('time for training a sample , sec.')
+    axh[0].tick_params(axis='both', labelsize='large')
+
+    axh[1].set_ylabel('no. of sample', fontdict=font)
+    axh[1].set_xlabel('time for training a sample , sec.', fontdict=font)
     axh[1].hist(learning_time_sample, bins=(0.01 * np.array(list(range(101)))).tolist())
+    axh[1].tick_params(axis='both', labelsize='large')
+
     plt.show(block=False)
     training_time_file = os.path.join(dir_training_records,
                                       "Training_time_Model_{:s}_Training_Method_{:s})".
