@@ -12,6 +12,7 @@ matplotlib.use("TkAgg")
 # os.makedirs(dir_training_records, exist_ok=True)
 
 fig_1, ax_1 = plt.subplots(figsize=(16, 8))
+
 font = {'fontweight': 'normal', 'fontsize': 18}
 font_title = {'fontweight': 'semibold', 'fontsize': 24}
 
@@ -71,13 +72,15 @@ def lt_plot(lt_epoch, lt_sample, dir_training_records, train_model, train_method
     axh[0].set_ylabel('no. of epoch', fontdict=font)
     axh[0].set_xlabel('time of training in an epoch , sec.', fontdict=font)
     axh[0].hist(learning_time_epoch)
-    axh[0].tick_params(axis='both', labelsize='large')
+    # axh[0].tick_params(axis='both', labelsize='large')
 
     axh[1].set_ylabel('no. of sample', fontdict=font)
     axh[1].set_xlabel('time for training a sample , sec.', fontdict=font)
     axh[1].hist(learning_time_sample, bins=(0.01 * np.array(list(range(101)))).tolist())
-    axh[1].tick_params(axis='both', labelsize='large')
+    # axh[1].tick_params(axis='both', labelsize='large')
 
+    fig_2.canvas.draw()
+    fig_2.canvas.flush_events()
     plt.show(block=False)
     training_time_file = os.path.join(dir_training_records,
                                       "Training_time_Model_{:s}_Training_Method_{:s})".
