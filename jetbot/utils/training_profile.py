@@ -11,8 +11,8 @@ matplotlib.use("TkAgg")
 # dir_training_records = os.path.join(dir_depo, 'training records', TRAIN_MODEL)
 # os.makedirs(dir_training_records, exist_ok=True)
 
-fig_1, ax_1 = plt.subplots(figsize=(8, 4))
-font = {'weight': 'normal', 'size': 10}
+fig_1, ax_1 = plt.subplots(figsize=(12, 9))
+font = {'weight': 'normal', 'size': 12}
 
 
 def plot_loss(loss_data, best_loss, no_epoch, dir_training_records, train_model, train_method):
