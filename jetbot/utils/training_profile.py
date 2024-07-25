@@ -12,7 +12,7 @@ matplotlib.use("TkAgg")
 # os.makedirs(dir_training_records, exist_ok=True)
 
 fig_1, ax_1 = plt.subplots(figsize=(16, 8))
-font = {'weight': 'normal', 'size': 18}
+font = {'fontweight': 'normal', 'fontsize': 18}
 font_title = {'fontweight': 'demibold', 'fontsize': 24}
 
 
