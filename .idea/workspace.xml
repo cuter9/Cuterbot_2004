@@ -7,7 +7,8 @@
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/road_cruiser.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/road_cruiser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/road_following/live_demo_light.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/live_demo_light.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jetbot/utils/model_selection.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/utils/model_selection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,31 +336,8 @@
       <workItem from="1721791046018" duration="636000" />
       <workItem from="1721791688214" duration="159000" />
       <workItem from="1721791851685" duration="196000" />
-      <workItem from="1721792556645" duration="44484000" />
-    </task>
-    <task id="LOCAL-00099" summary="update">
-      <option name="closed" value="true" />
-      <created>1721275324274</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1721275324274</updated>
-    </task>
-    <task id="LOCAL-00100" summary="update">
-      <option name="closed" value="true" />
-      <created>1721276280082</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1721276280083</updated>
-    </task>
-    <task id="LOCAL-00101" summary="update">
-      <option name="closed" value="true" />
-      <created>1721277351276</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1721277351276</updated>
+      <workItem from="1721792556645" duration="44804000" />
+      <workItem from="1721872706081" duration="5638000" />
     </task>
     <task id="LOCAL-00102" summary="update">
       <option name="closed" value="true" />
@@ -729,7 +707,31 @@
       <option name="project" value="LOCAL" />
       <updated>1721831116755</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="update">
+      <option name="closed" value="true" />
+      <created>1721856468562</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1721856468566</updated>
+    </task>
+    <task id="LOCAL-00149" summary="update">
+      <option name="closed" value="true" />
+      <created>1721856565773</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1721856565773</updated>
+    </task>
+    <task id="LOCAL-00150" summary="update">
+      <option name="closed" value="true" />
+      <created>1721856584333</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1721856584333</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,6 +763,11 @@
           <url>file://$PROJECT_DIR$/test/test_inheritance.py</url>
           <line>3</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://F:/Courses/Course_Demos/NTUC/AI_Lecture_Demos/Cuterbot_2004/notebooks/road_following/train_model_PC.ipynb</url>
+          <line>149</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

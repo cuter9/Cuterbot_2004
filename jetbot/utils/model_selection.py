@@ -6,10 +6,11 @@ import numpy as np
 HEAD_LIST = ['model_function', 'model_type', 'model_path']
 MODEL_REPO_DIR = os.path.join(os.environ["HOME"], "model_repo")
 MODEL_REPO_DIR_DOCKER = os.path.join("/workspace", "model_repo")
+os.environ['MODEL_REPO_DIR_DOCKER'] = MODEL_REPO_DIR_DOCKER
+os.environ['MODEL_REPO_DIR'] = MODEL_REPO_DIR
 
 
 class model_selection(HasTraits):
-
     model_function = Unicode(default_value='object detection').tag(config=True)
     model_function_list = List(default_value=[]).tag(config=True)
     model_type = Unicode(default_value='SSD').tag(config=True)
