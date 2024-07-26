@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cuterbot_2004.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jetbot/utils/training_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/utils/training_profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/train_model_PC-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/train_model_PC-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model_PC.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -343,15 +341,7 @@
       <workItem from="1721902411276" duration="142000" />
       <workItem from="1721902606509" duration="1521000" />
       <workItem from="1721904166327" duration="18075000" />
-      <workItem from="1721926051466" duration="5227000" />
-    </task>
-    <task id="LOCAL-00117" summary="update">
-      <option name="closed" value="true" />
-      <created>1721461219732</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1721461219732</updated>
+      <workItem from="1721926051466" duration="8091000" />
     </task>
     <task id="LOCAL-00118" summary="update">
       <option name="closed" value="true" />
@@ -737,7 +727,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721929449087</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="update">
+      <option name="closed" value="true" />
+      <created>1721957490631</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1721957490631</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
