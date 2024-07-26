@@ -7,7 +7,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.use("TkAgg")
-
+plt.ion()
 # dir_training_records = os.path.join(dir_depo, 'training records', TRAIN_MODEL)
 # os.makedirs(dir_training_records, exist_ok=True)
 
