@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jetbot/utils/training_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/jetbot/utils/training_profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/train_model-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/.ipynb_checkpoints/train_model-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/road_following/train_model.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/train_model.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/road_following/test_trt_model.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/road_following/test_trt_model.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,15 +339,8 @@
       <workItem from="1721902411276" duration="142000" />
       <workItem from="1721902606509" duration="1521000" />
       <workItem from="1721904166327" duration="18075000" />
-      <workItem from="1721926051466" duration="17772000" />
-    </task>
-    <task id="LOCAL-00126" summary="update">
-      <option name="closed" value="true" />
-      <created>1721469989809</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1721469989809</updated>
+      <workItem from="1721926051466" duration="17801000" />
+      <workItem from="1721974899788" duration="123000" />
     </task>
     <task id="LOCAL-00127" summary="update">
       <option name="closed" value="true" />
@@ -735,7 +726,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721970283504</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="update">
+      <option name="closed" value="true" />
+      <created>1721971543368</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1721971543368</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
