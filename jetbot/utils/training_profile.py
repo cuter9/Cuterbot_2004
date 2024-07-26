@@ -7,7 +7,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.use("TkAgg")
-plt.ion()
+
 # dir_training_records = os.path.join(dir_depo, 'training records', TRAIN_MODEL)
 # os.makedirs(dir_training_records, exist_ok=True)
 
@@ -68,7 +68,7 @@ def lt_plot(lt_epoch, lt_sample, dir_training_records, train_model, train_method
         format(mean_lt_sample, max_lt_sample, min_lt_sample))
 
     fig_2, axh = plt.subplots(1, 2, figsize=(16, 8))
-    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model), fontdict=font_title)
+    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model), fontsize=24, fontweight='semibold')
     axh[0].set_ylabel('no. of epoch', fontdict=font)
     axh[0].set_xlabel('time of training in an epoch , sec.', fontdict=font)
     cf = np.floor(0.9 * min_lt_epoch)
