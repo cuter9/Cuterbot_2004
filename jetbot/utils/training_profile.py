@@ -13,7 +13,7 @@ matplotlib.use("TkAgg")
 
 fig_1, ax_1 = plt.subplots(figsize=(16, 8))
 
-font = {'fontweight': 'normal', 'fontsize': 20}
+font = {'fontweight': 'normal', 'fontsize': 18}
 font_title = {'fontweight': 'medium', 'fontsize': 24}
 
 
