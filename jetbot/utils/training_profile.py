@@ -14,7 +14,7 @@ matplotlib.use("TkAgg")
 fig_1, ax_1 = plt.subplots(figsize=(16, 8))
 
 font = {'fontweight': 'normal', 'fontsize': 18}
-font_title = {'fontweight': 'semibold', 'fontsize': 24}
+font_title = {'fontweight': 'medium', 'fontsize': 24}
 
 
 # plot the training convergence profile
@@ -68,7 +68,7 @@ def lt_plot(lt_epoch, lt_sample, dir_training_records, train_model, train_method
         format(mean_lt_sample, max_lt_sample, min_lt_sample))
 
     fig_2, axh = plt.subplots(1, 2, figsize=(16, 8))
-    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model), fontsize=24, fontweight='semibold')
+    fig_2.suptitle("Training Time Statistics -- {:s}".format(train_model), fontsize=24, fontweight='medium')
     axh[0].set_ylabel('no. of epoch', fontdict=font)
     axh[0].set_xlabel('time of training in an epoch , sec.', fontdict=font)
     cf = np.floor(0.9 * min_lt_epoch)
