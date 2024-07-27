@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/object_following/live_demo.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -347,14 +347,7 @@
       <workItem from="1721974899788" duration="239000" />
       <workItem from="1722018699890" duration="56000" />
       <workItem from="1722047121881" duration="101000" />
-    </task>
-    <task id="LOCAL-00128" summary="update">
-      <option name="closed" value="true" />
-      <created>1721471762518</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1721471762518</updated>
+      <workItem from="1722077444316" duration="147000" />
     </task>
     <task id="LOCAL-00129" summary="update">
       <option name="closed" value="true" />
@@ -740,7 +733,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721975085443</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="update">
+      <option name="closed" value="true" />
+      <created>1722077557559</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1722077557559</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
