@@ -22,6 +22,7 @@ then
 	    -v $WORKSPACE:/workspace \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -v $HOME/.Xauthority:/root/.Xauthority \
+      -v /run/jtop.sock:/run/jtop.sock \
 	    --workdir /workspace \
 	    --name=jetbot_jupyter \
 	    --memory-swap=$JETBOT_JUPYTER_MEMORY_SWAP \

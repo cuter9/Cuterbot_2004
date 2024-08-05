@@ -27,10 +27,7 @@ import torch.nn.functional as F
 import cv2
 import numpy as np
 import traitlets
-import time
 
-# from jetbot import ObjectDetector
-# from jetbot.object_detection_yolo import ObjectDetector_YOLO
 from jetbot import Camera
 from jetbot import Robot
 from jetbot import bgr8_to_jpeg
@@ -144,7 +141,7 @@ class ObjectFollower(ObjectDetector):
 
     def execute_of(self, change):
         # print("start execution !")
-        start_time = time.process_time()
+        start_time = time.time()
 
         self.current_image = change['new']
         # width = self.img_width
@@ -197,7 +194,7 @@ class ObjectFollower(ObjectDetector):
                 float(self.speed_gain_of - self.turn_gain_of * center[0] + self.steering_bias_of)
             )
 
-        end_time = time.process_time()
+        end_time = time.time()
         # self.execution_time.append(end_time - start_time + self.capturer.cap_time)
         self.execution_time_of.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
@@ -209,7 +206,6 @@ class ObjectFollower(ObjectDetector):
         # return self.cap_image
 
     def stop_of(self, change):
-        import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         print("stop running!")
         self.capturer.unobserve_all()
@@ -222,7 +218,7 @@ class ObjectFollower(ObjectDetector):
         model_name_str = self.follower_model.split('/')[-1].split('.')[0]
         plot_exec_time(self.execution_time_of[1:], model_name, model_name_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split('.')[0])
-        plt.show()
+        # plt.show()
 
 
 class Avoider(object):

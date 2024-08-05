@@ -3,11 +3,72 @@ import os
 from traitlets import HasTraits, Unicode, List, Bool
 import numpy as np
 
+import torch
+import torchvision.models as pth_models
+
 HEAD_LIST = ['model_function', 'model_type', 'model_path']
 MODEL_REPO_DIR = os.path.join(os.environ["HOME"], "model_repo")
 MODEL_REPO_DIR_DOCKER = os.path.join("/workspace", "model_repo")
 os.environ['MODEL_REPO_DIR_DOCKER'] = MODEL_REPO_DIR_DOCKER
 os.environ['MODEL_REPO_DIR'] = MODEL_REPO_DIR
+
+
+def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
+    if pretrained:
+        model = getattr(pth_models, pth_model_name)()  # for fine tuning
+    else:
+        model = getattr(pth_models, pth_model_name)(pretrained=False)  # for inferencig
+    # ----- modify last layer for classification, and the model used in notebook should be modified too.
+
+    if pth_model_name == 'mobilenet_v3_large':  # MobileNet
+        model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features,
+                                              2)  # for mobilenet_v3 model. must add the block expansion factor 4
+        model_type = "MobileNet"
+
+    elif pth_model_name == 'mobilenet_v2':
+        model.classifier[1] = torch.nn.Linear(model.classifier[1].in_features,
+                                              2)  # for mobilenet_v2 model. must add the block expansion factor 4
+        model_type = "MobileNet"
+
+    elif pth_model_name == 'vgg11':  # VGGNet
+        model.classifier[6] = torch.nn.Linear(model.classifier[6].in_features,
+                                              2)  # for VGG model. must add the block expansion factor 4
+        model_type = "VggNet"
+
+    elif 'resnet' in pth_model_name:  # ResNet
+        model.fc = torch.nn.Linear(model.fc.in_features,
+                                   2)  # for resnet model must add the block expansion factor 4
+        # model.fc = torch.nn.Linear(512, 2)
+        model_type = "ResNet"
+
+    elif 'efficientnet' in pth_model_name:  # ResNet
+        model.classifier[1] = torch.nn.Linear(model.classifier[1].in_features, 2)  # for efficientnet model
+        # model.classifier[0].dropout = torch.nn.Dropout(p=dropout)
+        model_type = "EfficientNet"
+
+    elif pth_model_name == 'inception_v3':  # Inception_v3
+        model.fc = torch.nn.Linear(model.fc.in_features, 2)
+        # model.dropout = torch.nn.Dropout(p=dropout)
+        if model.aux_logits:
+            model.AuxLogits.fc = torch.nn.Linear(model.AuxLogits.fc.in_features, 2)
+        model_type = "InceptionNet"
+
+    elif pth_model_name == 'googlenet':  # Inception_v3
+        model.fc = torch.nn.Linear(model.fc.in_features, 2)
+        # model.dropout = torch.nn.Dropout(p=dropout)
+        if model.aux_logits:
+            model.aux1.fc2 = torch.nn.Linear(model.aux1.fc2.in_features, 2)
+            model.aux2.fc2 = torch.nn.Linear(model.aux2.fc2.in_features, 2)
+        #   model.aux1.dropout = torch.nn.Dropout(p=dropout)
+        #   model.aux2.dropout = torch.nn.Dropout(p=dropout)
+        model_type = "GoogleNet"
+
+    elif "densenet" in pth_model_name:  # densenet121, densenet161, densenet169, densenet201
+        model.classifier = torch.nn.Linear(model.classifier.in_features, 2)
+        model_type = "DenseNet"
+    else:
+        model_type = None
+    return model, model_type
 
 
 class model_selection(HasTraits):
@@ -20,19 +81,19 @@ class model_selection(HasTraits):
     selected_model_path = Unicode(default_value='').tag(config=True)
     is_selected = Bool(default_value=False).tag(config=True)
 
-    def __init__(self, core_library='TensorRT'):
+    def __init__(self, core_library='TensorRT', dir_model_repo=MODEL_REPO_DIR_DOCKER):
         super().__init__()
 
         self.core_library = core_library
         if self.core_library == 'TensorRT':
-            self.df = pd.read_csv(os.path.join(MODEL_REPO_DIR_DOCKER, "trt_model_tbl.csv"),
+            self.df = pd.read_csv(os.path.join(dir_model_repo, "trt_model_tbl.csv"),
                                   header=None, names=HEAD_LIST)
         elif self.core_library == 'Pytorch':
-            self.df = pd.read_csv(os.path.join(MODEL_REPO_DIR_DOCKER, "torch_model_tbl.csv"),
+            self.df = pd.read_csv(os.path.join(dir_model_repo, "torch_model_tbl.csv"),
                                   header=None, names=HEAD_LIST)
 
         for p in self.df.values:
-            p[2] = os.path.join(MODEL_REPO_DIR_DOCKER, p[2].split("/", 1)[1])
+            p[2] = os.path.join(dir_model_repo, p[2].split("/", 1)[1])
 
         self.model_function_list = list(self.df["model_function"].astype("category").cat.categories)
         self.update_model_type_list()
@@ -56,7 +117,8 @@ class model_selection(HasTraits):
         mf = self.df[self.df.model_function == self.model_function]  # select the models based on given model function
         mt = mf[mf.model_type == self.model_type]  # select the models from the given model type
         mpl = mt.loc[:, ['model_path']].values
-        self.model_path_list = np.squeeze(mpl).tolist()
+        # self.model_path_list = np.squeeze(mpl).tolist()
+        self.model_path_list = mpl[:, 0].tolist()
         return self.model_path_list
 
     def update_model(self, change):

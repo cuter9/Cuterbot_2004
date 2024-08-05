@@ -21,16 +21,11 @@
 # In[ ]:
 
 from queue import Empty
-import torch.nn.functional as F
 import cv2
 import numpy as np
 import traitlets
-from traitlets import HasTraits, Unicode, Float, Integer, Bool, Any
-import os
-import time
+from traitlets import Float, Bool, Any
 
-# from jetbot import ObjectDetector
-# from jetbot.object_detection_yolo import ObjectDetector_YOLO
 from jetbot import Camera
 from jetbot import Robot
 from jetbot import bgr8_to_jpeg
@@ -121,9 +116,9 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
     def execute_fm(self, change):
 
         # do object following
-        start_time = time.process_time()
+        start_time = time.time()
         self.execute(change)
-        end_time = time.process_time()
+        end_time = time.time()
         # self.execution_time.append(end_time - start_time + self.capturer.cap_time)
         self.execution_time_fm.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
@@ -137,6 +132,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         self.load_object_detector(change)  # load object detector function in object follower module
         self.load_road_cruiser(change)  # load_road_cruiser function in road_cruiser_trt module
         self.capturer.unobserve_all()
+
         print("start running")
         self.capturer.observe(self.execute_fm, names='value')
 
@@ -203,7 +199,6 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
         # return self.cap_image
 
     def stop_fm(self, change):
-        import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         print("start stopping!")
 
@@ -220,7 +215,7 @@ class FleeterTRT(ObjectFollower, RoadCruiserTRT):
 
         # plot execution time of fleet controller model processing
         follower_model_name = "fleet controller model"
-        follower_model_str = self.follower_model.split(".")[0]
+        follower_model_str = self.follower_model.split("/")[-1].split(".")[0]
         plot_exec_time(self.execution_time_fm[1:], follower_model_name, follower_model_str)
         # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.follower_model.split(".")[0])
-        plt.show()
+        # plt.show()

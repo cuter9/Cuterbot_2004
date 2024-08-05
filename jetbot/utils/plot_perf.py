@@ -3,7 +3,9 @@ import matplotlib
 
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-import os
+
+font = {'fontweight': 'normal', 'fontsize': 12}
+font_title = {'fontweight': 'medium', 'fontsize': 18}
 
 
 def plot_exec_time(execution_time, model_name, model_str):
@@ -14,27 +16,30 @@ def plot_exec_time(execution_time, model_name, model_str):
     min_execute_time = np.amin(execute_time)
 
     # fps = np.array(fps)
-    mean_fps = 1/mean_execute_time
-    max_fps = 1/min_execute_time
-    min_fps = 1/max_execute_time
+    mean_fps = 1 / mean_execute_time
+    max_fps = 1 / min_execute_time
+    min_fps = 1 / max_execute_time
 
     print(
         "The execution time statistics of %s  ----- \n     Mean execution time of : %.4f sec.\n     Max execution time : %.4f sec.\n     Min execution time of : %.4f sec. " \
-        % (model_name, mean_execute_time, max_execute_time, min_execute_time))
+        % (model_name, float(mean_execute_time), float(max_execute_time), float(min_execute_time)))
 
     # fig = plt.figure()
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(12, 6))
     # ax = fig.add_subplot()
     nbin = 150
-    sbin = (max_execute_time*1.2 - min_execute_time * 0.8) / nbin
+    sbin = (max_execute_time * 1.2 - min_execute_time * 0.8) / nbin
     ax.hist(execute_time, bins=(np.arange(min_execute_time * 0.8, max_execute_time * 1.2, sbin)).tolist())
     # ax.hist(execute_time, bins=(0.003 * np.array(list(range(151)))).tolist())
-    ax.set_xlabel('processing time, sec.')
-    ax.set_ylabel('No. of processes')
-    ax.set_title('Histogram of processing time of  ' + model_name  + "\n"+ model_str)
+    ax.set_xlabel('processing time, sec.', fontdict=font)
+    ax.set_ylabel('No. of processes', fontdict=font)
+    ax.set_title('Histogram of processing time of  ' + model_name + "\n" + model_str, fontdict=font_title)
     props = dict(boxstyle='round', facecolor='wheat')
     text_str = " mean execution time : %.4f sec. (%.1f FPS)\n max execution time : %.4f sec. (%.1f FPS)\n min execution time : %.4f sec. (%.1f FPS)" \
-        % (mean_execute_time, mean_fps, max_execute_time, min_fps, min_execute_time, max_fps)
-    ax.text(0.5, 0.85, text_str, transform=ax.transAxes, fontsize=10, verticalalignment='top', bbox=props)
-    # plt.show(block=False)
-    
+               % (float(mean_execute_time), float(mean_fps), float(max_execute_time), float(min_fps),
+                  float(min_execute_time), float(max_fps))
+    ax.text(0.55, 0.85, text_str, transform=ax.transAxes, fontsize=12, verticalalignment='top', bbox=props)
+
+    fig.canvas.draw()
+    fig.canvas.flush_events()
+    plt.show(block=False)

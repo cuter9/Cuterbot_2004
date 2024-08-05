@@ -1,15 +1,10 @@
-import os
 import time
-
 import PIL.Image
 
 import numpy as np
 import torch
-import torchvision
 import torchvision.transforms as transforms
-import traitlets
 from traitlets import HasTraits, Unicode, Float
-# import torchvision.models as models
 from torch2trt import TRTModule
 
 from jetbot import Camera
@@ -86,8 +81,8 @@ class RoadCruiserTRT(HasTraits):
         return image[None, ...]
 
     def execute_rc(self, change):
-        start_time = time.process_time()
-        # global angle, angle_last
+        start_time = time.time()
+
         image = change['new']
         xy = self.trt_model_rc(self.preprocess_rc(image)).detach().float().cpu().numpy().flatten()
         x = xy[0]
@@ -110,7 +105,7 @@ class RoadCruiserTRT(HasTraits):
         self.robot.left_motor.value = max(min(self.speed_gain_rc + self.steering_rc, 1.0), 0.0)
         self.robot.right_motor.value = max(min(self.speed_gain_rc - self.steering_rc, 1.0), 0.0)
 
-        end_time = time.process_time()
+        end_time = time.time()
         # self.execution_time.append(end_time - start_time + self.camera.cap_time)
         self.execution_time_rc.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
@@ -122,9 +117,7 @@ class RoadCruiserTRT(HasTraits):
         self.capturer.observe(self.execute_rc, names='value')
 
     def stop_rc(self, change):
-        import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
-        # self.camera.unobserve(self.execute, names='value')
         self.capturer.unobserve_all()
         time.sleep(1.0)
         self.robot.stop()
@@ -134,5 +127,4 @@ class RoadCruiserTRT(HasTraits):
         model_name = 'road cruiser model'
         cruiser_model_name = self.cruiser_model.split("/")[-1].split('.')[0]
         plot_exec_time(self.execution_time_rc[1:], model_name, cruiser_model_name)
-        # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.cruiser_model_str)
-        plt.show()
+        # plt.show()

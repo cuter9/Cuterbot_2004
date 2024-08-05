@@ -4,64 +4,31 @@ import PIL.Image
 
 import numpy as np
 import torch
-import torchvision
 import torchvision.transforms as transforms
-import traitlets
 from traitlets import HasTraits, Float, Unicode
-import torchvision.models as pth_models
 
 from jetbot import Camera
 from jetbot import Robot
-
-
-def load_tune_pth_model(pth_model_name="resnet18", pretrained=True):
-    if pretrained:
-        model = getattr(pth_models, pth_model_name)()
-    else:
-        model = getattr(pth_models, pth_model_name)(weights=False)
-    # ----- modify last layer for classification, and the model used in notebook should be modified too.
-
-    if pth_model_name == 'mobilenet_v3_large':  # MobileNet
-        model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features,
-                                              2)  # for mobilenet_v3 model. must add the block expansion factor 4
-
-    elif pth_model_name == 'mobilenet_v2':
-        model.classifier[1] = torch.nn.Linear(model.classifier[1].in_features,
-                                              2)  # for mobilenet_v2 model. must add the block expansion factor 4
-
-    elif pth_model_name == 'vgg11':  # VGGNet
-        model.classifier[6] = torch.nn.Linear(model.classifier[6].in_features,
-                                              2)  # for VGG model. must add the block expansion factor 4
-
-    elif 'resnet' in pth_model_name:  # ResNet
-        model.fc = torch.nn.Linear(model.fc.in_features,
-                                   2)  # for resnet model must add the block expansion factor 4
-        # model.fc = torch.nn.Linear(512, 2)
-
-    elif pth_model_name == 'inception_v3':  # Inception_v3
-        model.fc = torch.nn.Linear(model.fc.in_features, 2)
-        if model.aux_logits:
-            model.AuxLogits.fc = torch.nn.Linear(model.AuxLogits.fc.in_features, 2)
-
-    return model
+from jetbot.utils.model_selection import load_tune_pth_model
 
 
 class RoadCruiser(HasTraits):
     cruiser_model = Unicode(default_value='').tag(config=True)
     type_cruiser_model = Unicode(default_value='').tag(config=True)
-    speed_gain = Float(default_value=0.15).tag(config=True)
-    steering_gain = Float(default_value=0.08).tag(config=True)
-    steering_dgain = Float(default_value=1.5).tag(config=True)
-    steering_bias = Float(default_value=0.0).tag(config=True)
-    steering = Float(default_value=0.0).tag(config=True)
+    speed_rc = Float(default_value=0).tag(config=True)
+    speed_gain_rc = Float(default_value=0.15).tag(config=True)
+    steering_gain_rc = Float(default_value=0.08).tag(config=True)
+    steering_dgain_rc = Float(default_value=1.5).tag(config=True)
+    steering_bias_rc = Float(default_value=0.0).tag(config=True)
+    steering_rc = Float(default_value=0.0).tag(config=True)
     x_slider = Float(default_value=0).tag(config=True)
     y_slider = Float(default_value=0).tag(config=True)
-    speed = Float(default_value=0).tag(config=True)
     use_gpu = Unicode(default_value='gpu').tag(config=True)
 
     def __init__(self, init_sensor_rc=False):
         super().__init__()
 
+        self.cruiser_model_type_pth = None
         self.cruiser_model_pth = None
 
         if init_sensor_rc:
@@ -81,9 +48,11 @@ class RoadCruiser(HasTraits):
     def load_road_cruiser(self, change):
         # The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
         self.cruiser_model_pth = None
+        self.cruiser_model_type_pth = None
+
         pth_model_name = self.cruiser_model.split('/')[-1].split('.')[0].split('_', 4)[-1].split('-')[0]
         print('pytorch model name: %s' % pth_model_name)
-        self.cruiser_model_pth = load_tune_pth_model(pth_model_name=pth_model_name, pretrained=False)
+        self.cruiser_model_pth, self.cruiser_model_type_pth = load_tune_pth_model(pth_model_name=pth_model_name, pretrained=False)
 
         print('path of cruiser model: %s' % self.cruiser_model)
         print('use %s' % self.use_gpu)
@@ -142,7 +111,7 @@ class RoadCruiser(HasTraits):
         return image[None, ...]
 
     def execute_rc(self, change):
-        start_time = time.process_time()
+        start_time = time.time()
         # global angle, angle_last
         image = change['new']
         xy = self.cruiser_model_pth(self.preprocess_rc(image)).detach().float().cpu().numpy().flatten()
@@ -153,21 +122,20 @@ class RoadCruiser(HasTraits):
         self.x_slider = x.item()
         self.y_slider = y.item()
 
-        self.speed = self.speed_gain
+        self.speed_rc = self.speed_gain_rc
 
         # angle = np.sqrt(xy)*np.arctan2(x, y)
         angle_1 = np.arctan2(x, y)
         self.angle = 0.5 * np.pi * np.tanh(0.5 * angle_1)
-        pid = self.angle * self.steering_gain + (self.angle - self.angle_last) * self.steering_dgain
+        pid = self.angle * self.steering_gain_rc + (self.angle - self.angle_last) * self.steering_dgain_rc
         self.angle_last = self.angle
 
-        self.steering = pid + self.steering_bias
+        self.steering = pid + self.steering_bias_rc
 
-        self.robot.left_motor.value = max(min(self.speed_gain + self.steering, 1.0), 0.0)
-        self.robot.right_motor.value = max(min(self.speed_gain - self.steering, 1.0), 0.0)
+        self.robot.left_motor.value = max(min(self.speed_gain_rc + self.steering, 1.0), 0.0)
+        self.robot.right_motor.value = max(min(self.speed_gain_rc - self.steering, 1.0), 0.0)
 
-        end_time = time.process_time()
-        # self.execution_time.append(end_time - start_time + self.camera.cap_time)
+        end_time = time.time()
         self.execution_time_rc.append(end_time - start_time)
         # self.fps.append(1/(end_time - start_time))
 
@@ -178,7 +146,6 @@ class RoadCruiser(HasTraits):
         self.capturer.observe(self.execute_rc, names='value')
 
     def stop_rc(self, change):
-        import matplotlib.pyplot as plt
         from jetbot.utils import plot_exec_time
         # self.camera.unobserve(self.execute, names='value')
         self.capturer.unobserve_all()
@@ -190,5 +157,4 @@ class RoadCruiser(HasTraits):
         model_name = "road cruiser model"
         cruiser_model_str = self.cruiser_model.split("/")[-1].split('.')[0]
         plot_exec_time(self.execution_time_rc[1:], model_name, cruiser_model_str)
-        # plot_exec_time(self.execution_time[1:], self.fps[1:], model_name, self.cruiser_model_str)
-        plt.show()
+        # plt.show()
