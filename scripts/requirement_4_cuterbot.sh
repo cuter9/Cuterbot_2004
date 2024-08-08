@@ -3,14 +3,15 @@
 sudo apt-get update
 sudo pip3 install pip -U
 sudo pip3 install gdown wget
-sudo pip3 install 'numpy<1.22.0' -U
+sudo pip3 install 'numpy<1.24.0' -U
 sudo pip3 install matplotlib
 sudo pip3 install onnx
 sudo pip3 install jetson-stats -U
 
 export HOME=/home/cuterbot
 
-# INSTALL TENSORFLOW, PYTORCH, TOCHVISION, OPENCV 
+# INSTALL TENSORFLOW, PYTORCH, TOCHVISION, OPENCV
+sudo cp $HOME/Cuterbot_2004/scripts/gdrive_repo_cookies.txt "/home/cuterbot/.cache/gdown/cookies.txt"
 gdown --folder https://drive.google.com/drive/folders/1mRBVWVFVVIGWK1F27X_m7r6XJDjVusX5 -O ${HOME}/repo
 pushd ${HOME}/repo
 bash ./opencv-python_requirements.sh
