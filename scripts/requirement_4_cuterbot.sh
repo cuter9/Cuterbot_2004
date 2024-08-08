@@ -3,7 +3,7 @@
 sudo apt-get update
 sudo pip3 install pip -U
 sudo pip3 install gdown wget
-sudo pip3 install 'numpy<1.22.0' -U
+sudo pip3 install 'numpy<1.24.0' -U
 sudo pip3 install matplotlib
 sudo pip3 install onnx
 sudo pip3 install jetson-stats -U
