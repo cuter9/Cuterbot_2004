@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +123,6 @@
         <env name="DISPLAY" value="localhost:10.0" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -147,7 +147,6 @@
         <env name="DISPLAY" value="localhost:10.0" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -172,7 +171,6 @@
         <env name="DISPLAY" value="localhost:10.0" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -197,7 +195,6 @@
         <env name="DISPLAY" value="localhost:10.0" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote Python 3.8.10 (sftp://cuterbot@192.168.1.113:22/usr/bin/python3.8)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -359,14 +356,14 @@
       <workItem from="1723018282799" duration="2737000" />
       <workItem from="1723021083379" duration="4532000" />
       <workItem from="1723113710323" duration="15000" />
-    </task>
-    <task id="LOCAL-00142" summary="update">
-      <option name="closed" value="true" />
-      <created>1721820365614</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1721820365614</updated>
+      <workItem from="1723118189941" duration="3556000" />
+      <workItem from="1723130000571" duration="1857000" />
+      <workItem from="1723132566280" duration="51000" />
+      <workItem from="1723135152049" duration="65000" />
+      <workItem from="1723139263395" duration="32000" />
+      <workItem from="1723169250580" duration="44000" />
+      <workItem from="1723337270831" duration="206000" />
+      <workItem from="1723337483663" duration="120000" />
     </task>
     <task id="LOCAL-00143" summary="update">
       <option name="closed" value="true" />
@@ -752,7 +749,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723111841554</updated>
     </task>
-    <option name="localTasksCounter" value="191" />
+    <task id="LOCAL-00191" summary="update">
+      <option name="closed" value="true" />
+      <created>1723126784371</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1723126784371</updated>
+    </task>
+    <option name="localTasksCounter" value="192" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
