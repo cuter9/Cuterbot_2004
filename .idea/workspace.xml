@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d62f21-4216-452a-9253-5dc75bd4e437" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/jupyter/enable.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/jupyter/enable.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,15 +364,7 @@
       <workItem from="1723337270831" duration="206000" />
       <workItem from="1723337483663" duration="120000" />
       <workItem from="1723337869888" duration="758000" />
-      <workItem from="1723338635117" duration="4595000" />
-    </task>
-    <task id="LOCAL-00149" summary="update">
-      <option name="closed" value="true" />
-      <created>1721856565773</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1721856565773</updated>
+      <workItem from="1723338635117" duration="5492000" />
     </task>
     <task id="LOCAL-00150" summary="update">
       <option name="closed" value="true" />
@@ -758,7 +750,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723353442713</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="update">
+      <option name="closed" value="true" />
+      <created>1723357301918</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1723357301918</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
